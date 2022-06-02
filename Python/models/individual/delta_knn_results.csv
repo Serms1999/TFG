@@ -1,0 +1,11 @@
+weights,n_neighbors,algorithm,Accuracy
+uniform,20,brute,0.7286675667523199
+uniform,5,kd_tree,0.7708577106531106
+distance,10,brute,0.7649345663538949
+uniform,50,ball_tree,0.6879104624472329
+distance,250,ball_tree,0.6622246310536003
+uniform,5,brute,0.7708577106531106
+distance,100,ball_tree,0.6773146154230805
+uniform,250,brute,0.6162583213563873
+distance,2000,ball_tree,0.6029765735771629
+uniform,10,kd_tree,0.7564927952821316

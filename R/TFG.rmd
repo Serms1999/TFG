@@ -1,0 +1,306 @@
+---
+title: "TFG"
+author: "Sergio Marin"
+date: "22/6/2021"
+output:
+  html_document:
+    theme: spacelab
+    highlight: kate
+    df_print: paged
+    toc: yes
+    toc_float: yes
+    number_sections: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r warning = FALSE, message = FALSE}
+library(ggplot2)
+library(gridExtra)
+library(caret)
+library(randomForest)
+library(e1071)
+library(import)
+library(RNSS)
+library(naivebayes)
+library(kernlab)
+library(mlbench)
+library(mda)
+library(rpart)
+library(doParallel)
+
+data <- read.csv("stats/stats.csv", stringsAsFactors = FALSE, header = TRUE)
+```
+
+Definimos las variables de entrada y de salida.
+
+```{r}
+data.Var.out = c("Device")
+data.Vars.in = setdiff(names(data),data.Var.out)
+```
+
+Creamos una partición de test y una de train. Para ello cogemos los primeros x vectores de cada dispositivo. Esto es necesario porque si no los datos presentarían correlación y falsearían los resultados.
+
+```{r}
+createPartition <- function(data, p) {
+  tab <- table(data)
+  devicesNum <- nrow(tab)
+  num <- mean(as.numeric(tab))
+  trainNum <- floor(num * p)
+  out = c()
+  for (i in 0:(devicesNum - 1)) {
+    out <- c(out, (1 + i * num):(trainNum + i * num))
+  }
+  return(out)
+}
+
+#data.TrainIdx.75 <- createPartition(data[[data.Var.out]], p = 0.75)
+set.seed(1)
+data.TrainIdx.75 <- createDataPartition(data[[data.Var.out]], p = 0.75, list = F, times = 1)
+data.Train <- data[data.TrainIdx.75, ]
+data.Test <- data[-data.TrainIdx.75, ]
+```
+
+Eliminamos las variables correladas.
+
+```{r}
+#We won´t use those non numerical predictors
+ftred <- na.omit(data.Train[data.Vars.in])
+#Get Pearson correlations matrix
+thecors <- cor(ftred)
+#Plot the matrix
+corrplot::corrplot(thecors)
+
+remove = findCorrelation(thecors, cutoff=0.9)
+
+data.Train.ftred <- data.Train[-remove]
+data.Vars.in.ftred <- data.Vars.in[-remove]
+
+#We won´t use those non numerical predictors
+ftred <- na.omit(data.Train.ftred[data.Vars.in.ftred])
+#Get Pearson correlations matrix
+thecors <- cor(ftred)
+#Plot the matrix
+corrplot::corrplot(thecors)
+```
+
+Dividimos el conjunto en uno más pequeño para ajustar hiperparámetros y otro que servirá para comprobar el overfitting.
+
+```{r}
+#data.TrainIdxMin.75 <- createPartition(data.Train.ftred[[data.Var.out]], p = 0.75)
+set.seed(1)
+data.TrainIdxMin.75 <- createDataPartition(data.Train.ftred[[data.Var.out]], p = 0.75, list = F, times = 1)
+data.TrainMin <- data.Train.ftred[data.TrainIdxMin.75, ]
+data.TestMin <- data.Train.ftred[-data.TrainIdxMin.75, ]
+```
+
+
+Ejecutamos algunos entrenamientos.
+
+```{r}
+# Declaramos el trainControl
+trainControl <- trainControl(method = "repeatedcv",
+                             repeats = 5,
+                             summaryFunction = multiClassSummary,  
+                             number = 5)
+```
+
+```{r, eval=FALSE}
+rf.grid <- expand.grid(mtry = c(1, 2, 3, 4, 5, 7, 10, 15))
+
+start.time <- proc.time()
+
+set.seed(1)
+data.model.rf <- train(data.TrainMin[data.Vars.in.ftred],
+                                  as.factor(data.TrainMin[[data.Var.out]]),
+                                  trControl = trainControl,
+                                  tuneGrid = rf.grid,
+                                  allowParallel = TRUE,
+                                  method = 'rf')
+
+time.model.rf <- proc.time() - start.time
+
+registerDoSEQ()
+
+saveRDS(data.model.rf, file = "models/model.rf.rds")
+saveRDS(time.model.rf, file = "models/time.model.rf.rds")
+```
+
+```{r}
+data.model.rf <- readRDS(file = "models/model.rf.rds")
+time.model.rf <- readRDS(file = "models/time.model.rf.rds")
+```
+
+```{r}
+final.rf <- predict(data.model.rf, data.TestMin[data.Vars.in.ftred])
+MLmetrics::Accuracy(final.rf, data.TestMin[[data.Var.out]])
+rm(data.model.rf, time.model.rf, rf.grid)
+```
+
+```{r, eval=FALSE}
+registerDoParallel(detectCores() - 2)
+
+start.time <- proc.time()
+
+svmLinear.grid <- expand.grid(C = seq(0, 1, 0.2))
+
+set.seed(1)
+data.model.svmLinear <- train(data.TrainMin[data.Vars.in.ftred],
+                                  as.factor(data.TrainMin[[data.Var.out]]),
+                                  trControl = trainControl,
+                                  tunedGrid = svmLinear.grid,
+                                  allowParallel = TRUE,
+                                  method = 'svmLinear')
+
+time.model.svmLinear <- proc.time() - start.time
+registerDoSEQ()
+
+saveRDS(data.model.svmLinear, file = "models/model.svmLinear.rds")
+saveRDS(time.model.svmLinear, file = "models/time.model.svmLinear.rds")
+```
+
+```{r}
+data.model.svmLinear <- readRDS(file = "models/model.svmLinear.rds")
+time.model.svmLinear <- readRDS(file = "models/time.model.svmLinear.rds")
+```
+
+```{r}
+final.svmLinear <- predict(data.model.svmLinear, data.TestMin[data.Vars.in.ftred])
+MLmetrics::Accuracy(final.svmLinear, data.TestMin[[data.Var.out]])
+rm(data.model.svmLinear, time.model.svmLinear, svmLinear.grid)
+```
+
+```{r, eval=FALSE}
+#registerDoParallel(detectCores() - 2)
+
+start.time <- proc.time()
+
+svmRadial.grid <- expand.grid(C = seq(0, 1, 0.2), sigma = seq(0, 0.02, 0.0025))
+
+set.seed(1)
+data.model.svmRadial <- train(data.TrainMin[data.Vars.in.ftred],
+                                  as.factor(data.TrainMin[[data.Var.out]]),
+                                  trControl = trainControl,
+                                  tunedGrid = svmRadial.grid,
+                                  allowParallel = TRUE,
+                                  method = 'svmRadial')
+
+time.model.svmRadial <- proc.time() - start.time
+#registerDoSEQ()
+
+saveRDS(data.model.svmRadial, file = "models/model.svmRadial.rds")
+saveRDS(time.model.svmRadial, file = "models/time.model.svmRadial.rds")
+```
+
+```{r, eval=FALSE}
+data.model.svmRadial <- readRDS(file = "models/model.svmRadial.rds")
+time.model.svmRadial <- readRDS(file = "models/time.model.svmRadial.rds")
+```
+
+```{r,  eval=FALSE}
+final.svmRadial <- predict(data.model.svmRadial, data.TestMin[data.Vars.in.ftred])
+MLmetrics::Accuracy(final.svmRadial, data.TestMin[[data.Var.out]])
+rm(data.model.svmRadial, time.model.svmRadial, svmRadial.grid)
+```
+
+```{r}
+mlp.grid <- expand.grid(size = c(1, 5, 10, 35, 50, 75, 100))
+
+registerDoParallel(detectCores() - 2)
+
+start.time <- proc.time()
+
+set.seed(1)
+data.model.mlp <- train(data.TrainMin[data.Vars.in.ftred],
+                                  as.factor(data.TrainMin[[data.Var.out]]), 
+                                  trControl = trainControl,
+                                  tuneGrid = mlp.grid,
+                                  allowParallel = TRUE,
+                                  method = 'mlp')
+
+time.model.mlp <- proc.time() - start.time
+registerDoSEQ()
+
+saveRDS(data.model.mlp, file = "models/model.mlp.rds")
+saveRDS(time.model.mlp, file = "models/time.model.mlp.rds")
+```
+
+```{r, eval=FALSE}
+data.model.mlp <- readRDS(file = "models/model.mlp.rds")
+time.model.mlp <- readRDS(file = "models/time.model.mlp.rds")
+```
+
+```{r}
+final.mlp <- predict(data.model.mlp, data.TestMin[data.Vars.in.ftred])
+MLmetrics::Accuracy(final.mlp, data.TestMin[[data.Var.out]])
+rm(data.model.mlp, time.model.mlp, mlp.grid)
+```
+
+
+```{r}
+nb.grid <- expand.grid(laplace = c(0, 1, 2),
+                        usekernel = c(TRUE, FALSE),
+                        adjust = c(0.5, 1, 1.5, 2, 2.5))
+
+registerDoParallel(detectCores() - 2)
+
+start.time <- proc.time()
+
+set.seed(1)
+data.model.nb <- train(data.TrainMin[data.Vars.in.ftred],
+                                  as.factor(data.TrainMin[[data.Var.out]]), 
+                                  trControl = trainControl,
+                                  tuneGrid = nb.grid,
+                                  allowParallel = TRUE,
+                                  method = 'naive_bayes')
+
+time.model.nb <- proc.time() - start.time
+registerDoSEQ()
+
+saveRDS(data.model.nb, file = "models/model.nb.rds")
+saveRDS(time.model.nb, file = "models/time.model.nb.rds")
+```
+
+```{r, eval=FALSE}
+data.model.nb <- readRDS(file = "models/model.nb.rds")
+time.model.nb <- readRDS(file = "models/time.model.nb.rds")
+```
+
+````{r}
+final.nb <- predict(data.model.nb, data.TestMin[data.Vars.in.ftred])
+MLmetrics::Accuracy(final.nb, data.TestMin[[data.Var.out]])
+rm(data.model.nb, time.model.nb, nb.grid)
+```
+
+```{r}
+rpart2.grid <- expand.grid(maxdepth = c(1, 3, 6, 13, 16, 20, 25))
+
+registerDoParallel(detectCores() - 2)
+
+start.time <- proc.time()
+
+set.seed(1)
+data.model.rpart2 <- train(data.TrainMin[data.Vars.in.ftred],
+                                  as.factor(data.TrainMin[[data.Var.out]]), 
+                                  trControl = trainControl,
+                                  tuneGrid = rpart2.grid,
+                                  allowParallel = TRUE,
+                                  method = 'rpart2')
+
+time.model.rpart2 <- proc.time() - start.time
+registerDoSEQ()
+
+saveRDS(data.model.rpart2, file = "models/model.rpart2.rds")
+saveRDS(time.model.rpart2, file = "models/time.model.rpart2.rds")
+```
+
+```{r, eval=FALSE}
+data.model.rpart2 <- readRDS(file = "models/model.rpart2.rds")
+time.model.rpart2 <- readRDS(file = "models/time.model.rpart2.rds")
+```
+
+```{r}
+final.rpart2 <- predict(data.model.rpart2, data.TestMin[data.Vars.in.ftred])
+MLmetrics::Accuracy(final.rpart2, data.TestMin[[data.Var.out]])
+rm(data.model.rpart2, time.model.rpart2, rpart2.grid)
+```

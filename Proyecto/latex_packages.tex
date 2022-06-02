@@ -1,0 +1,108 @@
+\usepackage[left=2.25cm,right=2.25cm,top=2.5cm,bottom=2.5cm]{geometry}
+%\usepackage[sc]{mathpazo}
+\linespread{1.05}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-tabla, english]{babel}
+\decimalpoint
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{colortbl}
+% Scalable fonts (para lettrine)
+\usepackage{type1ec} 
+\usepackage{lettrine}
+% Cabeceras y pies de página
+\usepackage{fancyhdr}
+% Vertabim
+\usepackage{moreverb}
+% Código 
+\usepackage{listingsutf8}
+% Identacion y separacion de parrafos
+\usepackage{parskip}
+% Posicion de figuras
+\usepackage{float}
+% Diagramas
+\usepackage[all,pdf]{xy}
+% Firma digital
+%\usepackage{eforms}
+% Subfiguras
+\usepackage{subfig}
+% Hyperref
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,%
+	citecolor=black,%
+	filecolor=black,%
+	linkcolor=black,%
+	urlcolor=black,%
+	pageanchor=false
+}
+% URL en bibliografía
+\usepackage{xurl}
+% Apéndices
+\usepackage{appendix}
+% Múltiples columnas
+\usepackage{multicol}
+% Captions en multicols
+\usepackage{caption}
+% Títulos de capítulos
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+{\bfseries\Large} 
+{\filleft\MakeUppercase{\chaptertitlename} \Huge\thechapter} {4ex}
+{\titlerule
+\vspace{2ex}%
+\filright} [\vspace{2ex}%
+\titlerule]
+% Tablas
+\usepackage{tabularx}
+\usepackage{booktabs}
+% Tablas largas
+\usepackage{longtable}
+% Columnas de más de una fila en las tablas
+\usepackage{multirow}
+% Fechas
+\usepackage{datetime}
+
+\usepackage[acronym, toc]{glossaries}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,latexsym,cancel}
+
+% Unidades
+\usepackage{siunitx}
+% Figuras
+\usepackage{standalone}
+\usepackage{tikz}
+\usetikzlibrary{
+    automata, 
+    positioning, 
+    arrows, 
+    shapes.geometric,  
+    shapes.symbols, 
+    external
+}
+
+% Configuración de la bibliografía
+\usepackage[
+    bibstyle=ieee,
+    citestyle=numeric,
+    isbn=true,
+    doi=false,
+    sorting=none,
+    url=true,
+    bibencoding=utf8,
+    backend=bibtex
+]{biblatex}
+\addbibresource{bibliografia.bib}
+\usepackage{xpatch}
+\xpatchbibdriver{online}
+  {\printtext[parens]{\usebibmacro{date}}}
+  {\iffieldundef{year}
+    {}
+    {\printtext[parens]{\usebibmacro{date}}}}
+  {}
+  {\typeout{There was an error patching biblatex-ieee (specifically, ieee.bbx's @online driver)}}
+  
+\setcounter{biburllcpenalty}{100}
+\setcounter{biburlucpenalty}{200}
+\setcounter{biburlnumpenalty}{100}

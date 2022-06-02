@@ -1,0 +1,176 @@
+\documentclass[a4paper,12pt]{book}
+
+% Paquetes de Latex
+\input{latex_packages.tex}
+  
+% Configuración de TikZ 
+\input{tikzconf}
+
+% Definimos unidades
+\DeclareSIUnit{\byte}{B}
+
+\includeonly{
+    resumen,
+    %abstract,
+    %Introduccion,
+    %Estado_del_Arte,
+    %Objetivos_Metodologia,
+    %Diseno_Resolucion,
+    %Conclusiones
+}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\renewcommand{\chaptermark}[1]{\lhead[{\sc{\chaptername\ #1}}]{}}
+\renewcommand{\sectionmark}[1]{\rhead[ ]{{\thesection.\ #1}}}
+
+% Nuevo tipo de columnas
+\renewcommand\tabularxcolumn[1]{m{#1}}% for vertical centering text in X column
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+% Definición colores
+\definecolor{verdedato}{RGB}{78,173,50}
+\definecolor{rojodato}{RGB}{234,51,35}
+\definecolor{azuldato}{RGB}{0,0,200}
+
+\definecolor{codegreen}{RGB}{184,215,163}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\definecolor{azuldiagrama}{RGB}{93,160,242}
+\definecolor{verdediagrama}{RGB}{124,244,111}
+\definecolor{rojodiagrama}{RGB}{204,73,53}
+\definecolor{naranjadiagrama}{RGB}{209,139,69}
+\definecolor{blancodiagrama}{RGB}{237,247,211}
+
+\definecolor{azulclasificador}{RGB}{181,199,230}
+\definecolor{verdeclasificador}{RGB}{197,224,181}
+\definecolor{rojoclasificador}{RGB}{248,204,175}
+
+% Code Listing Configuration
+\input{config_listing}
+
+% Save TikZ images to files
+\tikzexternalize[prefix=./images/tikz/]
+
+\begin{document}
+\selectlanguage{spanish}
+\title{Título del TFG / TFM}
+\author{Sergio Marín Sánchez}
+\newdate{fecha}{2}{6}{2022}
+
+\begin{titlepage}
+ 
+\begin{center}
+ 
+% Upper part of the page
+\vfill
+
+\includegraphics[height=0.5\textwidth]{escudo}\\[2.5cm]
+ 
+\textsc{\LARGE Universidad de Murcia}\\[0.5cm]
+ 
+\textsc{\Large Trabajo Final de Grado}\\[0.5cm]
+ 
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries Identificación de dispositivos IoT}\\[0.4cm]
+{ \huge \bfseries  a través de huellas hardware}\\[0.4cm]
+\HRule \\[1.5cm]
+ 
+% Author and supervisor
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Autor:}\\
+Sergio \textsc{Marín Sánchez}\\
+\href{mailto:sergio.marins@um.es}{sergio.marins@um.es}
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Tutores:} \\
+Gregorio \textsc{Martínez Pérez}\\
+\href{mailto:gregorio@um.es}{gregorio@um.es}\\
+Pedro Miguel \textsc{Sánchez Sánchez}\\
+\href{mailto:pedromiguel.sanchez@um.es}{pedromiguel.sanchez@um.es}
+\end{flushright}
+\end{minipage}
+ 
+\vfill
+ 
+% Bottom of the page
+{\large \displaydate{fecha}}
+ 
+\end{center}
+ 
+\end{titlepage}
+
+\let\cleardoublepage\newpage
+
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+% Agradecimientos
+\input{agradecimientos.tex}
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+\pagestyle{plain}
+\setcounter{page}1
+\setcounter{secnumdepth}{4}	%Profundidad de la numeracion del indice
+\setcounter{tocdepth}{2}	%Profundidad del indice
+
+\tableofcontents
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+\listoffigures
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+\listoftables
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+\setlength{\parindent}{18pt}
+
+% Declaracion de originalidad
+%\input{declaracion.tex}
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+% Resumen en castellano
+\include{resumen}
+
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+% Resumen en inglés
+\include{abstract}
+
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\lhead[{\sc{\chaptername\ \thechapter.\ #1}}]{}}
+\renewcommand{\sectionmark}[1]{\rhead[ ]{{\thesection.\ #1}}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+% Introduccion
+\include{Introduccion}
+
+% Estado del arte
+\include{Estado_del_Arte}
+
+% Análisis de objetivos y metodología 
+\include{Objetivos_Metodologia}
+
+% Diseño y resolución
+\include{Diseno_Resolucion}
+
+% Conclusiones y vias futuras
+\include{Conclusiones}
+
+% Apéndices, si hiciese falta
+\appendix
+%\include{apendice1.tex}
+
+% Bibliografía
+\selectlanguage{english}
+\renewcommand\bibname{Bibliografía}
+\printbibliography[heading = bibintoc]
+
+\end{document}

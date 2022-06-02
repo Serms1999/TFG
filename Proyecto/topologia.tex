@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+    \node (1) {\includegraphics{cisco_icons/cloud}};
+    \node (2) [below = of 1] {\includegraphics{cisco_icons/router}};
+    \node (3) [below = of 2] {$\substack{\includegraphics{cisco_icons/pc} \\ \text{Observador}}$};
+    \node (aux) [below =0.4cm of 3] {};
+    \node (4) [below = of aux] {$\substack{\includegraphics{cisco_icons/pc} \\ \text{Disp. 3}}$};
+    \node (5) [left = of 4] {$\substack{\includegraphics{cisco_icons/pc} \\ \text{Disp. 2}}$};
+    \node (6) [left = of 5] {$\substack{\includegraphics{cisco_icons/pc} \\ \text{Disp. 1}}$};
+    \node (7) [right = of 4] {$\substack{\includegraphics{cisco_icons/pc} \\ \text{Disp. 4}}$};
+    \node (8) [right = of 7] {$\substack{\includegraphics{cisco_icons/pc} \\ \text{Disp. 5}}$};
+    \node (text) {Internet};
+    \draw[-] (1) -- (2); 
+    \draw[-] (2) -- (3);
+    \draw[-] (3) -- (4);
+    \draw[-] (aux.center) -| (6);
+    \draw[-] (aux.center) -| (5);
+    \draw[-] (aux.center) -| (7);
+    \draw[-] (aux.center) -| (8);
+\end{tikzpicture}

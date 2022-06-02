@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+    \node[draw, fill = azulclasificador, minimum width = 4.5cm] (0) {Hue Classifier};
+    \node[draw, fill = azulclasificador, minimum width = 4.5cm] (1) [left = of 0] {Device Genre Classifier};
+    \node[draw, fill = azulclasificador, minimum width = 4.5cm] (2) [above = 0.4cm of 0] {EdimaxPlug Classifier};
+    \node[draw, fill = azulclasificador, minimum width = 4.5cm] (3) [above = 0.4cm of 2] {D-Link Classifier};
+    \node[draw, fill = azulclasificador, minimum width = 4.5cm] (4) [below = 0.4cm of 0] {TP-Link Classifier};
+    \node[draw, fill = azulclasificador, minimum width = 4.5cm] (5) [below = 0.4cm of 4] {Smarter Classifier};
+    \node[draw, diamond, shape aspect = 2, fill = rojoclasificador] (6) [below = 0.4cm of 5] {Result};
+    \node[draw, diamond, shape aspect = 2, fill = rojoclasificador] (7) [right = of 0] {Result};
+    \node[draw, tape, tape bend top = none, tape bend height = 6pt, text width = 2.3cm, align = center, fill = verdeclasificador] (8) [above = 1.72cm of 1.west, anchor = west] {Arff file \\ (All devices)};
+    
+    \draw (1) -- (0);
+    \draw (1.north) to [bend left = 18] (2.west);
+    \draw (1.north) to [bend left] (3.west);
+    \draw (1.south) to [bend right = 18] (4.west);
+    \draw (1.south) to [bend right] (5.west);
+    \draw (1.south) to [bend right] (6.west);
+    
+    \draw (0) -- (7);
+    \draw (3.east) to [bend left] (7.north); 
+    \draw (2.east) to [bend left] (7.north west); 
+    \draw (4.east) to [bend right] (7.south west); 
+    \draw (5.east) to [bend right] (7.south); 
+    
+    \draw (8) -- (8 |- 1.north);
+\end{tikzpicture}
