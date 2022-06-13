@@ -1,8 +1,149 @@
 %!TEX root = TFG.tex
 
-\chapter{Estado del arte}
+\chapter{Estado del arte} \label{chap:art}
 
-En este capítulo se realiza un estudio del estado del arte relativo a la aplicación de distintas técnicas que tengan como objetivo identificar a un dispositivo a través de la red independientemente de un identificador susceptible de ser identificado. Para estos cometidos son muy utilizados los algoritmos de aprendizaje automático o Machine Learning. 
+\section{Dispositivos IoT}
+
+\subsection{Introducción}
+
+El Internet de las Cosas, más conocido por Internet of Things (IoT), es el conjunto de  dispositivos capaces de conectarse a internet, recolectar e intercambiar datos de forma autónoma. Una cosa que distingue a los dispositivos IoT de los que no lo son, es que estos dispositivos pueden interactuar entre ellos sin necesidad de intervención humana.
+
+El concepto de IoT fue primeramente mencionado por Kevin Ashton en 1999 mientras realizaba una presentación sobre dispositivos RFID \cite{gokhale2018introduction}. A pesar de esto el primer dispositivo de este tipo fue una máquina de refrescos en 1982 \cite{cokemachine1982iot}, que se conectaba a internet para informar los refrescos que contenía, y si estos se encontraban fríos.
+
+\subsection{Arquitectura IoT}
+
+Cada vez hay más dispositivos IoT conectados a internet, lo que dada su naturaleza, implica que son varias miles de millones de ellos. Por este motivo, los protocolos de la pila TCP/IP no están preparados para este número tan grande de dispositivos que manejar.
+
+Existen diversas propuestas sobre arquitecturas multi capa que puedan asegurar los requisitos de calidad de servicio (QoS) y seguridad requeridos. En la propuesta de Muhammad Umar Farooq et al. \cite{farooq2015review} se hace mención a una arquitectura de 6 capas.
+
+Por otro lado, en la propuesta de Ibrar Yaqoob et al. \cite{yaqoob2017internet} se explica una propuesta más general, combinando varias de las capas que comparten gran parte de su cometido. A continuación se explican estas 3 capas:
+
+\begin{enumerate}
+    \item \textbf{Capa sensitiva}: esta es la capa más básica. Es la que se encarga de recolectar toda la información que sea capaz el dispositivo a través de sus múltiples sensores.
+    \item \textbf{Capa de transporte}: esta capa es la que realiza todo el intercambio de información entre las otras dos capas. Se encarga de las operaciones de red.
+    \item \textbf{Capa de aplicación}: esta capa se encarga de extraer la información valiosa de los datos producidos por la capa sensitiva, y que le llegan a través de la capa de transporte. En esta capa se agrupan distintos servicios como data mining o computación en la nube.
+\end{enumerate}
+
+\subsection{Aplicaciones del IoT}
+
+En la actualidad, vivimos rodeados de dispositivos inteligentes. Estos dispositivos nos permiten realizar todo tipo de acciones, por ejemplo, un teléfono móvil nos permite enviar y recibir emails, enviar mensajes instantáneos, utilizar redes sociales, etc. A pesar de todas esas funciones, todos estos aparatos comparten un ``problema'', necesitan de la intervención humana para realizar sus tareas.
+
+De estas necesidades nacen los dispositivos IoT, por ejemplo, un frigorífico inteligente. Este frigorífico es capaz de llevar el inventario de productos que contiene y detectar cuando alguno de ellos está próximo a terminarse. De forma autónoma este dispositivo es capaz de conectarse a internet y realizar una pedido online al supermercado de nuestra preferencia para reabastecerse de estos productos.
+
+Este es sólo un ejemplo, dentro del hogar se pueden encontrar también los muy conocidos robots aspiradora o los asistentes inteligentes, pero estos dispositivos pueden ir mucho más lejos. Estos dispositivos se pueden usar para un control inteligente del tráfico, donde un coche autónomo puede recibir en tiempo real las rutas menos congestionadas que seguir hacia un destino.
+
+Otro de sus posibles usos está en la medicina. Donde se pueden instalar dispositivos de este tipo para medir distintas métricas de salud de los pacientes, como la frecuencia cardíaca o el nivel de glucosa en sangre. De esta forma, en caso de que una persona presente algún desorden, una ambulancia puede ser avisada de forma inmediata aunque dicha persona esté sola e inconsciente.
+
+Como último ejemplo se mencionará al sector agrícola. En este campo se pueden desplegar drones que detecten el nivel de humedad del terreno y, por ejemplo, activen el riego de cierta zona en caso de ser necesario. También pueden haber sensores a nivel del suelo que detecten la calidad del suelo, midiendo los distintos nutrientes y actuando en consecuencia.
+
+\section{Machine Learning}
+
+\subsection{Introducción}
+
+El Machine Learning se trata de una búsqueda, una búsqueda de formas alternativas de hacer algo. Para ello se busca en estructuras muy similares a las previas. Para modificar una estructura y seguir con la búsqueda nos valemos de sucesos que hayan acontecido, entonces, evaluamos si han mejorado y nos quedaremos como estructura para la siguiente iteración con la que más mejore a la previa. Para realizar estas operaciones necesitamos una forma de cambiar de estructura y una forma de evaluar si hemos mejorado.
+
+Con esta forma de trabajar se puede ver que el programa no tiene que resolver la tarea sino autoajustarse para obtener mejores evaluaciones cada vez. El programador por tanto no pone el programa sino proporcionar al programa la mejor estructura modificable y a continuación alimentar al sistema con datos. Aportamos por tanto ejemplos o premios que ayudan al programa a autoajustarse. Existen tres tipos de aprendizaje: 
+
+\begin{itemize}
+    \item \textbf{Supervisado}: al sistema se le proporcionan ejemplos de cuales la solución es conocida. Una variante sería el semi-supervisado en el que sólo una parte de los datos tienen solución conocida.
+    \item \textbf{No Supervisado}: al sistema se le proporcionan datos que no tienen una solución conocida, esperando que el sistema nos proporcione conocimiento que intuimos que existe en dichos datos. Un ejemplo sería el \textit{clustering} que agrupa los datos por similitudes.
+    \item \textbf{Por refuerzo}: al sistema no se le pasan ejemplos de datos, sino que se le premia o castiga por distintas conductas que desarrolla automáticamente. Al final el sistema, que busca obtener más premios, se comportará de la forma que queremos.
+\end{itemize}
+
+\subsection{Tratamiento de los datos}
+
+Para obtener un resultado de cuan bueno es un modelo (algoritmo) que se quiere usar se debe dividir el conjunto de datos inicial en dos conjuntos: \textbf{datos de entrenamiento} y \textbf{datos de test}. Con los datos de entrenamiento el algoritmo se ajusta y aprende de los datos, y con los datos de test comprobamos los resultados que obtenemos del algoritmo ante datos que no ha visto antes.
+
+Para realizar una comparación entre distintos modelos y se quiere ver cuál es el que mejor se ajusta a los datos se debe dividir el conjunto de datos de entrenamiento en otros dos conjuntos: \textbf{conjunto de entrenamiento} y \textbf{conjunto de validación}. Con este último se puede evaluar la capacidad de generalizar de nuestro algoritmo.
+
+Con esta segunda división se obtiene el algoritmo que mejor se adapta a nuestros datos, pero no un modelo final. Para tener un modelo final se entrenará este con el conjunto de datos de entrenamiento en su totalidad y se evaluará con los datos de test.
+
+\subsection{Algoritmos de aprendizaje supervisado} \label{sec:algorithms}
+
+Dentro de los algoritmos de aprendizaje supervisado se encuentran algoritmos que clasifican y algoritmos que se dedican a la regresión.
+
+Los algoritmos clasificadores tratan de agrupar a los distintos vectores de entrada en distintas clases. Un ejemplo de esto sería un algoritmo de clasificación binaria, en la que tenemos ejemplos \textbf{positivos} (pertenecen a la clase) o \textbf{negativos} (no pertenecen). Esto nos lleva a los conceptos de \textbf{falso positivo} (el sistema dice que pertenece y es falso) y \textbf{falso negativo} (el sistema dice que no pertenece y es falso).
+
+Los algoritmos regresores buscan dar una salida numérica como resultado en lugar de la pertenencia a una clase, por tanto no sirven para este trabajo. A continuación se explicarán los algoritmos que se han usado para el desarrollo de este trabajo.
+
+\subsubsection{Árboles de decisión}
+
+La idea principal del algoritmo es que partiendo de un conjunto de elementos en el nodo padre, haciendo una pregunta binaria tal que se pude dividir el conjunto en otros 2 que sean más puros, es decir, que los elementos entre sí compartan (al menos) la característica por la que hemos preguntado.
+
+Si los atributos son categóricos se puede crear una partición diciendo si pertenecen o no a la clase. Por contra, si los atributos son ordinales se pueden tener preguntas del tipo $x \leq x_c$.
+
+\subsubsection{Random Forest}
+
+Este algoritmo es un conjunto de árboles de decisión trabajando en paralelo. Cada árbol realizará de forma aleatoria una partición distinta a los otros para cada división de una rama, con esto se obtiene variabilidad en los resultados de los árboles. Por último, el algoritmo toma como salida aquella clase que haya sido el resultado de más árboles.  \cite{hatwell2020chirps} \cite{breiman2001random}
+
+\subsubsection{Multilayer Perceptron (MLP)}
+
+Se trata de un modelo de red neuronal artificial de tipo \textit{feed-forward} (es decir, no existen ciclos en el grafo que forma la red). Consiste en una serie de múltiples capas (multilayer) de nodos que conforman grafos dirigidos, estando cada capa conectada con la siguiente. 
+
+MLP entrena la red utilizando la propagación hacia atrás (backpropagation) que, empleada junto con una técnica de optimización como gradient descent, calcula el gradiente de una función de pérdida respecto a todos los pesos en la red, de manera que se pasa el valor del gradiente al método de optimización y este lo usa para actualizar los pesos, con el objetivo de minimizar la función de pérdida.
+
+\subsubsection{Naive Bayes}
+
+Los algoritmos de aprendizaje bayesianos tratan de encontrar la probabilidad de que un dato pertenezca a una clase. Una vez se tienen todas las probabilidades de pertenencia a una clase se toma como salida del algoritmo aquella clase con la mayor probabilidad.
+
+Para realizar este proceso el algoritmo usa distintos atributos de cada dato $a_1, \dots, a_n$. Ahora este proceso se trata de conoces la probabilidad condicionada de que este conjunto de atributos pertenezca a una determinada clase. Esto es muy costoso y por tanto hay que relajar esta hipóstesis. Para ello se asume independencia entre los atributos de ahí el nombre de \textit{naive}.
+
+\subsubsection{K Nearest Neighbours (KNN)}
+
+El algoritmo KNN es un algoritmo que se usa mayoritariamente para clasificación. En este algoritmo los datos se agrupan por distancias.
+
+A la hora de clasificar un nuevo dato, este algoritmo busca los $k$ datos más cercanos. Una vez tiene esos datos comprueba sus clases. La clase con mayor representación entre los $k$ datos es la que se asignará al nuevo dato. Podemos verlo con un ejemplo.
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \node (1) {\includegraphics[width=0.4\textwidth]{images/KnnClassification}};
+        \node (2) at (0.2, -1.3) {$k = 3$};
+        \node (3) at (0.2, -2.6) {$k = 5$};
+    \end{tikzpicture}
+    \caption{Funcionamiento del algoritmo KNN \cite{knnalgorithm2010}}
+    \label{fig:knn_clasification}
+\end{figure}
+
+En la Fig. \ref{fig:knn_clasification} se quiere clasificar el dato \textcolor{verdedato}{\Large$\bullet$} podemos usar múltiples valores de $k$ y con ello obtendremos diferentes resultados:
+\begin{itemize}
+    \item Si usamos $k = 3$ sólo nos fijaremos en los 3 datos más próximos, que serán 2 de la clase \textcolor{rojodato}{\large$\blacktriangle$} y uno de la clase \textcolor{azuldato}{$\blacksquare$}. Con esto la clase que se asignará al dato \textcolor{verdedato}{\Large$\bullet$} será \textcolor{rojodato}{\large$\blacktriangle$}.
+    \item Si usamos $k = 5$ sólo nos fijaremos en los 5 datos más próximos, que serán 2 de la clase \textcolor{rojodato}{\large$\blacktriangle$} y tres de la clase \textcolor{azuldato}{$\blacksquare$}. Con esto la clase que se asignará al dato \textcolor{verdedato}{\Large$\bullet$} será \textcolor{azuldato}{$\blacksquare$}.
+\end{itemize}
+
+\subsubsection{Máquinas de vector soporte (SVM)}
+
+Las máquinas de vector soporte son un conjunto de algoritmos de aprendizaje supervisado que se utilizan tanto para clasificación como para regresión, nos centraremos en clasificación.
+
+Estos algoritmos toman los datos como puntos en un espacio $n-$dimensional. El objetivo es dividir estos datos mediante hiperplanos de forma que los puntos que contenidos en una región del espacio delimitada por los mismos hiperplanos sean una misma clase y que estén lo más separados posible. Esto se puede ver más fácil con un ejemplo.
+
+En la Fig. \ref{fig:svm_separation} podemos ver como hay distintos hiperplanos ($\mathcal{H}_1, \mathcal{H}_2, \mathcal{H}_3$) que pueden dividir el espacio. 
+
+\begin{itemize}
+    \item $\mathcal{H}_1$ no divide de forma correcta todos los puntos de la entrada, puesto que hay puntos negros juntos con blancos.
+    \item $\mathcal{H}_2$ sí que divide a todos los puntos en dos clases de la forma correcta, pero no están seraparas lo máximo posible de este hiperplano.
+    \item $\mathcal{H}_3$ sí que cumple con las restricciones de división y distancia máxima.
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \node (1) {\includegraphics[width=0.4\textwidth]{images/svm_separation}};
+        \node (2) at (2.7, -2.7) {$x_1$};
+        \node (3) at (-3.2, 2.2) {$x_2$};
+        \node (4) at (-2, 2.5) {\scriptsize $\mathcal{H}_1$};
+        \node (5) at (-0.5, 2.5) {\scriptsize $\mathcal{H}_2$};
+        \node (6) at (2, 2.5) {\scriptsize $\mathcal{H}_3$};
+    \end{tikzpicture}
+    \caption{Separación por hiperplanos SVM \cite{svmseparation2012}}
+    \label{fig:svm_separation}
+\end{figure}
+
+En muchas ocasiones no se podrán dividir los conjuntos de forma correcta usando únicamente divisiones lineales del espacio, por ello, habrá que usar divisiones no lineales.
+
+\section{Revisión bibliográfica}
+
+En esta sección se realiza un estudio del estado del arte relativo a la aplicación de distintas técnicas que tengan como objetivo identificar a un dispositivo a través de la red independientemente de un identificador susceptible de ser identificado. Para estos cometidos son muy utilizados los algoritmos de aprendizaje automático o Machine Learning. 
 
 Comenzamos la revisión bibliográfica por el trabajo desarrollado por Pascal Oser et al. \cite{oser2018identifying}. En este trabajo se desarrolla un sistema para identificar dispositivos entre un total de 562 en el centro del CERN. Para este cometido se tomas muestras periódicas de las marcas de tiempo (timestamps) contenidas en paquetes TCP que se envían y reciben de estos dispositivos.
 
@@ -71,20 +212,49 @@ Para cada uno de los dispositivos se realiza una captura de 5 minutos. Esta capt
 
 A continuación procede a entrenar tres modelos de deep learning, DNN, CNN y LSTM (los tres modelos pertenecen a la librería \texttt{TensorFlow} programada para Python \cite{tensorflow2015-whitepaper}), con los que obtiene unos resultados de 96.3\%, 94.7\% y 76\% respectivamente.
 
+Fabian Lanze et al. \cite{lanze2012clock} han desarrollado un trabajo en el que crean un sistema de identificación de dispositivos basado en el clock skew. Su objetivo es generar huellas para cada punto de acceso, de forma que si un dispositivo pueda saber si ese punto de acceso es legítimo, o por contra si puede ser un potencial atacante.
+
+Lo primero que hacen es definir el skew de un reloj como la primera derivada del offset de dicho reloj. De forma práctica usarán la desviación que almacena el demonio del servicio NTP para aproximar el skew del dispositivo conectado al punto de acceso. Usará conexión inalámbrica y recogerá hasta 6000 paquetes por dispositivo en cada muestra (10 minutos). Si en una muestra no se alcanzan los 500 paquetes, por problemas de conexión o cualquier otro motivo, esa muestra se elimina. Con este proceso se consiguen medir 388 puntos de acceso. 
+
+Finalmente, trata de generar una huella para cada punto de acceso de forma estadística, basándose sobre todo en la distribución del clock skew. Como resultado obtiene que su método no es suficientemente preciso y que muchos dispositivos presentan una huella similar, por lo tanto, concluye que no es posible identificarlos únicamente de esta forma.
+
+En el trabajo desarrollado por Yair Meidan et al. \cite{meidan2017profiliot} se desarrolla un sistema que es capaz de identificar dispositivos IoT a través de su tráfico de red. Las pruebas se realizan con trazas sobre conexión inalámbrica y tanto con dispositivos IoT como con PCs, smartphones, etc. 
+
+De estas trazas se centran específicamente en las sesiones TCP, donde cada una se representa como un conjunto de características de cada paquete.
+
+Primeramente, ejecutan un clasificador binario con el que obtienen la probabilidad de que un dispositivo sea IoT, usando solo información de una sesión TCP de cada dispositivo. En este apartado obtienen un \SI{100}{\percent} de acierto.
+
+Por último, entrenan distintos modelos de clasificación (GBM, Random Forest, XGBoost), únicamente sobre los dispositivos previamente etiquetados como IoT, obteniendo finalmente un resultado de un \SI{99.281}{\percent} de accuracy en la identificación del modelo y marca de cada uno de ellos.
+
+Como último artículo se analizará la propuesta realizada por Loh Chin Choong Desmond et al. \cite{desmond2008identifying}. En este trabajo han construido un sistema de identificación de dispositivos basado en los mensajes \textit{probe request} de los distintos dispositivos. Para ello, distinguirán como dispositivos distintos las distintas combinaciones de la tupla: $\langle$``Machine'', ``Wireless Network Interface Card (NIC) Driver'', ``Operating System''$\rangle$.
+
+A continuación, comprueban que en el tiempo de emisión de estos mensajes se ven varios comportamientos que se repiten. Luego, observan que la latencia entre ráfagas de estos mensajes también presenta estos comportamientos distintivos. Con estas latencias son con las que entrenarán un modelo que sea capaz de distinguir los dispositivos.
+
+El modelo que eligen se basa en aprendizaje no supervisado, Maximum Variance Clustering \cite{veenman2002maximum}. Este modelo es similar al algoritmo de $k$-medias, la distinción es que $k$-medias necesita conocer previamente el número de clústeres $k$ previamente, mientras que Maximum Variance Clustering necesita conocer la varianza máxima dentro de un clúster $\sigma^2_{max}$. Con este algoritmo obtienen unos resultados de accuracy entre el \SI{70}{\percent} y el \SI{80}{\percent}.
+
+
+\subsection{Resultados de la revisión bibliográfica}
+
 Por último realizaremos un resumen en forma de tabla de los artículos que han sido revisados.
 
-\begin{table}[H]
+\begin{table}
     \centering
-    \begin{tabularx}{0.9\textwidth}{Y|Y|Y}
-        Propuesta & Algoritmos usados & Resultados \\
+    \begin{tabularx}{0.9\textwidth}{Y|Y|Y|Y|Y|Y}
+        Referencia & Fuente de los datos & Método de clasificación & Tipo de aprendizaje & Algoritmos usados & Resultados \\
         \hline\hline
-        Pascal Oser et al. \cite{oser2018identifying} & MLP, SVM, Random Forest & 99.76\% de accuracy y 97.03\% de precisión \\
+        \cite{oser2018identifying} & Cabeceras TCP & Machine Learning & Supervisado & MLP, SVM, Random Forest & 99.76\% de accuracy y 97.03\% de precisión \\
         \hline
-        Salma Hamad et al. \cite{hamad2019iot} & AdaBoost, LDA, KNN, Árboles de decisión, Naive Bayes, SVM, Random Forest y GBoost & 89\% de accuracy \\
+        \cite{hamad2019iot} & Característi-cas del payload & Machine Learning & Supervisado & AdaBoost, LDA, KNN, Árboles de decisión, Naive Bayes, SVM, Random Forest y GBoost & 89\% de accuracy \\
         \hline
-        Ahmet Aksoy et al. \cite{aksoy2019automated} & Tablas de decisión, Árboles de decisión J48, OneR y PART & Entre 42.2\% y 100\% de accuracy, con un promedio de 82\% \\
+        \cite{aksoy2019automated} & Cabereceras TCP & Machine Learning & Supervisado & Tablas de decisión, Árboles de decisión J48, OneR y PART & Entre 42.2\% y 100\% de accuracy, con un promedio de 82\% \\
         \hline
-        Hossein Jafari et al. \cite{jafari2018iot} & DNN, CNN y LSTM & 96.3\% de accuracy en DNN, 94.7\% de accuracy en CNN y 76\% de accuracy en LSTM
+        \cite{jafari2018iot} & Radio frecuencias & Machine Learning & Supervisado & DNN, CNN y LSTM & 96.3\% de accuracy en DNN, 94.7\% de accuracy en CNN y 76\% de accuracy en LSTM \\
+        \hline
+        \cite{lanze2012clock} & Registros NTP & Estadístico & - & - & Inconcluyen-tes \\
+        \hline
+        \cite{meidan2017profiliot} & Sesiones TCP & Machine Learning & Supervisado & GBM, Random Forest y XGBoost & \SI{99.281}{\percent} de accuracy \\
+        \hline
+        \cite{desmond2008identifying} & Mensajes \textit{probe request} & Machine Learning & No supervisado & Maximum Variance Clustering & Entre un 70\% y 80\% de accuracy\\
     \end{tabularx}
     \caption{Resultados en el estado del arte}
     \label{tab:art_results}
