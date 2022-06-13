@@ -1,302 +1,325 @@
 %% This BibTeX bibliography file was created using BibDesk.
-%% http://bibdesk.sourceforge.net/
+%% https://bibdesk.sourceforge.io/
 
-
-%% Created for Eduardo Martínez Graciá at 2020-12-24 12:13:16 +0100 
+%% Created for Sergio Marin Sanchez at 2022-06-10 19:31:07 +0200 
 
 
 %% Saved with string encoding Unicode (UTF-8) 
-	
-@article{sanchez2021survey,
-  title={A Survey on Device Behavior Fingerprinting: Data Sources, Techniques, Application Scenarios, and Datasets},
-  author={S{\'a}nchez, Pedro Miguel S{\'a}nchez and Valero, Jos{\'e} Mar{\'\i}a Jorquera and Celdr{\'a}n, Alberto Huertas and Bovet, G{\'e}r{\^o}me and P{\'e}rez, Manuel Gil and P{\'e}rez, Gregorio Mart{\'\i}nez},
-  journal={IEEE Communications Surveys \& Tutorials},
-  year={2021},
-  publisher={IEEE}
+
+
+
+@online{cokemachine1982iot,
+	title = {The "Only" Coke Machine on the Internet},
+	year = {1982},
+	url = {https://www.cs.cmu.edu/~coke/history_long.txt}
 }
+
+@article{sanchez2021survey,
+	author = {S{\'a}nchez, Pedro Miguel S{\'a}nchez and Valero, Jos{\'e} Mar{\'\i}a Jorquera and Celdr{\'a}n, Alberto Huertas and Bovet, G{\'e}r{\^o}me and P{\'e}rez, Manuel Gil and P{\'e}rez, Gregorio Mart{\'\i}nez},
+	journal = {IEEE Communications Surveys \& Tutorials},
+	publisher = {IEEE},
+	title = {A Survey on Device Behavior Fingerprinting: Data Sources, Techniques, Application Scenarios, and Datasets},
+	year = {2021}}
 
 @inproceedings{oser2018identifying,
-author="Oser, Pascal
-and Kargl, Frank
-and L{\"u}ders, Stefan",
-editor="Wang, Guojun
-and Chen, Jinjun
-and Yang, Laurence T.",
-title="Identifying Devices of the Internet of Things Using Machine Learning on Clock Characteristics",
-booktitle="Security, Privacy, and Anonymity in Computation, Communication, and Storage",
-year="2018",
-publisher="Springer International Publishing",
-address="Cham",
-pages="417--427",
-abstract="The number of devices of the so-called Internet of Things (IoT) is heavily increasing. One of the main challenges for operators of large networks is to autonomously and automatically identify any IoT device within the network for the sake of computer security and, subsequently, being able to better protect and secure those.",
-doi="10.1007/978-3-030-05345-1_36",
-isbn="978-3-030-05345-1"
-}
+	abstract = {The number of devices of the so-called Internet of Things (IoT) is heavily increasing. One of the main challenges for operators of large networks is to autonomously and automatically identify any IoT device within the network for the sake of computer security and, subsequently, being able to better protect and secure those.},
+	address = {Cham},
+	author = {Oser, Pascal and Kargl, Frank and L{\"u}ders, Stefan},
+	booktitle = {Security, Privacy, and Anonymity in Computation, Communication, and Storage},
+	doi = {10.1007/978-3-030-05345-1_36},
+	editor = {Wang, Guojun and Chen, Jinjun and Yang, Laurence T.},
+	isbn = {978-3-030-05345-1},
+	pages = {417--427},
+	publisher = {Springer International Publishing},
+	title = {Identifying Devices of the Internet of Things Using Machine Learning on Clock Characteristics},
+	year = {2018},
+	bdsk-url-1 = {https://doi.org/10.1007/978-3-030-05345-1_36}}
 
 @article{kohno2005remote,
-  title={Remote physical device fingerprinting},
-  author={Kohno, Tadayoshi and Broido, Andre and Claffy, Kimberly C},
-  journal={IEEE Transactions on Dependable and Secure Computing},
-  volume={2},
-  number={2},
-  pages={93--108},
-  year={2005},
-  publisher={IEEE}
-}
-
-@inproceedings{lanze2012clock,
-  title={Clock skew based remote device fingerprinting demystified},
-  author={Lanze, Fabian and Panchenko, Andriy and Braatz, Benjamin and Zinnen, Andreas},
-  booktitle={2012 IEEE Global Communications Conference (GLOBECOM)},
-  pages={813--819},
-  year={2012},
-  organization={IEEE}
-}
+	author = {Kohno, Tadayoshi and Broido, Andre and Claffy, Kimberly C},
+	journal = {IEEE Transactions on Dependable and Secure Computing},
+	number = {2},
+	pages = {93--108},
+	publisher = {IEEE},
+	title = {Remote physical device fingerprinting},
+	volume = {2},
+	year = {2005}}
 
 @inproceedings{hamad2019iot,
-  title={IoT device Identification via network-flow based fingerprinting and learning},
-  author={Hamad, Salma Abdalla and Zhang, Wei Emma and Sheng, Quan Z and Nepal, Surya},
-  booktitle={2019 18th IEEE International Conference On Trust, Security And Privacy In Computing And Communications/13th IEEE International Conference On Big Data Science And Engineering (TrustCom/BigDataSE)},
-  pages={103--111},
-  year={2019},
-  organization={IEEE}
-}
+	author = {Hamad, Salma Abdalla and Zhang, Wei Emma and Sheng, Quan Z and Nepal, Surya},
+	booktitle = {2019 18th IEEE International Conference On Trust, Security And Privacy In Computing And Communications/13th IEEE International Conference On Big Data Science And Engineering (TrustCom/BigDataSE)},
+	organization = {IEEE},
+	pages = {103--111},
+	title = {IoT device Identification via network-flow based fingerprinting and learning},
+	year = {2019}}
 
-@inproceedings{aksoy2019automated,  
-  author={Aksoy, Ahmet and Gunes, Mehmet Hadi},  
-  booktitle={ICC 2019 - 2019 IEEE International Conference on Communications (ICC)},   
-  title={Automated IoT Device Identification using Network Traffic},   
-  year={2019},  
-  volume={},  
-  number={},  
-  pages={1-7},  
-  abstract={IoT devices have been gaining popularity and become integral to our daily life. These devices are prone to be compromised as well as any computing system, but lack computing capabilities for cybersecurity software. An important measure for protecting attacks on IoT devices is through isolation of such devices by restriction of communications to the device from firewall/gateway. To this end identification of the IoT device is valuable for network administration and security. In this paper, we introduce a system for automated classification of device characteristics, called System IDentifier (SysID), based on their network traffic. SysID uses any single packet that is originated from the device to detect its kind. We use genetic algorithm (GA) to determine relevant features in different protocol headers and then deploy various machine learning (ML) algorithms (i.e., DecisionTable, J48 Decision Trees, OneR, and PART) to classify host device types by analyzing features selected by GA. GA helps reduce classification complexity and increases its accuracy by eliminating noisy features from the data. SysID allows the ability to have a completely automated way of classifying IoT devices using their TCP/IP packets without expert input for classification. In an experimental study with 23 IoT devices, SysID identified the device type from a single packet with over 95% accuracy.},
-  keywords={},
-  doi={10.1109/ICC.2019.8761559},
-  ISSN={1938-1883},
-  month={May}
-}
+@inproceedings{aksoy2019automated,
+	abstract = {IoT devices have been gaining popularity and become integral to our daily life. These devices are prone to be compromised as well as any computing system, but lack computing capabilities for cybersecurity software. An important measure for protecting attacks on IoT devices is through isolation of such devices by restriction of communications to the device from firewall/gateway. To this end identification of the IoT device is valuable for network administration and security. In this paper, we introduce a system for automated classification of device characteristics, called System IDentifier (SysID), based on their network traffic. SysID uses any single packet that is originated from the device to detect its kind. We use genetic algorithm (GA) to determine relevant features in different protocol headers and then deploy various machine learning (ML) algorithms (i.e., DecisionTable, J48 Decision Trees, OneR, and PART) to classify host device types by analyzing features selected by GA. GA helps reduce classification complexity and increases its accuracy by eliminating noisy features from the data. SysID allows the ability to have a completely automated way of classifying IoT devices using their TCP/IP packets without expert input for classification. In an experimental study with 23 IoT devices, SysID identified the device type from a single packet with over 95% accuracy.},
+	author = {Aksoy, Ahmet and Gunes, Mehmet Hadi},
+	booktitle = {ICC 2019 - 2019 IEEE International Conference on Communications (ICC)},
+	doi = {10.1109/ICC.2019.8761559},
+	issn = {1938-1883},
+	month = {May},
+	pages = {1-7},
+	title = {Automated IoT Device Identification using Network Traffic},
+	year = {2019},
+	bdsk-url-1 = {https://doi.org/10.1109/ICC.2019.8761559}}
 
 @online{steadyclockcpp,
-  title={\texttt{std::chrono::steady\_clock}},
-  url={https://en.cppreference.com/w/cpp/chrono/steady_clock}, 
-  journal={cppreference.com}
-} 
+	journal = {cppreference.com},
+	title = {\texttt{std::chrono::steady\_clock}},
+	url = {https://en.cppreference.com/w/cpp/chrono/steady_clock},
+	bdsk-url-1 = {https://en.cppreference.com/w/cpp/chrono/steady_clock}}
 
 @article{hatwell2020chirps,
-  title={CHIRPS: Explaining random forest classification},
-  author={Hatwell, Julian and Gaber, Mohamed Medhat and Azad, R Muhammad Atif},
-  journal={Artificial Intelligence Review},
-  volume={53},
-  pages={5747--5788},
-  year={2020},
-  publisher={Springer}
-}
+	author = {Hatwell, Julian and Gaber, Mohamed Medhat and Azad, R Muhammad Atif},
+	journal = {Artificial Intelligence Review},
+	pages = {5747--5788},
+	publisher = {Springer},
+	title = {CHIRPS: Explaining random forest classification},
+	volume = {53},
+	year = {2020}}
 
 @article{breiman2001random,
-  title={Random forests},
-  author={Breiman, Leo},
-  journal={Machine learning},
-  volume={45},
-  number={1},
-  pages={5--32},
-  year={2001},
-  publisher={Springer}
-}
+	author = {Breiman, Leo},
+	journal = {Machine learning},
+	number = {1},
+	pages = {5--32},
+	publisher = {Springer},
+	title = {Random forests},
+	volume = {45},
+	year = {2001}}
 
 @online{svmseparation2012,
-  author  = "Wikimedia Commons",
-  title   = "Svm separating hyperplanes (SVG)",
-  year    = "2012",
-  url     = "https://commons.wikimedia.org/wiki/File:Svm_separating_hyperplanes_(SVG).svg"
-}
+	author = {Wikimedia Commons},
+	title = {Svm separating hyperplanes (SVG)},
+	url = {https://commons.wikimedia.org/wiki/File:Svm_separating_hyperplanes_(SVG).svg},
+	year = {2012},
+	bdsk-url-1 = {https://commons.wikimedia.org/wiki/File:Svm_separating_hyperplanes_(SVG).svg}}
 
 @online{knnalgorithm2010,
-  author  = "Wikimedia Commons",
-  title   = "File:KnnClassification",
-  year    = "2010",
-  url     = "https://commons.wikimedia.org/wiki/File:KnnClassification.svg"
-}
+	author = {Wikimedia Commons},
+	title = {File:KnnClassification},
+	url = {https://commons.wikimedia.org/wiki/File:KnnClassification.svg},
+	year = {2010},
+	bdsk-url-1 = {https://commons.wikimedia.org/wiki/File:KnnClassification.svg}}
 
 @online{scikitforest,
-  title={\texttt{RandomForestClassifier}},
-  url={https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier},
-  journal={scikit}
-} 
+	journal = {scikit},
+	title = {\texttt{RandomForestClassifier}},
+	url = {https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier},
+	bdsk-url-1 = {https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier}}
 
 @online{scikitnaivebayes,
-  title={\texttt{GaussianNB}}, 
-  url={https://scikit-learn.org/stable/modules/generated/sklearn.naive\_bayes.GaussianNB.html#sklearn.naive\_bayes.GaussianNB}, 
-  journal={scikit}
-} 
+	journal = {scikit},
+	title = {\texttt{GaussianNB}},
+	url = {https://scikit-learn.org/stable/modules/generated/sklearn.naive\_bayes.GaussianNB.html#sklearn.naive\_bayes.GaussianNB},
+	bdsk-url-1 = {https://scikit-learn.org/stable/modules/generated/sklearn.naive%5C_bayes.GaussianNB.html#sklearn.naive%5C_bayes.GaussianNB}}
 
 @online{scikitmlp,
-  title={\texttt{MLPClassifier}}, 
-  url={https://scikit-learn.org/stable/modules/generated/sklearn.neural\_network.MLPClassifier.html#sklearn.neural\_network.MLPClassifier}, 
-  journal={scikit}
-} 
+	journal = {scikit},
+	title = {\texttt{MLPClassifier}},
+	url = {https://scikit-learn.org/stable/modules/generated/sklearn.neural\_network.MLPClassifier.html#sklearn.neural\_network.MLPClassifier},
+	bdsk-url-1 = {https://scikit-learn.org/stable/modules/generated/sklearn.neural%5C_network.MLPClassifier.html#sklearn.neural%5C_network.MLPClassifier}}
 
-@online{scikittrees, 
-  title={\texttt{DecisionTreeClassifier}}, 
-  url={https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier}, 
-  journal={scikit}
-} 
+@online{scikittrees,
+	journal = {scikit},
+	title = {\texttt{DecisionTreeClassifier}},
+	url = {https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier},
+	bdsk-url-1 = {https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier}}
 
-@online{scikitsvm, 
-  title={\texttt{LinearSVC}}, 
-  url={https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html}, 
-  journal={scikit}
-}
- 
-@online{scikitknn, 
-  title={\texttt{KNeighborsClassifier}}, 
-  url={https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html}, 
-  journal={scikit}
-} 
+@online{scikitsvm,
+	journal = {scikit},
+	title = {\texttt{LinearSVC}},
+	url = {https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html},
+	bdsk-url-1 = {https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html}}
 
-@online{scikitgrid, 
-  title={\texttt{GridSearchCV}}, 
-  url={https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html}, 
-  journal={scikit}
-} 
+@online{scikitknn,
+	journal = {scikit},
+	title = {\texttt{KNeighborsClassifier}},
+	url = {https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html},
+	bdsk-url-1 = {https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html}}
+
+@online{scikitgrid,
+	journal = {scikit},
+	title = {\texttt{GridSearchCV}},
+	url = {https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html},
+	bdsk-url-1 = {https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html}}
 
 @techreport{RFC1323,
-  series = {Request for Comments},
-  number = 1323,
-  howpublished = {RFC 1323},
-  publisher = {RFC Editor},
-  doi =	{10.17487/RFC1323},
-  url =	{https://rfc-editor.org/rfc/rfc1323.txt},
-  author = {David A. Borman and Robert T. Braden and Van Jacobson},
-  title = {{TCP Extensions for High Performance}},
-  pagetotal = 37,
-  year = 1992,
-  month = may,
-  abstract = {This memo presents a set of TCP extensions to improve performance over large bandwidth*delay product paths and to provide reliable operation over very high-speed paths. It defines new TCP options for scaled windows and timestamps, which are designed to provide compatible interworking with TCP's that do not implement the extensions. {[}STANDARDS-TRACK{]}},
-}
+	abstract = {This memo presents a set of TCP extensions to improve performance over large bandwidth*delay product paths and to provide reliable operation over very high-speed paths. It defines new TCP options for scaled windows and timestamps, which are designed to provide compatible interworking with TCP's that do not implement the extensions. {[}STANDARDS-TRACK{]}},
+	author = {David A. Borman and Robert T. Braden and Van Jacobson},
+	doi = {10.17487/RFC1323},
+	howpublished = {RFC 1323},
+	month = may,
+	number = 1323,
+	pagetotal = 37,
+	publisher = {RFC Editor},
+	series = {Request for Comments},
+	title = {{TCP Extensions for High Performance}},
+	url = {https://rfc-editor.org/rfc/rfc1323.txt},
+	year = 1992,
+	bdsk-url-1 = {https://rfc-editor.org/rfc/rfc1323.txt},
+	bdsk-url-2 = {https://doi.org/10.17487/RFC1323}}
 
 @article{hall2009weka,
-author = {Hall, Mark and Frank, Eibe and Holmes, Geoffrey and Pfahringer, Bernhard and Reutemann, Peter and Witten, Ian H.},
-title = {The WEKA Data Mining Software: An Update},
-year = {2009},
-issue_date = {June 2009},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-volume = {11},
-number = {1},
-issn = {1931-0145},
-url = {https://doi.org/10.1145/1656274.1656278},
-doi = {10.1145/1656274.1656278},
-abstract = {More than twelve years have elapsed since the first public release of WEKA. In that time, the software has been rewritten entirely from scratch, evolved substantially and now accompanies a text on data mining [35]. These days, WEKA enjoys widespread acceptance in both academia and business, has an active community, and has been downloaded more than 1.4 million times since being placed on Source-Forge in April 2000. This paper provides an introduction to the WEKA workbench, reviews the history of the project, and, in light of the recent 3.6 stable release, briefly discusses what has been added since the last stable version (Weka 3.4) released in 2003.},
-journal = {SIGKDD Explor. Newsl.},
-month = {nov},
-pages = {10–18},
-numpages = {9}
-}
+	abstract = {More than twelve years have elapsed since the first public release of WEKA. In that time, the software has been rewritten entirely from scratch, evolved substantially and now accompanies a text on data mining [35]. These days, WEKA enjoys widespread acceptance in both academia and business, has an active community, and has been downloaded more than 1.4 million times since being placed on Source-Forge in April 2000. This paper provides an introduction to the WEKA workbench, reviews the history of the project, and, in light of the recent 3.6 stable release, briefly discusses what has been added since the last stable version (Weka 3.4) released in 2003.},
+	address = {New York, NY, USA},
+	author = {Hall, Mark and Frank, Eibe and Holmes, Geoffrey and Pfahringer, Bernhard and Reutemann, Peter and Witten, Ian H.},
+	doi = {10.1145/1656274.1656278},
+	issn = {1931-0145},
+	issue_date = {June 2009},
+	journal = {SIGKDD Explor. Newsl.},
+	month = {nov},
+	number = {1},
+	numpages = {9},
+	pages = {10--18},
+	publisher = {Association for Computing Machinery},
+	title = {The WEKA Data Mining Software: An Update},
+	url = {https://doi.org/10.1145/1656274.1656278},
+	volume = {11},
+	year = {2009},
+	bdsk-url-1 = {https://doi.org/10.1145/1656274.1656278}}
 
 @article{miettinen2017iot,
-   title={IoT SENTINEL: Automated Device-Type Identification for Security Enforcement in IoT},
-   url={http://dx.doi.org/10.1109/ICDCS.2017.283},
-   DOI={10.1109/icdcs.2017.283},
-   journal={2017 IEEE 37th International Conference on Distributed Computing Systems (ICDCS)},
-   publisher={IEEE},
-   author={Miettinen, Markus and Marchal, Samuel and Hafeez, Ibbad and Asokan, N. and Sadeghi, Ahmad-Reza and Tarkoma, Sasu},
-   year={2017},
-   month={Jun}
-}
+	author = {Miettinen, Markus and Marchal, Samuel and Hafeez, Ibbad and Asokan, N. and Sadeghi, Ahmad-Reza and Tarkoma, Sasu},
+	doi = {10.1109/icdcs.2017.283},
+	journal = {2017 IEEE 37th International Conference on Distributed Computing Systems (ICDCS)},
+	month = {Jun},
+	publisher = {IEEE},
+	title = {IoT SENTINEL: Automated Device-Type Identification for Security Enforcement in IoT},
+	url = {http://dx.doi.org/10.1109/ICDCS.2017.283},
+	year = {2017},
+	bdsk-url-1 = {http://dx.doi.org/10.1109/ICDCS.2017.283},
+	bdsk-url-2 = {http://dx.doi.org/10.1109/icdcs.2017.283}}
 
-@INPROCEEDINGS{jafari2018iot,  author={Jafari, Hossein and Omotere, Oluwaseyi and Adesina, Damilola and Wu, Hsiang-Huang and Qian, Lijun},  booktitle={MILCOM 2018 - 2018 IEEE Military Communications Conference (MILCOM)},   title={IoT Devices Fingerprinting Using Deep Learning},   year={2018},  volume={},  number={},  pages={1-9},  doi={10.1109/MILCOM.2018.8599826}}
+@inproceedings{jafari2018iot,
+	author = {Jafari, Hossein and Omotere, Oluwaseyi and Adesina, Damilola and Wu, Hsiang-Huang and Qian, Lijun},
+	booktitle = {MILCOM 2018 - 2018 IEEE Military Communications Conference (MILCOM)},
+	doi = {10.1109/MILCOM.2018.8599826},
+	pages = {1-9},
+	title = {IoT Devices Fingerprinting Using Deep Learning},
+	year = {2018},
+	bdsk-url-1 = {https://doi.org/10.1109/MILCOM.2018.8599826}}
 
 @misc{tensorflow2015-whitepaper,
-title={ {TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},
-url={https://www.tensorflow.org/},
-note={Software available from tensorflow.org},
-author={
-    Mart\'{\i}n~Abadi and
-    Ashish~Agarwal and
-    Paul~Barham and
-    Eugene~Brevdo and
-    Zhifeng~Chen and
-    Craig~Citro and
-    Greg~S.~Corrado and
-    Andy~Davis and
-    Jeffrey~Dean and
-    Matthieu~Devin and
-    Sanjay~Ghemawat and
-    Ian~Goodfellow and
-    Andrew~Harp and
-    Geoffrey~Irving and
-    Michael~Isard and
-    Yangqing Jia and
-    Rafal~Jozefowicz and
-    Lukasz~Kaiser and
-    Manjunath~Kudlur and
-    Josh~Levenberg and
-    Dandelion~Man\'{e} and
-    Rajat~Monga and
-    Sherry~Moore and
-    Derek~Murray and
-    Chris~Olah and
-    Mike~Schuster and
-    Jonathon~Shlens and
-    Benoit~Steiner and
-    Ilya~Sutskever and
-    Kunal~Talwar and
-    Paul~Tucker and
-    Vincent~Vanhoucke and
-    Vijay~Vasudevan and
-    Fernanda~Vi\'{e}gas and
-    Oriol~Vinyals and
-    Pete~Warden and
-    Martin~Wattenberg and
-    Martin~Wicke and
-    Yuan~Yu and
-    Xiaoqiang~Zheng},
-  year={2015},
-}
+	author = {Mart\'{\i}n~Abadi and Ashish~Agarwal and Paul~Barham and Eugene~Brevdo and Zhifeng~Chen and Craig~Citro and Greg~S.~Corrado and Andy~Davis and Jeffrey~Dean and Matthieu~Devin and Sanjay~Ghemawat and Ian~Goodfellow and Andrew~Harp and Geoffrey~Irving and Michael~Isard and Yangqing Jia and Rafal~Jozefowicz and Lukasz~Kaiser and Manjunath~Kudlur and Josh~Levenberg and Dandelion~Man\'{e} and Rajat~Monga and Sherry~Moore and Derek~Murray and Chris~Olah and Mike~Schuster and Jonathon~Shlens and Benoit~Steiner and Ilya~Sutskever and Kunal~Talwar and Paul~Tucker and Vincent~Vanhoucke and Vijay~Vasudevan and Fernanda~Vi\'{e}gas and Oriol~Vinyals and Pete~Warden and Martin~Wattenberg and Martin~Wicke and Yuan~Yu and Xiaoqiang~Zheng},
+	note = {Software available from tensorflow.org},
+	title = {{TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},
+	url = {https://www.tensorflow.org/},
+	year = {2015},
+	bdsk-url-1 = {https://www.tensorflow.org/}}
 
-@INPROCEEDINGS{salo2007multi,  author={Salo, Timothy J.},  booktitle={MILCOM 2007 - IEEE Military Communications Conference},   title={Multi-Factor Fingerprints for Personal Computer Hardware},   year={2007},  volume={},  number={},  pages={1-7},  doi={10.1109/MILCOM.2007.4455113}}
+@inproceedings{salo2007multi,
+	author = {Salo, Timothy J.},
+	booktitle = {MILCOM 2007 - IEEE Military Communications Conference},
+	doi = {10.1109/MILCOM.2007.4455113},
+	pages = {1-7},
+	title = {Multi-Factor Fingerprints for Personal Computer Hardware},
+	year = {2007},
+	bdsk-url-1 = {https://doi.org/10.1109/MILCOM.2007.4455113}}
 
 @misc{84Billio53:online,
-author = {Rob van der Meulen},
-title = {8.4 Billion Connected Things Will be in Use 2017 | Gartner},
-howpublished = {\url{https://www.gartner.com/en/newsroom/press-releases/2017-02-07-gartner-says-8-billion-connected-things-will-be-in-use-in-2017-up-31-percent-from-2016}},
-publisher={Gartner Inc.},
-month = {Feb},
-year = {2017}
+	author = {Rob van der Meulen},
+	howpublished = {\url{https://www.gartner.com/en/newsroom/press-releases/2017-02-07-gartner-says-8-billion-connected-things-will-be-in-use-in-2017-up-31-percent-from-2016}},
+	month = {Feb},
+	publisher = {Gartner Inc.},
+	title = {8.4 Billion Connected Things Will be in Use 2017 | Gartner},
+	year = {2017}}
+
+@inproceedings{lanze2012clock,
+	abstract = {Commonly used identifiers for IEEE 802.11 access points (APs), such as network name (SSID), MAC, or IP address can be easily spoofed. This allows an attacker to fake a real AP and intercept, collect, or alter (potentially even encrypted) data. In this paper, we address the aforementioned problem by studying limits of unique remote physical device identification based on their clock skew - an unavoidable phenomenon that causes clocks to run at marginal but measurably different speed. To this end, we propose an algorithm for passive fingerprinting using timestamps regularly sent by APs in beacon frames. The major advantages of our method are that it is online and that we are able to eliminate the influence of clock skew of the measurement device. Hence, fingerprints performed by different devices become comparable. We calculate the precision of our clock skew measurement algorithm and provide a termination criterion for estimation of the clock skew with arbitrary precision. Moreover, conducting a large scale evaluation, we study the stability and uniqueness of clock skew as a means for remote wireless device identification.},
+	author = {Lanze, Fabian and Panchenko, Andriy and Braatz, Benjamin and Zinnen, Andreas},
+	booktitle = {2012 IEEE Global Communications Conference (GLOBECOM)},
+	doi = {10.1109/GLOCOM.2012.6503213},
+	issn = {1930-529X},
+	month = {Dec},
+	pages = {813-819},
+	title = {Clock skew based remote device fingerprinting demystified},
+	year = {2012},
+	bdsk-url-1 = {https://doi.org/10.1109/GLOCOM.2012.6503213}}
+
+@article{lin2019individual,
+	abstract = {The access security of wireless devices is a serious challenge in present wireless network security. Radio frequency (RF) fingerprint recognition technology as an important non-password authentication technology attracts more and more attention, because of its full use of radio frequency characteristics that cannot be imitated to achieve certification. In this paper, a RF fingerprint identification method based on dimensional reduction and machine learning is proposed as a component of intrusion detection for resolving authentication security issues. We compare three kinds of dimensional reduction methods, which are the traditional PCA, RPCA and KPCA. And we take random forests, support vector machine, artificial neural network and grey correlation analysis into consideration to make decisions on the dimensional reduction data. Finally, we obtain the recognition system with the best performance. Using a combination of RPCA and random forests, we achieve 90{\%} classification accuracy is achieved at SNR {\$}{\$}{\backslash}ge {\$}{\$} 10 dB when reduced dimension is 76. The proposed method improves wireless device authentication and improves security protection due to the introduction of RF fingerprinting.},
+	author = {Lin, Yun and Zhu, Xiaolei and Zheng, Zhigao and Dou, Zheng and Zhou, Ruolin},
+	day = {01},
+	doi = {10.1007/s11227-017-2216-2},
+	issn = {1573-0484},
+	journal = {The Journal of Supercomputing},
+	month = {Jun},
+	number = {6},
+	pages = {3010-3027},
+	title = {The individual identification method of wireless device based on dimensionality reduction and machine learning},
+	url = {https://doi.org/10.1007/s11227-017-2216-2},
+	volume = {75},
+	year = {2019},
+	bdsk-url-1 = {https://doi.org/10.1007/s11227-017-2216-2}}
+
+@inproceedings{meidan2017profiliot,
+	abstract = {In this work we apply machine learning algorithms on network traffic data for accurate identification of IoT devices connected to a network. To train and evaluate the classifier, we collected and labeled network traffic data from nine distinct IoT devices, and PCs and smartphones. Using supervised learning, we trained a multi-stage meta classifier; in the first stage, the classifier can distinguish between traffic generated by IoT and non-IoT devices. In the second stage, each IoT device is associated a specific IoT device class. The overall IoT classification accuracy of our model is 99.281+.},
+	address = {New York, NY, USA},
+	author = {Meidan, Yair and Bohadana, Michael and Shabtai, Asaf and Guarnizo, Juan David and Ochoa, Mart\'{\i}n and Tippenhauer, Nils Ole and Elovici, Yuval},
+	booktitle = {Proceedings of the Symposium on Applied Computing},
+	doi = {10.1145/3019612.3019878},
+	isbn = {9781450344869},
+	keywords = {machine learning, internet of things (IoT), cyber security, device identification, network traffic analysis},
+	location = {Marrakech, Morocco},
+	numpages = {4},
+	pages = {506--509},
+	publisher = {Association for Computing Machinery},
+	series = {SAC '17},
+	title = {ProfilIoT: A Machine Learning Approach for IoT Device Identification Based on Network Traffic Analysis},
+	url = {https://doi.org/10.1145/3019612.3019878},
+	year = {2017},
+	bdsk-url-1 = {https://doi.org/10.1145/3019612.3019878}}
+
+@inproceedings{desmond2008identifying,
+	abstract = {We propose a new fingerprinting technique that differentiates between unique devices over a Wireless Local Area Network (WLAN) simply through the timing analysis of 802.11 probe request frames. Our technique can be applied to spoof detection, network reconnaissance, and implementation of access control against masquerading attacks. Experimental results indicate that our technique is consistent and accurate in differentiating between unique devices. In contrast with existing wireless fingerprinting techniques, our technique is passive, non-invasive and does not require the co-operation of fingerprintee hosts.},
+	address = {New York, NY, USA},
+	author = {Desmond, Loh Chin Choong and Yuan, Cho Chia and Pheng, Tan Chung and Lee, Ri Seng},
+	booktitle = {Proceedings of the First ACM Conference on Wireless Network Security},
+	doi = {10.1145/1352533.1352542},
+	isbn = {9781595938145},
+	keywords = {spoof detection, wireless fingerprinting},
+	location = {Alexandria, VA, USA},
+	numpages = {10},
+	pages = {46--55},
+	publisher = {Association for Computing Machinery},
+	series = {WiSec '08},
+	title = {Identifying Unique Devices through Wireless Fingerprinting},
+	url = {https://doi.org/10.1145/1352533.1352542},
+	year = {2008},
+	bdsk-url-1 = {https://doi.org/10.1145/1352533.1352542}}
+
+@article{veenman2002maximum,
+	author = {Veenman, C.J. and Reinders, M.J.T. and Backer, E.},
+	doi = {10.1109/TPAMI.2002.1033218},
+	journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+	number = {9},
+	pages = {1273-1280},
+	title = {A maximum variance cluster algorithm},
+	volume = {24},
+	year = {2002},
+	bdsk-url-1 = {https://doi.org/10.1109/TPAMI.2002.1033218}}
+	
+@article{gokhale2018introduction,
+  title={Introduction to IOT},
+  author={Gokhale, Pradyumna and Bhat, Omkar and Bhat, Sagar},
+  journal={International Advanced Research Journal in Science, Engineering and Technology},
+  volume={5},
+  number={1},
+  pages={41--44},
+  year={2018}
 }
 
-@INPROCEEDINGS{lanze2012clock,
-  author={Lanze, Fabian and Panchenko, Andriy and Braatz, Benjamin and Zinnen, Andreas},
-  booktitle={2012 IEEE Global Communications Conference (GLOBECOM)}, 
-  title={Clock skew based remote device fingerprinting demystified}, 
-  year={2012},
-  volume={},
-  number={},
-  pages={813-819},
-  abstract={Commonly used identifiers for IEEE 802.11 access points (APs), such as network name (SSID), MAC, or IP address can be easily spoofed. This allows an attacker to fake a real AP and intercept, collect, or alter (potentially even encrypted) data. In this paper, we address the aforementioned problem by studying limits of unique remote physical device identification based on their clock skew - an unavoidable phenomenon that causes clocks to run at marginal but measurably different speed. To this end, we propose an algorithm for passive fingerprinting using timestamps regularly sent by APs in beacon frames. The major advantages of our method are that it is online and that we are able to eliminate the influence of clock skew of the measurement device. Hence, fingerprints performed by different devices become comparable. We calculate the precision of our clock skew measurement algorithm and provide a termination criterion for estimation of the clock skew with arbitrary precision. Moreover, conducting a large scale evaluation, we study the stability and uniqueness of clock skew as a means for remote wireless device identification.},
-  keywords={},
-  doi={10.1109/GLOCOM.2012.6503213},
-  ISSN={1930-529X},
-  month={Dec},}
-  
-@Article{lin2019individual,
-author={Lin, Yun
-and Zhu, Xiaolei
-and Zheng, Zhigao
-and Dou, Zheng
-and Zhou, Ruolin},
-title={The individual identification method of wireless device based on dimensionality reduction and machine learning},
-journal={The Journal of Supercomputing},
-year={2019},
-month={Jun},
-day={01},
-volume={75},
-number={6},
-pages={3010-3027},
-abstract={The access security of wireless devices is a serious challenge in present wireless network security. Radio frequency (RF) fingerprint recognition technology as an important non-password authentication technology attracts more and more attention, because of its full use of radio frequency characteristics that cannot be imitated to achieve certification. In this paper, a RF fingerprint identification method based on dimensional reduction and machine learning is proposed as a component of intrusion detection for resolving authentication security issues. We compare three kinds of dimensional reduction methods, which are the traditional PCA, RPCA and KPCA. And we take random forests, support vector machine, artificial neural network and grey correlation analysis into consideration to make decisions on the dimensional reduction data. Finally, we obtain the recognition system with the best performance. Using a combination of RPCA and random forests, we achieve 90{\%} classification accuracy is achieved at SNR {\$}{\$}{\backslash}ge {\$}{\$} 10 dB when reduced dimension is 76. The proposed method improves wireless device authentication and improves security protection due to the introduction of RF fingerprinting.},
-issn={1573-0484},
-doi={10.1007/s11227-017-2216-2},
-url={https://doi.org/10.1007/s11227-017-2216-2}
+@article{farooq2015review,
+  title={A review on internet of things (IoT)},
+  author={Farooq, M Umar and Waseem, Muhammad and Mazhar, Sadia and Khairi, Anjum and Kamal, Talha},
+  journal={International journal of computer applications},
+  volume={113},
+  number={1},
+  pages={1--7},
+  publisher={Foundation of Computer Science}
 }
 
+@ARTICLE{yaqoob2017internet,  author={Yaqoob, Ibrar and Ahmed, Ejaz and Hashem, Ibrahim Abaker Targio and Ahmed, Abdelmuttlib Ibrahim Abdalla and Gani, Abdullah and Imran, Muhammad and Guizani, Mohsen},  journal={IEEE Wireless Communications},   title={Internet of Things Architecture: Recent Advances, Taxonomy, Requirements, and Open Challenges},   year={2017},  volume={24},  number={3},  pages={10-16},  abstract={Recent years have witnessed tremendous growth in the number of smart devices, wireless technologies, and sensors. In the foreseeable future, it is expected that trillions of devices will be connected to the Internet. Thus, to accommodate such a voluminous number of devices, scalable, flexible, interoperable, energy-efficient, and secure network architectures are required. This article aims to explore IoT architectures. In this context, first, we investigate, highlight, and report premier research advances made in IoT architecture recently. Then we categorize and classify IoT architectures and devise a taxonomy based on important parameters such as applications, enabling technologies, business objectives, architectural requirements, network topologies, and IoT platform architecture types. We identify and outline the key requirements for future IoT architecture. A few prominent case studies on IoT are discovered and presented. Finally, we enumerate and outline future research challenges.},  keywords={},  doi={10.1109/MWC.2017.1600421},  ISSN={1558-0687},  month={June},}

@@ -10,13 +10,14 @@
 \DeclareSIUnit{\byte}{B}
 
 \includeonly{
-    resumen,
-    abstract,
+    %resumen,
+    %abstract,
     Introduccion,
-    Estado_del_Arte,
-    Objetivos_Metodologia,
-    Diseno_Resolucion,
-    Conclusiones
+    %Estado_del_Arte,
+    %Objetivos_Metodologia,
+    %Diseno_Resolucion,
+    %Resultados,
+    %Conclusiones
 }
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
@@ -127,7 +128,7 @@ Pedro Miguel \textsc{Sánchez Sánchez}\\
 \setlength{\parindent}{18pt}
 
 % Declaracion de originalidad
-\input{declaracion.tex}
+%\input{declaracion.tex}
 \clearpage{\pagestyle{empty}\cleardoublepage}
 
 % Resumen en castellano
@@ -158,6 +159,9 @@ Pedro Miguel \textsc{Sánchez Sánchez}\\
 % Diseño y resolución
 \include{Diseno_Resolucion}
 
+% Análisis de los resultados
+\include{Resultados}
+
 % Conclusiones y vias futuras
 \include{Conclusiones}
 
@@ -167,6 +171,8 @@ Pedro Miguel \textsc{Sánchez Sánchez}\\
 
 % Bibliografía
 \selectlanguage{english}
+\rhead{}
+\lhead{}
 \renewcommand\bibname{Bibliografía}
 \printbibliography[heading = bibintoc]
 
