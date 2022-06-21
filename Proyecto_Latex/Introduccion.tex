@@ -2,31 +2,27 @@
 
 \chapter{Introducción} \label{chap:intro}
 
-\section{Contexto}
-
 En los últimos años el número de dispositivos conectados a internet se ha incrementado en gran medida \cite{84Billio53:online}. Esto se debe al uso de smartphones, tablets y demás dispositivos que requieren de conexión a internet para llevar a cabo la mayoría (o la totalidad) de tareas para las que han sido diseñados.
 
 Cada dispositivo conectado a internet tiene asociados varios identificadores, como la dirección IP y la dirección MAC. Estos identificadores deberían servir para identificar unívocamente a un dispositivo, pero en la práctica no se da esta situación. Las direcciones IP pueden cambiar automáticamente debido al direccionamiento IP dinámico (mediante servidores DHCP), pero también pueden ser modificadas por las propias personas. 
 
-Estas modificaciones pueden ser por temas únicamente de privacidad, pero en muchas ocasiones están relacionadas con la ciberdelincuencia. Los delicuentes pueden intentar falsificar sus identificadores con el objetivo de que las personas, buscando conectarse a un servicio legítimo, acaben conectándose a sus equipos.
+Estas modificaciones pueden ser por temas únicamente de privacidad, pero en muchas ocasiones están relacionadas con la ciberdelincuencia. Los delincuentes pueden intentar falsificar sus identificadores con el objetivo de que las personas, buscando conectarse a un servicio legítimo, acaben conectándose a sus equipos.
 
-Los fines de esto son, por ejemplo, introducir virus en sus equipos, para realizar ataques DDoS (ataques de denegación de servicio distribuidos) mediante miles de equipos infectados, para cifrar los datos de dicho equipo (ataque de ransomware), para realizar ataques de phishing, enviando páginas visualmente idénticas a las que consulte el equipo, pero los datos sensibles de los formularios (contraseñas) pasen a disposición del atacante. Otro fin posible es el mero espionaje de los datos.
+Debido a esto es necesario saber si el equipo con el que se quiere establecer es el correcto o no. En este punto se debe de hablar de la identificación de dispositivos de forma remota, existen varias alternativas para realizar esto. Por una parte, se puede identificar la clase del dispositivo, es decir, si es un ordenador, una impresora, un dispositivo IoT, etc. Por otra parte, se puede identificar el modelo del dispositivo, por ejemplo, distinguir un dispositivo de una marca A y modelo B de uno que sea de marca X y modelo Y. Por último, y la parte más difícil, se pueden distinguir dispositivos a nivel individual, aunque presenten el mismo hardware.
 
-\section{Motivación}
+Los fines de estas suplantaciones son, por ejemplo, cifrar los datos de un equipo (ataque de ransomware), o bien, introducir virus en muchos equipos con el objetivo de realizar ataques DDoS mediante miles de equipos infectados (ataques de denegación de servicio distribuidos), entre otros.
 
-Es en este punto en el que se requieren técnicas de comunicación seguras entre los dispositivos. Desde el punto de vista de las redes existen protocolos de comunicación segura como SSL, TLS, IPsec, etc. Pero estos dispositivos son inútiles si el equipo se quiere conectar voluntariamente al equipo atacante (esto debido al engaño que se ha comentado anteriormente).
+Por todas las razones expresadas anteriormente, existe la pregunta sobre cómo podemos saber a con qué equipos se está estableciendo una comunicación, o qué diferencia a un dispositivo de otro en internet si ambos presentan los mismos identificadores.
 
-Por estos motivos, existe la pregunta sobre cómo podemos saber a qué equipos nos estamos conectando, o qué diferencia a un dispositivo de otro en internet si ambos presentan los mismos identificadores.
+Una respuesta a estas preguntas es que los dispositivos aunque presenten el mismo hardware, tengan los mismos identificadores y ejecuten el mismo software, nunca serán exactamente iguales. Esto es debido a que en el proceso de fabricación de los dispositivos siempre habrá diferencias (por pequeñas que sean) que harán que los dispositivos sean distinguibles entre sí, por ejemplo, un dispositivo ejecuta una función en \SI{1.2}{\nano\second} y otro en \SI{1.4}{\nano\second}. Las diferencias son mínimas, pero existen.
 
-Una respuesta a estas preguntas es que los dispositivos aunque presenten el mismo hardware, tengan los mismos identificadores y ejecuten el mismo software, nunca serán exactamente iguales. Esto es debido a que en el proceso de fabricación de los dispositivos siempre habrá diferencias (por pequeñas que sean) que harán que los dispositivos sean distinguibles entre sí, por ejemplo, un dispositivo ejecuta una función en \SI{1.2}{\nano\second} y otro en \SI{1.4}{\nano\second}. Las diferencias son mínimas pero existen.
+Por contra, varias de las soluciones encontradas y comentadas en el capítulo de \textit{Estado del arte} (Capítulo \ref{chap:art}) trabajan de forma distinta. Algunas de ellas se basan en identificar un modelo de dispositivo, pero no un dispositivo individual.
 
-En el panorama actual del big data y el machine learning podemos explotar estas diferencias de tal forma que se generen huellas de cada dispositivo y con ello saber si realmente nos estamos conectando con el dispositivo adecuado o no.
+En el panorama actual del Big Data y el Machine Learning podemos explotar las diferencias comentadas anteriormente de tal forma que se generen huellas de cada dispositivo y con ello saber si realmente nos estamos conectando con el dispositivo adecuado o no.
 
-En este marco de trabajo es en el que se centra este proyecto. Se busca crear un sistema que partiendo de un reloj exacto, compare las desviaciones de los relojes de los distintos dispositivos y con ello cree una huella estadística del comportamiento de cada uno. Posteriormente se automatizará el proceso de analizar esos valores estadísticos mediante un modelo de machine learning.
+En este marco de trabajo es en el que se centra este proyecto. Se busca crear un sistema que partiendo de un reloj exacto, compare las desviaciones de los relojes de los distintos dispositivos y con ello cree una huella estadística del comportamiento de cada uno. Posteriormente se automatizará el proceso de analizar esos valores estadísticos mediante un modelo de Machine Learning.
 
-\section{Objetivos}
-
-Para lograr nuestro objetivo final de identificar dispositivos idénticos de forma automática, podemos establecer diversas metas intermedias.
+Para lograr el objetivo del trabajo, en la identificación de dispositivos idénticos de forma automática, se han establecido diversas metas intermedias.
 
 \begin{itemize}
     \item \textbf{Objetivo 1}. Presentar la arquitectura IoT, así como sus diversas aplicaciones.
@@ -40,16 +36,7 @@ Para lograr nuestro objetivo final de identificar dispositivos idénticos de for
     \item \textbf{Objetivo 9}. Describir las futuras vías de investigación de trabajos similares a este.
 \end{itemize}
 
-\section{Estructura del documento}
+La estructura de este documento está formada en primer lugar por un resumen, tanto en español como en inglés (de forma extendida), seguidos de 6 capítulos.
 
-Este documento está compuesto en primer lugar por un resumen, tanto en español como en inglés (de forma extendida), seguidos de 6 capítulos.
-
-\begin{itemize}
-    \item \textbf{Capítulo \ref{chap:intro}}. Es el capítulo actual, donde se presentan el contexto, la motivación y los objetivos del trabajo.
-    \item \textbf{Capítulo \ref{chap:art}}. En este capítulo se realiza una presentación de la arquitectura IoT y sus aplicaciones, así como, una presentación del Machine Learning y algunos de sus algoritmos.
-    \item \textbf{Capítulo \ref{chap:meto}}. 
-    \item \textbf{Capítulo \ref{chap:diseno}}. En este capítulo se hablará de nuestra propuesta para abordar este problema. Se obtendrán varios dataset y con ellos se entrenarán diversos modelos de Machine Learning.
-    \item \textbf{Capítulo \ref{chap:result}}. En este capítulo se analizarán los resultados obtenidos, en concreto, se evaluarán los distintos clasificadores usados.
-    \item \textbf{Capítulo \ref{chap:conclu}}. En este capítulo se exponen las conclusiones finales del trabajo y se comentan posibles vías futuras para esta línea de investigación.
-\end{itemize}  
+En el capítulo de \textit{Introducción} (Capítulo \ref{chap:intro}), que es el capítulo actual, se presentan el contexto, la motivación y los objetivos del trabajo. En el capítulo de \textit{Estado del arte} (Capítulo \ref{chap:art}) se realiza una presentación de la arquitectura IoT y sus aplicaciones, así como, una presentación del Machine Learning y algunos de sus algoritmos. En el capítulo de \textit{Análisis de objetivos y metodología} (Capítulo \ref{chap:meto}) se analizan los objetivos propuestos y se establece una metodología de trabajo. En el capítulo de \textit{Diseño y resolución} (Capítulo \ref{chap:diseno}) se hablará de nuestra propuesta para abordar este problema. Se obtendrán varios dataset y con ellos se entrenarán diversos modelos de Machine Learning. En el capítulo de \textit{Resultados} (Capítulo \ref{chap:result}) se analizarán los resultados obtenidos, en concreto, se evaluarán los distintos clasificadores usados. Finalmente en el capítulo de \textit{Conclusiones y vías futuras} se exponen las conclusiones finales del trabajo y se comentan posibles vías futuras para esta línea de investigación.
 
