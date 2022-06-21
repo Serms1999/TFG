@@ -9,10 +9,10 @@ Nowadays, the number of devices connected to the internet has increased signific
 These kinds of devices contain and share a lot of information about the people who use them. For this reason, many people try to get this data for purposes that may not be legal. One way to do it would be pretending that you are the device of the person that you want to access. In order to succeed, it is necessary to change all the identifiers to those that the criminal wants to impersonate. By doing this, people will connect to the criminal's device without being aware of it.
 
 
-Devices that have the same hardware and software components are not exactly the same, there are some details during the manufacturing process that cannot be copied. Taking advantage of this, we will create a system that will have the ability to identify these differences and as a consequence, between many devices.
+Devices that have the same hardware and software components are not exactly the same, there are some details during the manufacturing process that cannot be copied. Taking advantage of this, it will be created a system with the ability to identify those differences and as a consequence, between many devices.
 
 
-As I have mentioned, in this article we will create a system that can identify those details mentioned above. Many studies have already researched device identification, but most of the time they focus on distinguishing devices, but these investigations do not bring the focus to these devices that are identical in both hardware and software. 
+As mentioned, in this article it will be created a system that can identify those details mentioned above. Many studies have already researched device identification, but most of the time they focus on distinguishing devices, but these investigations do not bring the focus to these devices that are identical in both hardware and software. 
 
 
 The work developed by Pascal Oser et al. \cite{oser2018identifying} seeks to create a system that identifies devices among a total of 562 at the CERN research center. To execute it, they obtain the timestamps contained in the TCP header of the packets sent and received by these devices. Using these timestamps, they measure how often there is an overflow of the counter of this header and with it, they train a machine learning model capable of recognizing when each device does it.
@@ -27,37 +27,37 @@ Another remarkable work is the one developed by Ahmet Aksoy et al. \cite{aksoy20
 Finally, Hossein Jafari et al. \cite{jafari2018iot} generates fingerprints of each device using radio frequencies. The process is done by obtaining samples of the SNR value in 5 different levels on each device. Then, they train three deep learning models in order to identify each one.
 
 
-In our case, to identify different devices we will use their absolute timestamps i.e. the time elapsed since 1$^\text{st}$ January, 1970. The small differences that distinguish these devices will make that as time progresses, their internal clocks will fluctuate. This error will be accumulated and it will become more noticeable each time.
+In this case, to identify different devices, it will be used their absolute timestamps i.e. the time elapsed since 1$^\text{st}$ January, 1970. The small differences that distinguish these devices will make that as time progresses, their internal clocks will fluctuate. This error will be accumulated and it will become more noticeable each time.
 
 
-From this point, the first step will be to calculate different statistical values of how this error changes over time in the different devices. After that, we will use these values to train a machine learning model that is capable of performing this process automatically.
+From this point, the first step will be to calculate different statistical values of how this error changes over time in the different devices. After that, a machine learning algorithm will be trained, and it will be capable of performing this process automatically.
 
 
-Our test scenario consists of six IoT devices connected to a local network. One of them will act as a client and the other ve as servers. Every second the client will send a timestamp request to the servers, and they will reply with it. When the client receives this timestamp, it saves it as a record: “ (time from start), (absolute client time), (absolute server time), (time difference), (server ip)”. We will take the client's time as a reference, and we will analyze the differences between the other devices and the client.
+The test scenario made for this project consists of six IoT devices connected to a local network. One of them will act as a client and the other ve as servers. Every second the client will send a timestamp request to the servers, and they will reply with it. When the client receives this timestamp, it saves it as a record: “ (time from start), (absolute client time), (absolute server time), (time difference), (server ip)”. The client's time will be taken as a reference, and the differences will be analyzed between the other devices and the client.
 
 
-The first problem appeared at this time. Taking into account that we are going to analyze very small differences, we must have great accuracy of the times. Initially, it was thought that the best option was using the timestamps contained in the headers of the TCP and ICMP protocols. This idea was rejected since these headers have few bytes and with them we can only represent times in milliseconds, which does not provide enough information. For this reason, we decided to use the body section of the packets; to be able to send data of any length. In our case, it will send absolute timestamps in nanoseconds, which will be encoded with 64 bits. Finally, we chose the TCP protocol because in this way, we do not have to start a new connection with a device. 
+The first problem appeared at this time. Taking into account that it is going to been analyzed very small differences, it must have great accuracy of the times. Initially, it was thought that the best option was using the timestamps contained in the headers of the TCP and ICMP protocols. This idea was rejected since these headers have few bytes and with them it can only represent times in milliseconds, which does not provide enough information. For this reason, it was decided to use the body section of the packets; to be able to send data of any length. In this case, it will send absolute timestamps in nanoseconds, which will be encoded with 64 bits. Finally, it was chosen the TCP protocol because in this way, it does not have to start a new connection with a device. 
 
 
-These timestamps will be taken in two different ways. On the one hand,, it will be taken a sequential sample and we will listen for 2 hours (7200 samples) on each device, one after another. This period of time represents a 10 hours sample (36000 samples). On the contrary, we will carry out a parallel sample of all the devices for 12 hours (43200 samples per device) Another issue that has arised in this point is that the device's internal clock is altered by other processes, such as the NTP protocol. As a result, it is necessary to use an internal clock that does not decrease its value (\texttt{steady\_clock}). 
+These timestamps will be taken in two different ways. On the one hand, it will be taken a sequential sample and it will listen for 2 hours (7200 samples) on each device, one after another. This period of time represents a 10 hours sample (36000 samples). On the contrary, it will carry out a parallel sample of all the devices for 12 hours (43200 samples per device) Another issue that has arised in this point is that the device's internal clock is altered by other processes, such as the NTP protocol. As a result, it is necessary to use an internal clock that does not decrease its value (\texttt{steady\_clock}). 
 
 
-The next step is set on to the data analysis part. Firstly, we will obtain the increase in the deviation between each sample of a device.Due to these increases, we will generate a boxplot of each sample (sequential and parallel), in which each box will represent one of the devices under analysis. These graphs correspond to Fig. \ref{fig:box_secuencial} and Fig. \ref{fig:box_paralelo}. In these graphs, since we work with such small values, the outliers hide completely the results we want to see, so we will not show them. 
+The next step is set on to the data analysis part. Firstly, it be will obtained the increase in the deviation between each sample of a device. Due to these increases, it will be generated a boxplot of each sample (sequential and parallel), in which each box will represent one of the devices under analysis. These graphs correspond to Fig. \ref{fig:box_secuencial} and Fig. \ref{fig:box_paralelo}. In these graphs, since it is being worked with such small values, the outliers hide completely the results it is necessary to see, so they will not be shown. 
 
 
-The median is expected to be approximately 0 and the interquartile range is expected to be very similar on each device. We expect these results since we are analyzing clonic devices and they do not suffer from clock skew, at least theoretically.
+The median is expected to be approximately 0 and the interquartile range is expected to be very similar on each device. These results are expected since it is being analyzed clonic devices and they do not suffer from clock skew, at least theoretically.
 
 
-If we look at both graphs, it will be observed that the median is actually close to 0, but both the interquartile range and the non-outliers values range oscillate much more in the sequential 8 sample. Therefore, from this point on and because of the training of the models that perform the identification process, we will not take into account this sample; we will lay the focus on the parallel sample. 
+Looking both graphs, it will be observed that the median is actually close to 0, but both the interquartile range and the non-outliers values range oscillate much more in the sequential 8 sample. Therefore, from this point on and because of the training of the models that perform the identification process, This sample will not be taken into account; the focus will be laid on the parallel sample. 
 
 
-At this point we obtain the statistical values, we will use a 1 minute sliding window (60 samples) to obtain them. The statistical values that we will obtain will be: sum, mean, median, mode, standard deviation, interquartile range, kurtosis, skewness, maximum and minimum.
+At this point the statistical values are obtained, it is going to be used a 1 minute sliding window (60 samples) to obtain them. The statistical values that will be obtained will be: sum, mean, median, mode, standard deviation, interquartile range, kurtosis, skewness, maximum and minimum.
 
 
-Before training the models, we will check if there is a correlation between the different statistical values, since having correlated data does not provide information. To do it, we generate a correlation matrix between all the statistical variables and eliminate those variables that have a high correlation value with another variable. In order to train the different models, we will use the \texttt{scikit-learn} library for Python, along with utilities such as \texttt{numpy} and \texttt{pandas}. In this work we will use supervised learning algorithms, and those that we are going to use are:
+Before training the models, it is going to be checked if there is a correlation between the different statistical values, since having correlated data does not provide information. To do it, a correlation matrix between all the statistical variables is generated and those variables that have a high correlation value with another variable are eliminated. In order to train the different models, it is going to be used the \texttt{scikit-learn} library for Python, along with utilities such as \texttt{numpy} and \texttt{pandas}. In this work it will be used supervised learning algorithms, and those that are going to be used are:
 \begin{itemize}
-    \item \textbf{Decision trees}: starting from a set of elements in the parent node, we ask binary questions (yes or no) such that we can divide the set into two purer ones.
-    \item \textbf{Random forest}: set of decision trees working in parallel. Each tree will perform the divisions randomly, with which we achieve variability in the results of each one. Finally, we take as the output the class that has been the majority in the results. 
+    \item \textbf{Decision trees}: starting from a set of elements in the parent node, binary questions are asked (yes or no) such that the set can be divided into two purer ones.
+    \item \textbf{Random forest}: set of decision trees working in parallel. Each tree will perform the divisions randomly, with which variability can be achieved in the results of each one. Finally, the output is taken as the class that has been the majority in the results. 
     \item \textbf{Multilayer Perceptron (MLP)}: feed-forward neural network algorithm i.e. without cycles. This algorithm is trained using backpropagation, which together with an optimization such as gradient descent updates the weights of every node, with the aim of minimizing the Loss Function. 
     \item \textbf{Naive Bayes}: Bayesian algorithms try to calculate the probability that a data belongs to a class. Once it has the probabilities of belonging to every class, the algorithm assigns to that data the class whose probability is higher. To do this the algorithm calculates the conditional probability of the attributes of the data, but this is very expensive and therefore the hypothesis must be relaxed. That's why this algorithm is called naive. 
     \item \textbf{K Nearest Neighbours (KNN)}: this algorithm groups data by distances. When the algorithm wants to classify a new data, it looks at the nearest $k$'s. The majority class among those $k$ will define the class of the new data.
@@ -65,31 +65,31 @@ Before training the models, we will check if there is a correlation between the 
 \end{itemize}
 
 
- In order to train different models and obtain the best possible results, we must set their hyperparameters t. To make this adjustment, we will use a smaller set of data, but it must be representative of the totality of the data since each training costs a considerable amount of time. We will use a training/validation/test model.
+ In order to train different models and obtain the best possible results, it must be set their hyperparameters. To make this adjustment, it will be used a smaller set of data, but it must be representative of the totality of the data since each training costs a considerable amount of time. It is going to be used a training/validation/test model.
 
 
-We will divide the set of all the data into two, one with \SI{70}{\percent} of the data and another with \SI{30}{\percent}. The training set will be used to train the final model and we will use the test model to see the generalization capacity of the model.
+the set of all the data will be divided into two, one with \SI{70}{\percent} of the data and another with \SI{30}{\percent}. The training set will be used to train the final model and the test model will be used to see the generalization capacity of the model.
 
 
-To obtain the final model it is pivotal to choose the algorithm and hyperparameters that give us the best results according to our data. To get it, we must adjust each algorithm to obtain its best results and with them decide which algorithm to use.
+To obtain the final model it is pivotal to choose the algorithm and hyperparameters that give the best results according to the data. To get it, each algorithm must be adjusted to obtain its best results and with them decide which algorithm to use.
 
 
- The process of adjusting an algorithm takes time since we must train each algorithm with each combination of hyperparameters that we want to test. For this reason, we will reduce the volume of data we have (\SI{70}{\percent} of the total) and we will keep only \SI{35}{\percent} of it. This subset will also be divided into a 70/30 ratio in order to validate the results of training with data that the model has not seen before.
+The process of adjusting an algorithm takes time since each algorithm have to be trained with each combination of hyperparameters that is required for being tested. For this reason, the volume of data will be reduced (\SI{70}{\percent} of the total) and it will be keet only \SI{35}{\percent} of it. This subset will also be divided into a 70/30 ratio in order to validate the results of training with data that the model has not seen before.
 
 
- To make these partitions, we took random samples, but as our data had temporal correlation, we needed to reorder them so that we can keep this correlation and the models are able to recognize it. 
+To make these partitions, random samples are taken, but as the data had temporal correlation, it is needed to reorder them so that this correlation can be kept and the models are able to recognize it. 
 
 
-To adjust the hyperparameters of an algorithm we will use an object called grid that allows us to specify all the hyperparameters that we want to adjust with their respective values. This tool is very useful since it automates the whole process of testing different hyperparameters and allows us to obtain, in a single run, the results of an algorithm with each combination of hyperparameters.
+To adjust the hyperparameters of an algorithm, an object called grid, which allows to specify all the hyperparameter that will be tested, is going to be used. This tool is very useful since it automates the whole process of testing different hyperparameters and allows us to obtain, in a single run, the results of an algorithm with each combination of hyperparameters.
 
 
-Once all the models have been adjusted, we see that the ones with the best accuracies are those that are based on trees; both decision trees and random forest. In particular random forest is the one that gives us the best results, so, we will choose this random forest model as the nal model. 
+Once all the models have been adjusted, it is easy to see that the ones with the best accuracies are those that are based on trees; both decision trees and random forest. In particular random forest is the one that gives us the best results, so, this random forest algorithm will be chosen to be trained as the final model. 
 
 
-Finally, we only have to train the random forest model with the hyperparameters we have chosen and the training set in its completeness. Once this has been done we check its ability to generalize with the test set and obtain a final accuracy of \SI{99.44}{\percent}. 
+Finally, the random forest algorithm with its custom hyperparameters and the training set in its completeness is the only one that have to be trained. Once this has been done, its ability to generalize is checked with the test set and it is obtained a final accuracy of \SI{99.44}{\percent}. 
 
 
-As a conclusion we have that it is possible to identify theoretically identical devices automatically, but it should be noted that all of this process has been made on a private network. If we had done the same study over the Internet, the result would have been different. This is because even if all the devices were on the same local network and only the observer was out, each timestamp of each device could be routed differently, which would cause measurement errors.A possible solution to this problem would be to take much longer samples in time, since statistically the packets between two devices will be routed most of the time along the same path, leaving those who are not as outliers. 
+It can be concluded that it is possible to identify theoretically identical devices automatically, but it should be noted that all of this process has been made on a private network. If the same study had been done over the Internet, the result would have been different. This is because even if all the devices were on the same local network and only the observer was out, each timestamp of each device could be routed differently, which would cause measurement errors. A possible solution to this problem would be to take much longer samples in time, since statistically the packets between two devices will be routed most of the time along the same path, leaving those who are not as outliers. 
 
-On the other side of the argument, we would expect to see that the graph of the deviation was linear, but this is not the case even if we are using a clock that doesn't decrease its value and the NTP service has been disabled.
+On the other side of the argument, the graph of the deviation was expected to be linear, but this is not the case even if a clock that doesn't decrease its value is being used and the NTP service has been disabled.
 

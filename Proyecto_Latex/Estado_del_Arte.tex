@@ -26,7 +26,7 @@ Por otro lado, en la propuesta de Ibrar Yaqoob et al. \cite{yaqoob2017internet} 
 
 \subsection{Aplicaciones del IoT}
 
-En la actualidad, vivimos rodeados de dispositivos inteligentes. Estos dispositivos nos permiten realizar todo tipo de acciones, por ejemplo, un teléfono móvil nos permite enviar y recibir emails, enviar mensajes instantáneos, utilizar redes sociales, etc. A pesar de todas esas funciones, todos estos aparatos comparten un ``problema'', necesitan de la intervención humana para realizar sus tareas.
+En la actualidad, se vive rodeados de dispositivos inteligentes. Estos dispositivos  permiten realizar todo tipo de acciones, por ejemplo, un teléfono móvil permite enviar y recibir emails, enviar mensajes instantáneos, utilizar redes sociales, etc. A pesar de todas esas funciones, todos estos aparatos comparten un ``problema'', necesitan de la intervención humana para realizar sus tareas.
 
 De estas necesidades nacen los dispositivos IoT, por ejemplo, un frigorífico inteligente. Este frigorífico es capaz de llevar el inventario de productos que contiene y detectar cuando alguno de ellos está próximo a terminarse. De forma autónoma este dispositivo es capaz de conectarse a internet y realizar una pedido online al supermercado de nuestra preferencia para reabastecerse de estos productos.
 
@@ -52,17 +52,17 @@ Con esta forma de trabajar se puede ver que el programa no tiene que resolver la
 
 \subsection{Tratamiento de los datos}
 
-Para obtener un resultado de cuan bueno es un modelo (algoritmo) que se quiere usar se debe dividir el conjunto de datos inicial en dos conjuntos: \textbf{datos de entrenamiento} y \textbf{datos de test}. Con los datos de entrenamiento el algoritmo se ajusta y aprende de los datos, y con los datos de test comprobamos los resultados que obtenemos del algoritmo ante datos que no ha visto antes.
+Para obtener un resultado de cuan bueno es un modelo (algoritmo) que se quiere usar se debe dividir el conjunto de datos inicial en dos conjuntos: \textbf{datos de entrenamiento} y \textbf{datos de test}. Con los datos de entrenamiento el algoritmo se ajusta y aprende de los ellos, y con los datos de test se analizan los resultados obtenidos del algoritmo ante datos que no ha visto antes.
 
-Para realizar una comparación entre distintos modelos y se quiere ver cuál es el que mejor se ajusta a los datos se debe dividir el conjunto de datos de entrenamiento en otros dos conjuntos: \textbf{conjunto de entrenamiento} y \textbf{conjunto de validación}. Con este último se puede evaluar la capacidad de generalizar de nuestro algoritmo.
+Para realizar una comparación entre distintos modelos donde se quiere ver cual es el que mejor se ajusta a los datos se debe dividir el conjunto de datos de entrenamiento en otros dos conjuntos: \textbf{conjunto de entrenamiento} y \textbf{conjunto de validación}. Con este último se puede evaluar la capacidad de generalizar de nuestro algoritmo.
 
-Con esta segunda división se obtiene el algoritmo que mejor se adapta a nuestros datos, pero no un modelo final. Para tener un modelo final se entrenará este con el conjunto de datos de entrenamiento en su totalidad y se evaluará con los datos de test.
+Con esta segunda división se obtiene el algoritmo que mejor se adapta a los datos, pero no un modelo final. Para tener un modelo final se entrenará este con el conjunto de datos de entrenamiento en su totalidad y se evaluará con los datos de test.
 
 \subsection{Algoritmos de aprendizaje supervisado} \label{sec:algorithms}
 
 Dentro de los algoritmos de aprendizaje supervisado se encuentran algoritmos que clasifican y algoritmos que se dedican a la regresión.
 
-Los algoritmos clasificadores tratan de agrupar a los distintos vectores de entrada en distintas clases. Un ejemplo de esto sería un algoritmo de clasificación binaria, en la que tenemos ejemplos \textbf{positivos} (pertenecen a la clase) o \textbf{negativos} (no pertenecen). Esto nos lleva a los conceptos de \textbf{falso positivo} (el sistema dice que pertenece y es falso) y \textbf{falso negativo} (el sistema dice que no pertenece y es falso).
+Los algoritmos clasificadores tratan de agrupar a los distintos vectores de entrada en distintas clases. Un ejemplo de esto sería un algoritmo de clasificación binaria, en la que existen ejemplos \textbf{positivos} (pertenecen a la clase) o \textbf{negativos} (no pertenecen). Esto genera los conceptos de \textbf{falso positivo} (el sistema dice que pertenece y es falso) y \textbf{falso negativo} (el sistema dice que no pertenece y es falso).
 
 Los algoritmos regresores buscan dar una salida numérica como resultado en lugar de la pertenencia a una clase, por tanto no sirven para este trabajo. A continuación se explicarán los algoritmos que se han usado para el desarrollo de este trabajo.
 
@@ -105,19 +105,19 @@ A la hora de clasificar un nuevo dato, este algoritmo busca los $k$ datos más c
     \label{fig:knn_clasification}
 \end{figure}
 
-En la Fig. \ref{fig:knn_clasification} se quiere clasificar el dato \textcolor{verdedato}{\Large$\bullet$} podemos usar múltiples valores de $k$ y con ello obtendremos diferentes resultados:
+En la Fig. \ref{fig:knn_clasification} se quiere clasificar el dato \textcolor{verdedato}{\Large$\bullet$}, una opción es usar múltiples valores de $k$ y con ello obtener diferentes resultados:
 \begin{itemize}
-    \item Si usamos $k = 3$ sólo nos fijaremos en los 3 datos más próximos, que serán 2 de la clase \textcolor{rojodato}{\large$\blacktriangle$} y uno de la clase \textcolor{azuldato}{$\blacksquare$}. Con esto la clase que se asignará al dato \textcolor{verdedato}{\Large$\bullet$} será \textcolor{rojodato}{\large$\blacktriangle$}.
-    \item Si usamos $k = 5$ sólo nos fijaremos en los 5 datos más próximos, que serán 2 de la clase \textcolor{rojodato}{\large$\blacktriangle$} y tres de la clase \textcolor{azuldato}{$\blacksquare$}. Con esto la clase que se asignará al dato \textcolor{verdedato}{\Large$\bullet$} será \textcolor{azuldato}{$\blacksquare$}.
+    \item Asignando $k = 3$ sólo se tendrán en cuenta los 3 datos más próximos, que serán 2 de la clase \textcolor{rojodato}{\large$\blacktriangle$} y uno de la clase \textcolor{azuldato}{$\blacksquare$}. Con esto la clase que se asignará al dato \textcolor{verdedato}{\Large$\bullet$} será \textcolor{rojodato}{\large$\blacktriangle$}.
+    \item Asignando $k = 5$ sólo se tendrán en cuenta los 5 datos más próximos, que serán 2 de la clase \textcolor{rojodato}{\large$\blacktriangle$} y tres de la clase \textcolor{azuldato}{$\blacksquare$}. Con esto la clase que se asignará al dato \textcolor{verdedato}{\Large$\bullet$} será \textcolor{azuldato}{$\blacksquare$}.
 \end{itemize}
 
 \subsubsection{Máquinas de vector soporte (SVM)}
 
-Las máquinas de vector soporte son un conjunto de algoritmos de aprendizaje supervisado que se utilizan tanto para clasificación como para regresión, nos centraremos en clasificación.
+Las máquinas de vector soporte son un conjunto de algoritmos de aprendizaje supervisado que se utilizan tanto para clasificación como para regresión, en este caso se analizará únicamente en clasificación.
 
 Estos algoritmos toman los datos como puntos en un espacio $n-$dimensional. El objetivo es dividir estos datos mediante hiperplanos de forma que los puntos que contenidos en una región del espacio delimitada por los mismos hiperplanos sean una misma clase y que estén lo más separados posible. Esto se puede ver más fácil con un ejemplo.
 
-En la Fig. \ref{fig:svm_separation} podemos ver como hay distintos hiperplanos ($\mathcal{H}_1, \mathcal{H}_2, \mathcal{H}_3$) que pueden dividir el espacio. 
+En la Fig. \ref{fig:svm_separation} se puede ver como hay distintos hiperplanos ($\mathcal{H}_1, \mathcal{H}_2, \mathcal{H}_3$) que pueden dividir el espacio. 
 
 \begin{itemize}
     \item $\mathcal{H}_1$ no divide de forma correcta todos los puntos de la entrada, puesto que hay puntos negros juntos con blancos.
@@ -145,7 +145,7 @@ En muchas ocasiones no se podrán dividir los conjuntos de forma correcta usando
 
 En esta sección se realiza un estudio del estado del arte relativo a la aplicación de distintas técnicas que tengan como objetivo identificar a un dispositivo a través de la red independientemente de un identificador susceptible de ser identificado. Para estos cometidos son muy utilizados los algoritmos de aprendizaje automático o Machine Learning. 
 
-Comenzamos la revisión bibliográfica por el trabajo desarrollado por Pascal Oser et al. \cite{oser2018identifying}. En este trabajo se desarrolla un sistema para identificar dispositivos entre un total de 562 en el centro del CERN. Para este cometido se tomas muestras periódicas de las marcas de tiempo (timestamps) contenidas en paquetes TCP que se envían y reciben de estos dispositivos.
+Para comenzar la revisión bibliográfica, se analizará el trabajo desarrollado por Pascal Oser et al. \cite{oser2018identifying}. En este trabajo se desarrolla un sistema para identificar dispositivos entre un total de 562 en el centro del CERN. Para este cometido se tomas muestras periódicas de las marcas de tiempo (timestamps) contenidas en paquetes TCP que se envían y reciben de estos dispositivos.
 
 De estas marcas se obtienen las variables que se usarán para entrenar los distintos modelos de machine learning. Las variables que obtiene son el incremento entre dos marcas consecutivas, el desbordamiento del contador de la marca de tiempo, la mediana de todas las marcas, etc.
 
@@ -206,7 +206,7 @@ Los resultados que obtiene son de un 82\% de accuracy promedio entre todos los c
     \label{fig:askoy_classifier}
 \end{figure}
 
-El siguiente trabajo que se verá es el realizado por Hossein Jafari et al. \cite{jafari2018iot}. En este artículo no se utilizan paquetes de la capa de red o transporte, sino de la capa física. Para realizar esta labor se obtendrá la huella de cada dispositivo mediante radio frecuencias, por esta razón, este estudio sólo se centrará en conexiones inalámbricas, en este caso 6 dispositivos ZigBee.
+El siguiente trabajo que se verá es el realizado por Hossein Jafari et al. \cite{jafari2018iot}. En este artículo no se utilizan paquetes de la capa de red o transporte, sino de la capa física. Para realizar esta labor se obtendrá la huella de cada dispositivo mediante radio frecuencias, por esta razón, este estudio sólo se centrará en conexiones inalámbricas, en este caso 6 dispositivos ZigBee \cite{gislason2008zigbee}.
 
 Para cada uno de los dispositivos se realiza una captura de 5 minutos. Esta captura será del SNR en 5 niveles distintos, con lo que se obtiene \SI{10}{\giga\byte} por dispositivo y nivel de SNR, lo que en total serían \SI{300}{\giga\byte} de datos.
 
@@ -235,27 +235,31 @@ El modelo que eligen se basa en aprendizaje no supervisado, Maximum Variance Clu
 
 \subsection{Resultados de la revisión bibliográfica}
 
-Por último realizaremos un resumen en forma de tabla de los artículos que han sido revisados.
+Por último se realizará un resumen en forma de tabla de los artículos que han sido revisados.
 
 \begin{table}
     \centering
-    \begin{tabularx}{0.9\textwidth}{Y|Y|Y|Y|Y|Y}
-        Referencia & Fuente de los datos & Método de clasificación & Tipo de aprendizaje & Algoritmos usados & Resultados \\
-        \hline\hline
-        \cite{oser2018identifying} & Cabeceras TCP & Machine Learning & Supervisado & MLP, SVM, Random Forest & 99.76\% de accuracy y 97.03\% de precisión \\
-        \hline
-        \cite{hamad2019iot} & Característi-cas del payload & Machine Learning & Supervisado & AdaBoost, LDA, KNN, Árboles de decisión, Naive Bayes, SVM, Random Forest y GBoost & 89\% de accuracy \\
-        \hline
-        \cite{aksoy2019automated} & Cabereceras TCP & Machine Learning & Supervisado & Tablas de decisión, Árboles de decisión J48, OneR y PART & Entre 42.2\% y 100\% de accuracy, con un promedio de 82\% \\
-        \hline
-        \cite{jafari2018iot} & Radio frecuencias & Machine Learning & Supervisado & DNN, CNN y LSTM & 96.3\% de accuracy en DNN, 94.7\% de accuracy en CNN y 76\% de accuracy en LSTM \\
-        \hline
-        \cite{lanze2012clock} & Registros NTP & Estadístico & - & - & Inconcluyen-tes \\
-        \hline
-        \cite{meidan2017profiliot} & Sesiones TCP & Machine Learning & Supervisado & GBM, Random Forest y XGBoost & \SI{99.281}{\percent} de accuracy \\
-        \hline
-        \cite{desmond2008identifying} & Mensajes \textit{probe request} & Machine Learning & No supervisado & Maximum Variance Clustering & Entre un 70\% y 80\% de accuracy\\
-    \end{tabularx}
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{C{0.12\textwidth}C{0.15\textwidth}C{0.15\textwidth}C{0.15\textwidth}C{0.14\textwidth}C{0.2\textwidth}C{0.24\textwidth}}
+            \toprule
+            Referencia & Tipo de identificación & Fuente de los datos & Método de clasificación & Tipo de aprendizaje & Algoritmos usados & Resultados \\
+            \midrule
+            \cite{oser2018identifying} & Tipo de dispositivo & Cabeceras TCP & Machine Learning & Supervisado & MLP, SVM, Random Forest & 99.76\% de accuracy y 97.03\% de precisión \\
+            \addlinespace
+            \cite{hamad2019iot} & Individual & Característi-cas del payload & Machine Learning & Supervisado & AdaBoost, LDA, KNN, Árboles de decisión, Naive Bayes, SVM, Random Forest y GBoost & 89\% de accuracy \\
+            \addlinespace
+            \cite{aksoy2019automated} & Tipo y modelo del dispositivo & Cabereceras TCP & Machine Learning & Supervisado & Tablas de decisión, Árboles de decisión J48, OneR y PART & Entre 42.2\% y 100\% de accuracy, con un promedio de 82\% \\
+            \addlinespace
+            \cite{jafari2018iot} & Individual & Radio frecuencias & Machine Learning & Supervisado & DNN, CNN y LSTM & 96.3\% de accuracy en DNN, 94.7\% de accuracy en CNN y 76\% de accuracy en LSTM \\
+            \addlinespace
+            \cite{lanze2012clock} & Modelo del dispositivo & Registros NTP & Estadístico & - & - & Inconcluyentes \\
+            \addlinespace
+            \cite{meidan2017profiliot} & Tipo y modelo & Sesiones TCP & Machine Learning & Supervisado & GBM, Random Forest y XGBoost & \SI{99.281}{\percent} de accuracy \\
+            \addlinespace
+            \cite{desmond2008identifying} & Individual & Mensajes \textit{probe request} & Machine Learning & No supervisado & Maximum Variance Clustering & Entre un 70\% y 80\% de accuracy\\
+            \bottomrule
+        \end{tabular}
+    }
     \caption{Resultados en el estado del arte}
     \label{tab:art_results}
 \end{table}
