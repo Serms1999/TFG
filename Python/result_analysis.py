@@ -21,7 +21,8 @@ mpl.rcParams.update(pgf_with_latex)
 
 path_models = ''
 path_plots = ''
-accuracies = {}
+models = {}
+metrics_results = {}
 confusion_matrices = {}
 
 parser = argparse.ArgumentParser()
@@ -45,22 +46,35 @@ names = {
 }
 
 
+def read_models():
+    global models
+
+    model_name = ''
+    if delta:
+        model_name = 'delta_'
+
+    for model in names:
+        models[model] = load(f'{path_models}/{model_name + model}.joblib')
+
 def read_results():
-    global accuracies, confusion_matrices
+    global metrics_results, confusion_matrices
+    """
     try:
         with open(f'{path_models}/model_results.csv', 'r') as file:
             for line in file.readlines():
                 model, value = re.split(',', line.rstrip('\n'))
-                accuracies[model] = float(value)
+                metrics_results[model] = float(value)
     except IOError:
         raise IOError
+    """
 
+    metrics_results = pd.read_csv(f'{path_models}/model_results.csv', index_col=0)
     confusion_matrices = load(f'{path_models}/matrices.joblib')
 
 
 def plot_accuracy_barplot():
-    global accuracies
-    data = accuracies.copy()
+    global metrics_results
+    data = metrics_results.copy()
     del data['final_model']
 
     plt.figure()
@@ -83,10 +97,13 @@ def plot_accuracy_barplot():
 
 def plot_all_matrices():
     for model, cm in confusion_matrices.items():
-        plot_confusion_matrix(model, cm, classes=colors.keys(), text_size=25)
+        if model == 'final_model':
+            plot_confusion_matrix(model, cm, classes=colors.keys(), text_size=25, plot_colorbar=True)
+        else:
+            plot_confusion_matrix(model, cm, classes=colors.keys(), text_size=25, plot_colorbar=False)
 
 
-def plot_confusion_matrix(model_name, cm, classes=None, figsize=(10, 10), text_size=10):
+def plot_confusion_matrix(model_name, cm, classes=None, figsize=(10, 10), text_size=10, plot_colorbar=True):
     global names
     """
     classes --> number of classes / labels in your dataset (10 classes for this example)
@@ -141,22 +158,23 @@ def plot_confusion_matrix(model_name, cm, classes=None, figsize=(10, 10), text_s
                  size=10
                  )
 
-    # Plot colorbar
-    #ax.set_visible(False)
-    cbar = plt.colorbar(cax)
-    cbar.set_ticks(np.linspace(0, 1, 6))
-    cbar.set_ticklabels([f'{int(x)}%' for x in np.linspace(0, 1, 6) * 100])
-    #plt.savefig(f'{path_plots}/colorbar_matrices.pdf', format='pdf', bbox_inches='tight')
-    #ax.set_visible(True)
+    if plot_colorbar:
+        # Plot colorbar
+        #ax.set_visible(False)
+        cbar = plt.colorbar(cax)
+        cbar.set_ticks(np.linspace(0, 1, 6))
+        cbar.set_ticklabels([f'{int(x)}%' for x in np.linspace(0, 1, 6) * 100])
+        #plt.savefig(f'{path_plots}/colorbar_matrices.pdf', format='pdf', bbox_inches='tight')
+        #ax.set_visible(True)
 
     plt.savefig(f'{path_plots}/{model_name}_matrix.pdf', format='pdf', bbox_inches='tight')
 
 
 def random_forest_analysis():
     if delta:
-        data = pd.read_csv(f'{path_models}/CV_delta_randomForest_results.csv')
+        data = pd.read_csv(f'{path_models}/delta_random_forest_results.csv')
     else:
-        data = pd.read_csv(f'{path_models}/CV_randomForest_results.csv')
+        data = pd.read_csv(f'{path_models}/random_forest_results.csv')
     data['max_features'] = data['max_features'].fillna('none')
 
     accuracy_means = pd.DataFrame(columns=['criterion', 'max_features', 'mean_accuracy'])
@@ -181,7 +199,7 @@ def random_forest_analysis():
     ax.bar(x - width / 2, d['gini'], width, label='gini', color=colors['Disp. 1'])
     ax.bar(x + width / 2, d['entropy'], width, label='entropy', color=colors['Disp. 5'])
 
-    plt.ylim(0.6, 0.64)
+    plt.ylim(0.4, 0.45)
     ax.set_xlabel('\\texttt{max\_features}')
     ax.set_ylabel('Accuracy promedio')
     ax.set_title('Comparativa hiperparámetros')
@@ -216,7 +234,7 @@ def random_forest_analysis():
     ax.bar(x - width / 2, d['sqrt'], width, label='sqrt', color=colors['Disp. 1'])
     ax.bar(x + width / 2, d['log2'], width, label='log2', color=colors['Disp. 5'])
 
-    plt.ylim(0.62, 0.64)
+    plt.ylim(0.42, 0.45)
     ax.set_xlabel('\\texttt{n\_estimators}')
     ax.set_ylabel('Accuracy')
     ax.set_title('Comparativa hiperparámetros\n\\texttt{criterion = gini}')
@@ -238,6 +256,9 @@ def main():
 
     # Leemos los resultados
     read_results()
+
+    # Cargamos los modelos
+    read_models()
 
 
 if __name__ == '__main__':
