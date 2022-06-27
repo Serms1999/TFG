@@ -4,9 +4,11 @@ import argparse
 import os
 import platform
 import re
+import sys
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import pandas as pd
 from joblib import dump, load
 from sklearn import metrics
 from sklearn.ensemble import RandomForestClassifier
@@ -28,8 +30,9 @@ data_type = ''
 path = ''
 state = 27
 gen = ''
+gen_final = False
 models_to_train_list = []
-accuracies = {}
+metrics_results = None
 confusion_matrices = {}
 
 parser = argparse.ArgumentParser()
@@ -39,8 +42,8 @@ parser.set_defaults(delta=True)
 parser.add_argument('-t', '--data_type', type=str, choices=['individual', 'parallel'], default='parallel',
                     required=False, help='Elegir captura de datos secuencial o paralela')
 parser.add_argument('-p', '--path', type=str, required=False)
-parser.add_argument('-g', '--generate', type=str, choices=['all', 'none', 'custom'], help='Modelos que entrenar',
-                    default='none', required=False)
+parser.add_argument('-g', '--generate', type=str, choices=['all', 'final', 'adjust', 'none', 'custom'],
+                    help='Modelos que entrenar', default='none', required=False)
 parser.add_argument('-m', '--models',
                     type=lambda s: re.split(' |, ', s),
                     required=False,
@@ -99,9 +102,9 @@ models = {
     'svm_linear': {
         'model': LinearSVC(multi_class='ovr', max_iter=5000, random_state=state, loss='squared_hinge', dual=False),
         'param_grid': {
-            #'loss': ['hinge', 'squared_hinge'],
-            #'C': np.linspace(0, 2, 20),
-            #'dual': [True,  ]
+            # 'loss': ['hinge', 'squared_hinge'],
+            # 'C': np.linspace(0, 2, 20),
+            # 'dual': [True,  ]
             'C': np.linspace(0, 2, 100)
         }
     }
@@ -119,10 +122,19 @@ def read_stats(data_type: str):
 
 
 def get_models():
+    global gen_final
     d = {}
     if gen == 'all':
         for m in models:
             d[m] = True
+        gen_final = True
+    elif gen == 'adjust':
+        for m in models:
+            d[m] = True
+    elif gen == 'final':
+        gen_final = True
+        for m in models:
+            d[m] = False
     elif gen == 'none':
         for m in models:
             d[m] = False
@@ -133,15 +145,23 @@ def get_models():
 
 
 def get_model_args(model_name: str) -> tuple:
-
     model = models[model_name]
 
     return model['model'], model['param_grid']
 
 
-def print_results(model_name, accuracy, y_test, y_pred):
-    global accuracies, confusion_matrices
-    print(f'Accuracy: {accuracy}')
+def print_results(model_name, y_test, y_pred, best_params=None):
+    global metrics_results, confusion_matrices
+
+    results = pd.DataFrame.from_dict({
+        0: [model_name,
+            metrics.accuracy_score(y_test, y_pred),
+            metrics.recall_score(y_test, y_pred, average='macro'),
+            metrics.f1_score(y_test, y_pred, average='macro')
+        ]
+    }, columns=['model_name', 'accuracy', 'recall', 'f-score'], orient='index')
+
+    print(f'Accuracy: {results.iloc[0]["accuracy"]}')
     print(f'Matriz de confusion')
     unique_label = np.unique([y_test, y_pred])
     cm = metrics.confusion_matrix(y_test, y_pred, labels=unique_label)
@@ -150,8 +170,14 @@ def print_results(model_name, accuracy, y_test, y_pred):
         columns=['pred:{:}'.format(x) for x in unique_label]
     )
     print(cmtx)
+    if best_params is not None:
+        print('Mejores hiperparametros')
+        print(best_params)
 
-    accuracies[model_name] = accuracy
+    if metrics_results is None:
+        metrics_results = results
+    else:
+        metrics_results = pd.concat([metrics_results, results], ignore_index=True)
     confusion_matrices[model_name] = cm
 
 
@@ -206,7 +232,6 @@ def find_correlation(X, cutoff, plot=False):
 
 
 def train_model(model_name: str, x_train, x_test, y_train, y_test, generate=True):
-
     print('-' * 10 + f' {model_name} ' + '-' * 10)
 
     filename = model_name
@@ -218,9 +243,9 @@ def train_model(model_name: str, x_train, x_test, y_train, y_test, generate=True
 
     else:
         model, grid = get_model_args(model_name)
-        CV_model = GridSearchCV(param_grid=grid, estimator=model, cv=5, scoring='accuracy', n_jobs=10)
+        CV_model = GridSearchCV(param_grid=grid, estimator=model, cv=5, scoring='accuracy', n_jobs=-1)
         # CV_model = RandomizedSearchCV(param_distributions=grid, estimator=model, cv=5, scoring='accuracy', n_jobs=10,
-                                      # n_iter=10, random_state=state)
+        # n_iter=10, random_state=state)
         CV_model.fit(x_train, y_train)
 
         dump(CV_model, f'{path}/{filename}.joblib')
@@ -233,7 +258,7 @@ def train_model(model_name: str, x_train, x_test, y_train, y_test, generate=True
     results.to_csv(f'{path}/{filename}_results.csv', index=False, header=True)
 
     y_pred = model.predict(x_test)
-    print_results(model_name, accuracy=metrics.accuracy_score(y_test, y_pred), y_pred=y_pred, y_test=y_test)
+    print_results(model_name, y_pred=y_pred, y_test=np.array(y_test.array), best_params=CV_model.best_params_)
 
 
 def final_model_train(x_train, x_test, y_train, y_test, generate=True):
@@ -245,14 +270,14 @@ def final_model_train(x_train, x_test, y_train, y_test, generate=True):
 
     if generate:
         if data_type == 'parallel':
-            rfc = RandomForestClassifier(n_jobs=10,
+            rfc = RandomForestClassifier(n_jobs=-1,
                                          max_depth=1000,
-                                         n_estimators=700,
+                                         n_estimators=100,
                                          random_state=state,
                                          criterion='gini',
                                          max_features='sqrt')
         elif data_type == 'individual':
-            rfc = RandomForestClassifier(n_jobs=10,
+            rfc = RandomForestClassifier(n_jobs=-1,
                                          max_depth=1000,
                                          n_estimators=100,
                                          random_state=state,
@@ -266,11 +291,11 @@ def final_model_train(x_train, x_test, y_train, y_test, generate=True):
         rfc = load(f'{path}/{filename}.joblib')
 
     y_pred = rfc.predict(x_test)
-    print_results('final_model', accuracy=metrics.accuracy_score(y_test, y_pred), y_pred=y_pred, y_test=y_test)
+    print_results('final_model', y_pred=y_pred, y_test=np.array(y_test.array))
 
 
 def main():
-    global delta, data_type, path, accuracies
+    global delta, data_type, path, metrics_results
 
     models_to_train = get_models()
 
@@ -305,10 +330,11 @@ def main():
     for model_name, gen in models_to_train.items():
         train_model(model_name, X_train_sample, X_test_sample, y_train_sample, y_test_sample, generate=gen)
 
-    final_model_train(X_train, X_test, y_train, y_test, generate=False)
+    final_model_train(X_train, X_test, y_train, y_test, generate=gen_final)
 
     # Guardamos los resultados
-    save_results()
+    #save_results()
+    metrics_results.to_csv(f'{path}/model_results.csv', index=False)
     dump(confusion_matrices, f'{path}/matrices.joblib')
 
 

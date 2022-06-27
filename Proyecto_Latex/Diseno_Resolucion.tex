@@ -154,11 +154,43 @@ Consultando otro diagrama de cajas con el incremento de la desviación en cada i
     \label{fig:box_paralelo}
 \end{figure}
 
-\section{Elección de la muestra de datos}
+\subsection{Elección de la muestra de datos}
 
-Analizando los incrementos de la desviación en ambas muestras se puede ver que la muestra paralela tiene valores más parecidos a los esperados. Estos valores de incremento de la desviación son más pequeños y más parecidos entre todos los dispositivos, es por ello que se entrenarán los algoritmos con los datos de la muestra paralela.
+Analizando los incrementos de la desviación en ambas muestras (Fig. \ref{fig:box_secuencial} y \ref{fig:box_paralelo}) se puede ver que la muestra paralela tiene valores más parecidos a los esperados. Estos valores de incremento de la desviación son más pequeños y más parecidos entre todos los dispositivos, es por ello que se entrenarán los algoritmos con los datos de la muestra paralela.
 
-Estos datos se obtendrán mediante una ventana deslizante de \SI{1}{} minuto sobre el incremento de la desviación del reloj del dispositivo. Se obtendrán las siguientes variables estadísticas:
+\section{Preprocesamiento de los datos}
+
+En esta sección se realizará un proceso de filtrado de los datos para su adecuación de cara al entrenamiento de los modelos de Machine Learning. 
+
+Primeramente se detectarán valores anómalos en la muestra mediante un algoritmo de detección de anomalías y posteriormente se obtendrán diversas variables estadísticas de estos datos. Por último, se eliminarán las variables estadísticas que se encuentren correlacionadas.
+
+Estas variables se obtendrán mediante el uso de una ventana deslizante de \SI{1}{} minuto sobre el incremento de la desviación del reloj del dispositivo.
+
+Una ventana deslizante es una forma de agrupar datos consecutivos mientras se recorre una colección. Un ejemplo de ventana deslizante se puede ver en la Fig. \ref{fig:ex_sliding_window}.
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c}
+        \hline
+        $\cdots$ & $x_{i-2}$ & $x_{i-1}$ & $x_{i}$ & $x_{i+1}$ & $x_{i-2}$ & $\cdots$ \\
+        \hline
+        \multicolumn{2}{c}{} & \multicolumn{3}{c}{\upbracefill} & \multicolumn{2}{c}{} \\[-1ex]
+        \multicolumn{2}{c}{} & \multicolumn{3}{c}{\scriptsize ventana} & \multicolumn{2}{c}{} \\
+    \end{tabular}
+    \phantom{}\\
+    \vspace{0.5cm}
+    \begin{tabular}{c|c|c|c|c|c|c}
+        \hline
+        $\cdots$ & $x_{i-2}$ & $x_{i-1}$ & $x_{i}$ & $x_{i+1}$ & $x_{i-2}$ & $\cdots$ \\
+        \hline
+        \multicolumn{3}{c}{} & \multicolumn{3}{c}{\upbracefill} & \multicolumn{1}{c}{} \\[-1ex]
+        \multicolumn{3}{c}{} & \multicolumn{3}{c}{\scriptsize ventana} & \multicolumn{1}{c}{} \\
+    \end{tabular}
+    \caption{Ejemplo de una ventana deslizante}
+    \label{fig:ex_sliding_window}
+\end{figure}
+
+Las variables estadísticas que se obtendrán de los datos de la muestra paralela serán:
 \begin{multicols}{2}
     \begin{itemize}
         \item Suma
@@ -174,7 +206,40 @@ Estos datos se obtendrán mediante una ventana deslizante de \SI{1}{} minuto sob
     \end{itemize}
 \end{multicols}
 
-Generando estos datos estadísticos de la muestra paralela mediante la ventana deslizante, se obtienen los resultados que se pueden ver en la Tabla \ref{tab:stats_par}. Estos datos estadísticos serán los que posteriormente se usarán para entrenar un modelo de Machine Learning.
+\subsection{Detección de anomalías}
+
+En esta sección se buscarán valores que sean atípicos en las muestras de los distintos dispositivos. Se usará para ello el incremento de la desviación entre muestras. 
+
+Lo primero a realizar será seleccionar un algoritmo de detección de anomalías. En este trabajo se ha optado por \texttt{IsolationForest}, en concreto, la implementación de la librería \texttt{scikit-learn} \cite{scikitisolation}.
+
+Una vez seleccionado el algoritmo, se le suministran los datos vistos en la sección anterior para que seleccione aquellos que considere como anómalos. Los valores seleccionados por este algoritmo serán descartados de la muestra.
+
+Como parámetro para el algoritmo, se ha indicado un valor de contaminación de valores atípicos (\texttt{contamination}) del \SI{5}{\percent}. Este valor ha sido obtenido en base a la experimentación con distintos valores y a criterio propio.
+
+Los resultados obtenidos se pueden ver en la Fig. \ref{fig:anomaly}. En ella se observa como los datos presentaban mucha variabilidad, a pesar de que deberían ser prácticamente constantes. Con este primer procesado se consigue eliminar estos valores no deseados.
+
+\begin{figure}
+    \centering
+    \resizebox{0.95\textwidth}{!}{
+    \begin{minipage}{0.9\textwidth}
+        \centering
+        \subfloat[Outliers Disp. 1]{\includegraphics[width=0.3\textwidth]{../Python/plots/parallel/delta_offset_plot_disp1.pdf}}
+        \subfloat[Outliers Disp. 2]{\includegraphics[width=0.3\textwidth]{../Python/plots/parallel/delta_offset_plot_disp2.pdf}}
+        \subfloat[Outliers Disp. 3]{\includegraphics[width=0.3\textwidth]{../Python/plots/parallel/delta_offset_plot_disp3.pdf}} \\
+        \subfloat[Outliers Disp. 4]{\includegraphics[width=0.3\textwidth]{../Python/plots/parallel/delta_offset_plot_disp4.pdf}}
+        \subfloat[Outliers Disp. 5]{\includegraphics[width=0.3\textwidth]{../Python/plots/parallel/delta_offset_plot_disp5.pdf}}
+    \end{minipage}
+    \begin{minipage}{0.09\textwidth}
+        \subfloat{\includegraphics[scale=0.9]{../Python/plots/parallel/anomaly_legend.pdf}}
+    \end{minipage}
+    }
+    \caption{Valores anómalos detectados}
+    \label{fig:anomaly}
+\end{figure}
+
+\subsection{Obtención de las variables estadísticas}
+
+En esta sección se generarán los datos estadísticos de la muestra paralela mediante la ventana deslizante, se obtienen los resultados que se pueden ver en la Tabla \ref{tab:stats_par}.
 
 \begin{table}
     \centering
@@ -183,12 +248,12 @@ Generando estos datos estadísticos de la muestra paralela mediante la ventana d
             \toprule
              & Sum & Mean & Median & Mode & Std & IQR & Kurtosis & Skew & Max & Min & Device \\
             \midrule
-            1 & 21773.0 & 362.8833333333333 & -306.5 & -17885.0 & 8212.584818005707 & 12095.5 & 0.0567239505757037 & 0.4351150677774124 & 20799.0 & -17885.0 & Disp. 1 \\
-            2 & 4059.0 & 67.65 & 239.5 & -15862.0 & 5615.809629134339 & 3012.25 & 1.400480680742287 & -0.1242668154207108 & 14194.0 & -15862.0 & Disp. 2 \\
-            3 & 1187.0 & 19.78333333333333 & 503.5 & -25009.0 & 7760.832728977938 & 8467.0 & 1.231550787741679 & -0.2621794660161829 & 20510.0 & -25009.0 & Disp. 3 \\
-            4 & 74154.0 & 1235.9 & 2016.5 & -21616.0 & 8391.731753359314 & 9663.75 & 0.4104874852336051 & -0.4087239664161064 & 19992.0 & -21616.0 & Disp. 4 \\
-            5 & -127078.0 & -2117.9666666666667 & -2385.0 & -11894.0 & 4354.015072678016 & 2737.0 & 1.9665757630194 & 0.6070065306393123 & 10383.0 & -11894.0 & Disp. 5 \\
-            6 & 20147.0 & 335.78333333333336 & -306.5 & -17885.0 & 8244.497450208664 & 12095.5 & 0.0362682762350909 & 0.4263535051366743 & 20799.0 & -17885.0 & Disp. 1 \\
+            1 & -284.0 & -4.733333333333333 & -203.0 & -10750.0 & 6531.321744049499 & 8739.5 & -0.8026364427898236 & 0.266444555013173 & 12077.0 & -10750.0 & Disp. 1 \\
+            2 & -65895.0 & -1098.25 & 106.5 & -13344.0 & 3926.559099283938 & 2519.75 & 1.4605213340303709 & -1.1040127142547507 & 7616.0 & -13344.0 & Disp. 2 \\
+            3 & 96179.0 & 1602.9833333333333 & 815.0 & -8136.0 & 5010.092595279735 & 6575.5 & -0.39715065367509084 & 0.2484646585713819 & 12831.0 & -8136.0 & Disp. 3 \\
+            4 & 109162.0 & 1819.3666666666666 & 2016.5 & -10485.0 & 6159.084454763058 & 8290.5 & -0.7264084617343212 & -0.3858981208999922 & 11469.0 & -10485.0 & Disp. 4 \\
+            5 & -81317.0 & -1355.2833333333333 & -2127.0 & -6378.0 & 3665.051390911538 & 2616.5 & 2.701193448053943 & 1.7089231615691112 & 10383.0 & -6378.0 & Disp. 5 \\
+            6 & 19928.0 & 332.1333333333333 & -147.0 & -10750.0 & 6613.483928825726 & 10212.0 &     -0.8404647945245984 & 0.23473423365399895 & 12077.0 & -10750.0 & Disp. 1 \\
             \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
             \bottomrule
         \end{tabular}
@@ -197,11 +262,15 @@ Generando estos datos estadísticos de la muestra paralela mediante la ventana d
     \label{tab:stats_par}
 \end{table}
 
-\section{Reducción de la dimensionalidad}
+La decisión de utilizar datos estadísticos como entrada es obtener una mayor cantidad de datos para los algoritmos de Machine Learning. Dada la naturaleza de este estudio, sólo se está teniendo en cuenta un valor, la desviación del reloj de cada dispositivo.
 
-En esta sección buscaremos valores estadísticos correlacionados entre sí. En caso de existir habrá que eliminarlos antes de entrenar los modelos, puesto que no aportan información y provocarán que el algoritmo tarde aún más tiempo en ser entrenado.
+Obteniendo estas variables estadísticas es posible generar vectores mucho mayores que aportarán mayor información a los distintos algoritmos a la hora del aprendizaje.
 
-La correlación entre las variables estadísticas se puede ver en la Fig. \ref{fig:corr}. Se puede ver como suma, media y mediana son las variables más correlacionadas entre sí, por tanto serán eliminadas 2 de ellas.
+\subsection{Reducción de la dimensionalidad}
+
+En esta sección se buscarán valores estadísticos correlacionados entre sí. En caso de existir una correlación mayor a 0.9, se eliminarán esas variables antes de entrenar los modelos, puesto que no aportan información y provocarán que el algoritmo tarde aún más tiempo en ser entrenado.
+
+La correlación entre las variables estadísticas se puede ver en la Fig. \ref{fig:corr}. Se puede ver como suma, media y mediana son las variables más correlacionadas entre sí, por tanto serán eliminadas 2 de ellas (en este caso, media y mediana).
 
 \begin{figure}
     \centering
@@ -296,5 +365,5 @@ Hablando en primer lugar sobre los hiperparámetros \texttt{criterion} y \texttt
     \label{fig:comp_hiperparam}
 \end{figure}
 
-Los mejores valores obtenidos son \texttt{criterion = gini}, \texttt{n\_estimators = 700} y \texttt{max\_features = sqrt}. Con estos hiperparámetros se entrenará un modelo sobre el conjunto de entrenamiento menor y después se realizará una predicción con el conjunto de validación.
+Los mejores valores obtenidos son \texttt{criterion = gini}, \texttt{n\_estimators = 100} y \texttt{max\_feat ures = sqrt}. Con estos hiperparámetros se entrenará un modelo sobre el conjunto de entrenamiento menor y después se realizará una predicción con el conjunto de validación.
 

@@ -11,23 +11,28 @@ These kinds of devices contain and share a lot of information about the people w
 
 Devices that have the same hardware and software components are not exactly the same, there are some details during the manufacturing process that cannot be copied. Taking advantage of this, it will be created a system with the ability to identify those differences and as a consequence, between many devices.
 
+In this article, IoT devices will be used to perform the objectives. These are devices capable of connecting to Internet, collect data and exchange this data in their own. The concept of IoT devices was proposed by Kevin Ashton in 1999.
 
-As mentioned, in this article it will be created a system that can identify those details mentioned above. Many studies have already researched device identification, but most of the time they focus on distinguishing devices, but these investigations do not bring the focus to these devices that are identical in both hardware and software. 
+This kind of device need a different network architecture than normal devices because of their requirements about security and quality of service (QoS). Different proposals have been given from multiple researchings. One of them is the one from Ibrar Yaqoob et al. \cite{yaqoob2017internet} where they propose a three layer architecture: application, transport, and sensing.
 
+As mentioned, in this article it will be created a system that can identify those details mentioned above. Many studies have already researched device identification, but most of the time they focus on distinguishing devices, but these investigations do not bring the focus to these devices that are identical in both hardware and software.
 
 The work developed by Pascal Oser et al. \cite{oser2018identifying} seeks to create a system that identifies devices among a total of 562 at the CERN research center. To execute it, they obtain the timestamps contained in the TCP header of the packets sent and received by these devices. Using these timestamps, they measure how often there is an overflow of the counter of this header and with it, they train a machine learning model capable of recognizing when each device does it.
 
 
 Another example is the one developed by Salma Abdalla Hamad et al. \cite{hamad2019iot} in which a device authentication system is created for the purpose of giving access to a private network. These fingerprints are created considering several packet characteristics that were sent by the devices, such as packet length, destination IP, etc. By those features, devices can be classified as potential threats and not let them access the network. 
 
-
 Another remarkable work is the one developed by Ahmet Aksoy et al. \cite{aksoy2019automated} which uses a genetic algorithm to obtain representative headers of the packet. Then, it is used different classification algorithms to first group them by brand and then identify them individually. 
 
+Another approach to this kind of research is the one from Hossein Jafari et al. \cite{jafari2018iot} where they generate fingerprints of each device using radio frequencies. The process is done by obtaining samples of the SNR value in 5 different levels on each device. Then, they train three deep learning models in order to identify each one.
 
-Finally, Hossein Jafari et al. \cite{jafari2018iot} generates fingerprints of each device using radio frequencies. The process is done by obtaining samples of the SNR value in 5 different levels on each device. Then, they train three deep learning models in order to identify each one.
+Another work is the one from Fabian Lance et al. \cite{lanze2012clock}, where they have designed a system which uses clock skew measurements to identify devices. The objetive in that research is to identify legitimate access points. They use the data saved by the NTP demon to approximate the clock skew.
 
+Another important work is the one from Yair Meidan et al. \cite{meidan2017profiliot}. In this research they use wireless traffic traces to be capable of identify devices. They use a two layers system which firstly identify it the device is a IoT device or not. After this previous classification, they try to identify individual devices using Machine Learning algorithms.
 
-In this case, to identify different devices, it will be used their absolute timestamps i.e. the time elapsed since 1$^\text{st}$ January, 1970. The small differences that distinguish these devices will make that as time progresses, their internal clocks will fluctuate. This error will be accumulated and it will become more noticeable each time.
+Finally, the last work which has been analysed is the one from Loh Chin Choong Desmond et al. \cite{desmond2008identifying}. They use a concrete message in the wireless connection (probe request message) to generate a fingerprint from every device under analysis. Once they have all the data, they use an unsupervised Machine Learning algorithm called Maximum Variance Clustering to identify different devices.
+
+In this research, to identify different devices, it will be used their absolute timestamps i.e. the time elapsed since 1$^\text{st}$ January, 1970. The small differences that distinguish these devices will make that as time progresses, their internal clocks will fluctuate. This error will be accumulated and it will become more noticeable each time.
 
 
 From this point, the first step will be to calculate different statistical values of how this error changes over time in the different devices. After that, a machine learning algorithm will be trained, and it will be capable of performing this process automatically.
@@ -48,22 +53,15 @@ The next step is set on to the data analysis part. Firstly, it be will obtained 
 The median is expected to be approximately 0 and the interquartile range is expected to be very similar on each device. These results are expected since it is being analyzed clonic devices and they do not suffer from clock skew, at least theoretically.
 
 
-Looking both graphs, it will be observed that the median is actually close to 0, but both the interquartile range and the non-outliers values range oscillate much more in the sequential 8 sample. Therefore, from this point on and because of the training of the models that perform the identification process, This sample will not be taken into account; the focus will be laid on the parallel sample. 
+Looking both graphs, it will be observed that the median is actually close to 0, but both the interquartile range and the non-outliers values range oscillate much more in the sequential 8 sample. Therefore, from this point on and because of the training of the models that perform the identification process, This sample will not be taken into account; the focus will be laid on the parallel sample.
+
+Once it is decided which data is going to be used it is necessary to identify anomalous values between the correct ones. To do that it will be used an anomaly detection algorithm called IsolationForest. This algorithm requieres a parameter which approximate the value of anomalous values, for example, in this research, it has been concluded that this value is near 5\%. This value was obtained trying different values and looking into the graphs that shows the values which are going to be removed from the dataset.
 
 
 At this point the statistical values are obtained, it is going to be used a 1 minute sliding window (60 samples) to obtain them. The statistical values that will be obtained will be: sum, mean, median, mode, standard deviation, interquartile range, kurtosis, skewness, maximum and minimum.
 
 
-Before training the models, it is going to be checked if there is a correlation between the different statistical values, since having correlated data does not provide information. To do it, a correlation matrix between all the statistical variables is generated and those variables that have a high correlation value with another variable are eliminated. In order to train the different models, it is going to be used the \texttt{scikit-learn} library for Python, along with utilities such as \texttt{numpy} and \texttt{pandas}. In this work it will be used supervised learning algorithms, and those that are going to be used are:
-\begin{itemize}
-    \item \textbf{Decision trees}: starting from a set of elements in the parent node, binary questions are asked (yes or no) such that the set can be divided into two purer ones.
-    \item \textbf{Random forest}: set of decision trees working in parallel. Each tree will perform the divisions randomly, with which variability can be achieved in the results of each one. Finally, the output is taken as the class that has been the majority in the results. 
-    \item \textbf{Multilayer Perceptron (MLP)}: feed-forward neural network algorithm i.e. without cycles. This algorithm is trained using backpropagation, which together with an optimization such as gradient descent updates the weights of every node, with the aim of minimizing the Loss Function. 
-    \item \textbf{Naive Bayes}: Bayesian algorithms try to calculate the probability that a data belongs to a class. Once it has the probabilities of belonging to every class, the algorithm assigns to that data the class whose probability is higher. To do this the algorithm calculates the conditional probability of the attributes of the data, but this is very expensive and therefore the hypothesis must be relaxed. That's why this algorithm is called naive. 
-    \item \textbf{K Nearest Neighbours (KNN)}: this algorithm groups data by distances. When the algorithm wants to classify a new data, it looks at the nearest $k$'s. The majority class among those $k$ will define the class of the new data.
-    \item \textbf{Support Vector Machines (SVM)}: this algorithm places the data as $n$-dimensional points. The goal is to divide the space by hyperplanes in such a way that the points in the same region belong to the same class and they are as far as possible from the others.
-\end{itemize}
-
+Before training the models, it is going to be checked if there is a correlation between the different statistical values, since having correlated data does not provide information. To do it, a correlation matrix between all the statistical variables is generated and those variables that have a high correlation value with another variable are eliminated. In order to train the different models, it is going to be used the \texttt{scikit-learn} library for Python, along with utilities such as \texttt{numpy} and \texttt{pandas}. In this work it will be used supervised learning algorithms, and those that are going to be used are: Decision Trees, Random Forest, Multilayer Perceptron (MLP), Naive Bayes, K Nearest Neighbours (KNN) and Support Vector Machines (SVM).
 
  In order to train different models and obtain the best possible results, it must be set their hyperparameters. To make this adjustment, it will be used a smaller set of data, but it must be representative of the totality of the data since each training costs a considerable amount of time. It is going to be used a training/validation/test model.
 
@@ -86,7 +84,7 @@ To adjust the hyperparameters of an algorithm, an object called grid, which allo
 Once all the models have been adjusted, it is easy to see that the ones with the best accuracies are those that are based on trees; both decision trees and random forest. In particular random forest is the one that gives us the best results, so, this random forest algorithm will be chosen to be trained as the final model. 
 
 
-Finally, the random forest algorithm with its custom hyperparameters and the training set in its completeness is the only one that have to be trained. Once this has been done, its ability to generalize is checked with the test set and it is obtained a final accuracy of \SI{99.44}{\percent}. 
+Finally, the random forest algorithm with its custom hyperparameters and the training set in its completeness is the only one that have to be trained. Once this has been done, its ability to generalize is checked with the test set and it is obtained a final accuracy of \SI{99.13}{\percent}. 
 
 
 It can be concluded that it is possible to identify theoretically identical devices automatically, but it should be noted that all of this process has been made on a private network. If the same study had been done over the Internet, the result would have been different. This is because even if all the devices were on the same local network and only the observer was out, each timestamp of each device could be routed differently, which would cause measurement errors. A possible solution to this problem would be to take much longer samples in time, since statistically the packets between two devices will be routed most of the time along the same path, leaving those who are not as outliers. 

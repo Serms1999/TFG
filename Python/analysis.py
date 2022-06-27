@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import sys
@@ -69,6 +69,7 @@ def generate_stats_csv(data: DataFrame, generate=False, delta=False):
 
     df.index = np.array(df.index) + 1
     df.to_csv(f'{path}/{fname}.csv', index=True, header=True)
+    print(f'{fname_dev}.csv generado')
 
 
 def generate_boxplots(data: DataFrame):
@@ -106,23 +107,25 @@ def generate_offset_dict(data: DataFrame):
     return pd.DataFrame(d)
 
 
-def generate_delta_offset_dict(data: DataFrame, offset_diffs: DataFrame):
+def generate_delta_offset_dict(data: DataFrame, offset_diffs: DataFrame, remove_outliers=True):
     delta = dict()
 
     for key in data:
         time_series = pd.Series(data[key]['time'][1:])
         offset_series = offset_diffs[key]
         delta[key] = pd.DataFrame({'time': time_series, 'delta_offset': offset_series})
+        outlier_list = [0, len(data[key]) - 1]
 
-        Q1 = delta[key]['delta_offset'].quantile(0.25)
-        Q3 = delta[key]['delta_offset'].quantile(0.75)
-        IQR = Q3 - Q1
+        if remove_outliers:
+            Q1 = delta[key]['delta_offset'].quantile(0.25)
+            Q3 = delta[key]['delta_offset'].quantile(0.75)
+            IQR = Q3 - Q1
 
-        lower_bound = Q1 - 1.5 * IQR
-        upper_bound = Q3 + 1.5 * IQR
+            lower_bound = Q1 - 1.5 * IQR
+            upper_bound = Q3 + 1.5 * IQR
 
-        outlier_list = delta[key].index[(delta[key]['delta_offset'] < lower_bound) |
-                                                (delta[key]['delta_offset'] > upper_bound)]
+            outlier_list = delta[key].index[(delta[key]['delta_offset'] < lower_bound) |
+                                                    (delta[key]['delta_offset'] > upper_bound)]
 
         delta[key] = delta[key].drop(sorted(set(outlier_list)))
 
@@ -199,8 +202,8 @@ def generate_delta_offset_plot(data: dict):
     plt.figure()
 
     for key in data:
-        plt.plot(delta_offsets[key]['time'], delta_offsets[key]['delta_offset'] / np.power(10, 3),
-                 color=colors[key], label=key)
+        plt.plot(delta_offsets[key]['time'], delta_offsets[key]['delta_offset'] / np.power(10, 3), color=colors[key],
+                    label=key)
 
     plt.xlabel('Tiempo (\\si{\\second})')
     plt.ylabel('$\\Delta$Offset (\\si{\\micro\\second})')
