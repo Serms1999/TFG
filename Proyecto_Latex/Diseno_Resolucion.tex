@@ -160,9 +160,7 @@ Analizando los incrementos de la desviación en ambas muestras (Fig. \ref{fig:bo
 
 \section{Preprocesamiento de los datos}
 
-En esta sección se realizará un proceso de filtrado de los datos para su adecuación de cara al entrenamiento de los modelos de Machine Learning. 
-
-Primeramente se detectarán valores anómalos en la muestra mediante un algoritmo de detección de anomalías y posteriormente se obtendrán diversas variables estadísticas de estos datos. Por último, se eliminarán las variables estadísticas que se encuentren correlacionadas.
+En esta sección se realizará un preprocesamiento de los datos para su adecuación de cara al entrenamiento de los modelos de Machine Learning. se obtendrán diversas variables estadísticas de estos datos, y a continuación, se eliminarán las variables estadísticas que se encuentren correlacionadas.
 
 Estas variables se obtendrán mediante el uso de una ventana deslizante de \SI{1}{} minuto sobre el incremento de la desviación del reloj del dispositivo.
 
@@ -206,6 +204,7 @@ Las variables estadísticas que se obtendrán de los datos de la muestra paralel
     \end{itemize}
 \end{multicols}
 
+\iffalse
 \subsection{Detección de anomalías}
 
 En esta sección se buscarán valores que sean atípicos en las muestras de los distintos dispositivos. Se usará para ello el incremento de la desviación entre muestras. 
@@ -236,6 +235,7 @@ Los resultados obtenidos se pueden ver en la Fig. \ref{fig:anomaly}. En ella se 
     \caption{Valores anómalos detectados}
     \label{fig:anomaly}
 \end{figure}
+\fi
 
 \subsection{Obtención de las variables estadísticas}
 
@@ -286,27 +286,34 @@ La correlación entre las variables estadísticas se puede ver en la Fig. \ref{f
 
 \section{Entrenamiento de los modelos}
 
-En esta sección se analizarán los resultados que hemos obtenido de los modelos sobre los datos de la muestra paralela, como hemos concluido en la sección anterior.
+En esta sección se mostrará el proceso de entrenamiento de los distintos modelos.
 
-Para realizar este entrenamiento se ha usado la librería \texttt{scikit-learn} sobre el lenguaje de programación Python. Esta librería tiene clases que implementan los algoritmos vistos anteriormente que serán los que se usarán (Sec. \ref{sec:algorithms}). Las clases que corresponden a cada modelo son las que se ven en la Tabla \ref{tab:equiv_models}.
+Para realizar estos entrenamientos se ha usado la librería \texttt{scikit-learn} sobre el lenguaje de programación Python. Esta librería tiene clases que implementan los algoritmos vistos anteriormente en la sección de \textit{Estado del arte}. Las clases que corresponden a cada modelo son las que se ven en la Tabla \ref{tab:equiv_models}.
 
 \begin{table}
     \centering
-    \begin{tabular}{cc}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{cccC{0.2\textwidth}}
         \toprule
-        Algoritmo & Implementación \\
+        Algoritmo & Implementación & Tipo de aprendizaje & Objetivo \\
         \midrule
-        Árboles de decisión & \texttt{DecisionTreeClassifier} \cite{scikittrees} \\
-        Random Forest & \texttt{RandomForestClassifier} \cite{scikitforest} \\
-        MLP & \texttt{MLPClassifier} \cite{scikitmlp} \\
-        Naive Bayes & \texttt{GaussianNB} \cite{scikitnaivebayes} \\
-        KNN & \texttt{KNeighborsClassifier} \cite{scikitknn} \\
-        SVM & \texttt{LinearSVC} \cite{scikitsvm} \\
+        Árboles de decisión & \texttt{DecisionTreeClassifier} \cite{scikittrees} & Supervisado & Clasificación \\
+        Random Forest & \texttt{RandomForestClassifier} \cite{scikitforest} & Supervisado & Clasificación \\
+        MLP & \texttt{MLPClassifier} \cite{scikitmlp} & Supervisado & Clasificación \\
+        Naive Bayes & \texttt{GaussianNB} \cite{scikitnaivebayes} & Supervisado & Clasificación \\
+        KNN & \texttt{KNeighborsClassifier} \cite{scikitknn} & Supervisado & Clasificación \\
+        SVM & \texttt{LinearSVC} \cite{scikitsvm} & Supervisado & Clasificación \\
+        \addlinespace
+        Isolation Forest & \texttt{IsolationForest} \cite{scikitisolation} & No supervisado & Detección de anomalías \\
+        Local Outlier Factor & \texttt{LocalOutlierFactor} \cite{scikitlof} & No supervisado & Detección de anomalías \\
+        OneClass-SVM & \texttt{OneClassSVM} \cite{scikitocsvm} & No supervisado & Detección de anomalías \\
         \bottomrule
-    \end{tabular}
+    \end{tabular}}
     \caption{Equivalencia entre algoritmo e implementación}
     \label{tab:equiv_models}
 \end{table}
+
+\subsection{Entrenamiento de los algoritmos de clasificación}
 
 \begin{figure}
     \centering
@@ -333,7 +340,7 @@ Para realizar este entrenamiento se ha usado la librería \texttt{scikit-learn} 
     \label{fig:database}
 \end{figure}
 
-A la hora de entrenar modelos de machine learning lo primero que hay hacer es ajustar sus hiperparámetros. Los hiperparámetros de un modelo son parámetros del mismo que se pueden modificar para que este se adapte mejor a los datos con los que se está trabajando o para cambiar la forma en la aprende este modelo también para adaptarse a estos datos.
+A la hora de entrenar algoritmos de Machine Learning, lo primero que hay hacer es ajustar sus hiperparámetros. Los hiperparámetros de un modelo son parámetros del mismo que se pueden modificar para que este se adapte mejor a los datos con los que se está trabajando o para cambiar la forma en la aprende este modelo también para adaptarse a estos datos.
 
 Para ajustar los hiperparámetros no se usa la completitud de los datos, se usa un modelo entrenamiento/validación/test. Los datos se han dividido en un conjunto de entrenamiento y otro de test, 70\% para entrenamiento y 30\% para test, lo habitual es tener en torno a una tercera parte de los datos para entrenamiento y el resto para test. Este proceso (Fig. \ref{fig:database}) se hace para comprobar la capacidad de generalización del modelo con datos que no haya visto nunca.
 
@@ -366,4 +373,41 @@ Hablando en primer lugar sobre los hiperparámetros \texttt{criterion} y \texttt
 \end{figure}
 
 Los mejores valores obtenidos son \texttt{criterion = gini}, \texttt{n\_estimators = 100} y \texttt{max\_feat ures = sqrt}. Con estos hiperparámetros se entrenará un modelo sobre el conjunto de entrenamiento menor y después se realizará una predicción con el conjunto de validación.
+
+
+\subsection{Entrenamiento de los algoritmos de detección de anomalías}
+
+A la hora de entrenar algoritmos de aprendizaje no supervisado, por una parte, se realiza un proceso de ajuste similar al visto en la sección anterior. Por otra parte existe una diferencia y esa son los datos de entrada del algoritmo.
+
+Mientras que con los algoritmos de clasificación se realizaba un división únicamente teniendo en cuenta el tamaño del conjunto de los datos, en este caso se entrenará cada algoritmo únicamente con el 80\% de los datos de un dispositivo. Posteriormente, se usarán el 20\% de los datos de ese dispositivo para obtener una métrica y el 20\% de los datos del resto de dispositivos para otra. Este proceso se realiza con el fin de comprobar si el modelo es capaz de detectar como datos correctos aquellos provenientes de su mismo dispositivo y detectar como datos anómalos los del resto de dispositivos. Este división se puede ver de forma gráfica en la Fig. \ref{fig:unsupervised_database}.
+
+\begin{figure}
+    \centering
+    \resizebox{0.5\textwidth}{!}{
+    \begin{tikzpicture}    
+        \node[database,label=below:Datos,database radius=1cm,database segment height=0.5cm, outer sep=0.5cm] (data) {};
+        \node[database,label=below:$\underset{\text{Disp. }x}{\text{Datos}}$,database radius=0.75cm,database segment height=0.375cm, outer sep=0.3cm] (disp_data) [above right = 0cm and 2cm of data] {};
+        \node[database,label=below:$\underset{\text{sin Disp. }x}{\text{Datos}}$,database radius=0.75cm,database segment height=0.375cm, outer sep=0.3cm] (disp_out_data) [below right = 0cm and 2cm of data] {};
+        
+        \node[database,label=below:Entrenamiento,database radius=0.75cm,database segment height=0.375cm, outer sep=0.3cm] (train) [above right = -0.5cm and 2cm of disp_data] {};
+        \node[database,label=below:Test,database radius=0.75cm,database segment height=0.375cm, outer sep=0.3cm] (test) [below right = -1cm and 2cm of disp_data] {};
+        
+        
+        \node (train2) [above right = -1cm and 2cm of disp_out_data] {\Huge\phantom{---}\xmark};
+        \node[database,label=below:Test,database radius=0.75cm,database segment height=0.375cm, outer sep=0.3cm] (test2) [below right = -1cm and 2cm of disp_out_data] {};
+        
+        \draw[-] (data) -| (2.4,0) |- (disp_data);
+        \draw[-] (data) -| (2.4,0) |- (disp_out_data);
+        
+        \draw[-] (disp_data) -| (6.4, 4) |- (train) node [above, pos=0.75] {80\%};
+        \draw[-] (disp_data) -| (6.4, 4) |- (test) node [above, pos=0.75] {20\%};
+        
+        \draw[-] (disp_out_data) -| (6.4, -4) |- (train2) node [above, pos=0.75] {80\%};
+        \draw[-] (disp_out_data) -| (6.4, -4) |- (test2) node [above, pos=0.75] {20\%};
+        
+    \end{tikzpicture}
+    }
+    \caption{Particiones de los datos}
+    \label{fig:unsupervised_database}
+\end{figure}
 

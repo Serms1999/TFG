@@ -8,16 +8,17 @@ En la primera parte del proyecto se ha visto que para obtener la precisión en l
 
 Durante el desarrollo de esta parte de la investigación se apreció que el reloj interno es susceptible de ser alterado por procesos externos con el cometido de que esté sincronizado en todo momento con el resto de los dispositivos (protocolo NTP). Por este motivo este servicio tuvo que ser desactivado antes de realizar ninguna recolección de datos, pues los diferencias entre tiempos no serían las propias de cada dispositivo.
 
-Una vez desactivado el servicio, aún se obtenían datos que no eran correctos debido a que se estaba usando un reloj del sistema que podía ser modificado. Este reloj fue cambiado por un reloj que no fuera modificable (\texttt{steady\_clock}) y con eso los datos fueron más precisos.
+Una vez desactivado el servicio, aún se obtenían datos que no eran correctos debido a que se estaba usando un reloj del sistema que podía ser modificado. Este reloj fue cambiado por un reloj que no fuera modificable por procesos externos (\texttt{steady\_clock}) y con eso los datos fueron más precisos.
 
-Se realizaron capturas tanto en secuencial como en paralelo de la desviación de los relojes de los dispositivos, de las cuales se obtuvieron sus incrementos en cada momento. Con estos incrementos y una ventana deslizante de 1 minuto se obtienen variables estadísticas que servirán para entrenar los modelos.
+Se realizaron capturas tanto en secuencial como en paralelo de la desviación de los relojes de los dispositivos, de las cuales se obtuvieron sus incrementos en cada momento. Con estos incrementos y una ventana deslizante de 1 minuto se obtuvieron las variables estadísticas que servirían para entrenar los modelos. Se analizaron estas variables y se eliminaron aquellas que presentaban correlación.
 
-Después de ver los resultados de los modelos con los conjuntos de entrenamiento/validación y analizando los posibles usos del sistema implementado se considera que es mejor quedarse con la muestra paralela. 
+Se entrenaron modelos tanto de clasificación como de detección de anomalías con las variables mencionadas anteriormente y, posteriormente, se compararon entre sí para decidir cual es el modelo que mejor se ajustaba a los datos, eligiéndose el algoritmo de clasificación Random Forest como el mejor.
 
-Por último, se entrenó el algoritmo elegido, Random Forest, con los datos de la muestra paralela y los hiperparámetros que se consideraron mejores cuando se realizó el entrenamiento los conjuntos de entrenamiento/validación. De este modelo se obtuvieron unos resultados finales de 99.44\% en el valor de accuracy.
+Por último, se entrenó el algoritmo elegido, Random Forest, con los datos de la muestra paralela y los hiperparámetros que se consideraron mejores cuando se realizó el entrenamiento con los conjuntos de entrenamiento/validación. De este modelo se obtuvieron unos resultados finales de 99.38\% en el valor de Accuracy, de 99.39\% en el valor de Recall y de 99.38\% en el valor de $f$-score.
+
+Comparando este trabajo con aquellos que han sido analizados en el capítulo de \textit{Estado del arte}, se llega a la conclusión de que se ha creado un sistema capaz de identificar dispositivos con una precisión similar a la de los revisados. Sin embargo, estos datos han sido obtenidos en un ambiente muy controlado y que no es representativo de un escenario real. También han existido problemas como el mencionado con el servicio NTP, que puede haber influido en los resultados finales.
 
 Una de las posibles vías futuras de este trabajo sería el desarrollo de un modelo a tiempo real de este sistema. Para este cometido se debería tener una copia local de las huellas que generan ciertos dispositivos para poder compararlos con los que estamos recibiendo en ese momento y así comprobar si se trata de un atacante.
 
 Para realizar este sistema a tiempo real también habría que crear mecanismos que permitan al sistema actualizarse con nuevos datos, y con ello generar nuevas huellas para los dispositivos. También habría que modificar los modelos de Machine Learning debido a que para que el sistema funcione a tiempo real, estos deberían actualizarse. 
-
 

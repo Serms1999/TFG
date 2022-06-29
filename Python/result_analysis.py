@@ -22,7 +22,7 @@ mpl.rcParams.update(pgf_with_latex)
 path_models = ''
 path_plots = ''
 models = {}
-metrics_results = {}
+metrics_results = pd.DataFrame()
 confusion_matrices = {}
 
 parser = argparse.ArgumentParser()
@@ -58,19 +58,29 @@ def read_models():
 
 def read_results():
     global metrics_results, confusion_matrices
-    """
-    try:
-        with open(f'{path_models}/model_results.csv', 'r') as file:
-            for line in file.readlines():
-                model, value = re.split(',', line.rstrip('\n'))
-                metrics_results[model] = float(value)
-    except IOError:
-        raise IOError
-    """
 
-    metrics_results = pd.read_csv(f'{path_models}/model_results.csv', index_col=0)
-    confusion_matrices = load(f'{path_models}/matrices.joblib')
+    metrics_results = pd.read_csv(f'{path_models}/supervised_results.csv')
+    confusion_matrices = load(f'{path_models}/supervised_matrices.joblib')
 
+
+def plot_results_barplot():
+    global metrics_results
+
+    df = metrics_results[metrics_results['model_name'] != 'final_model'].\
+        set_index('model_name').sort_index(ascending=False)
+
+    plt.figure()
+
+    df.plot.barh(color=[colors['Disp. 1'], colors['Disp. 3'], colors['Disp. 5']])
+
+    plt.xticks(ticks=np.linspace(0, 1, 6), labels=[f'{int(x)}%' for x in np.linspace(0, 1, 6) * 100])
+    y_ticks, _ = plt.yticks()
+    plt.yticks(ticks=y_ticks, labels=[names[model_name] for model_name in df.index])
+
+    plt.legend(bbox_to_anchor=(1.04, 0.5), loc="center left", borderaxespad=0,
+               labels=['$Accuracy$', '$Recall$', '$f-score$'])
+    plt.ylabel('')
+    plt.savefig(f'{path_plots}/model_results.pdf', format='pdf', bbox_inches='tight')
 
 def plot_accuracy_barplot():
     global metrics_results
@@ -199,7 +209,7 @@ def random_forest_analysis():
     ax.bar(x - width / 2, d['gini'], width, label='gini', color=colors['Disp. 1'])
     ax.bar(x + width / 2, d['entropy'], width, label='entropy', color=colors['Disp. 5'])
 
-    plt.ylim(0.4, 0.45)
+    plt.ylim(0.6, 0.65)
     ax.set_xlabel('\\texttt{max\_features}')
     ax.set_ylabel('Accuracy promedio')
     ax.set_title('Comparativa hiperparámetros')
@@ -234,7 +244,7 @@ def random_forest_analysis():
     ax.bar(x - width / 2, d['sqrt'], width, label='sqrt', color=colors['Disp. 1'])
     ax.bar(x + width / 2, d['log2'], width, label='log2', color=colors['Disp. 5'])
 
-    plt.ylim(0.42, 0.45)
+    plt.ylim(0.62, 0.64)
     ax.set_xlabel('\\texttt{n\_estimators}')
     ax.set_ylabel('Accuracy')
     ax.set_title('Comparativa hiperparámetros\n\\texttt{criterion = gini}')

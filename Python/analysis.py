@@ -58,18 +58,10 @@ def generate_stats_csv(data: DataFrame, generate=False, delta=False):
         for i, _ in enumerate(data):
             list_df += [pd.read_csv(f'{path}/{fname_dev}{i + 1}.csv', index_col=0)]
 
-    num_rows = np.max([x.index[-1] for x in list_df])
-
-    for row in range(1, num_rows + 1):
-        for dev in range(num_dev):
-            try:
-                df = df.append(list_df[dev].loc[row], ignore_index=True)
-            except KeyError:
-                pass
-
+    df = pd.concat(list_df).sort_index(kind='merge').reset_index(drop=True)
     df.index = np.array(df.index) + 1
     df.to_csv(f'{path}/{fname}.csv', index=True, header=True)
-    print(f'{fname_dev}.csv generado')
+    print(f'{fname }.csv generado')
 
 
 def generate_boxplots(data: DataFrame):
@@ -176,25 +168,7 @@ def generate_correlation_plot(data: DataFrame):
     plt.clf()
 
 
-def generate_offset_plot(data: DataFrame):
-    path = f'plots/{data_type}'
 
-    plt.figure()
-    for disp in data:
-        plt.plot(data[disp]['time'], data[disp]['offset'] / np.power(10, 6), color=colors[disp], label=disp)
-
-    """
-    vertical_lines = [4000,  16500, 29000, 41000]
-    for line in vertical_lines:
-        plt.axvline(x=line, color='black', linestyle=':')
-    """
-
-    plt.xlabel('Tiempo (\\si{\\second})')
-    plt.ylabel('Offset (\\si{\\milli\\second})')
-    plt.legend(bbox_to_anchor=(1.04, 0.5), loc="center left", borderaxespad=0)
-
-    plt.savefig(f'{path}/offset_plot_45.pdf', format='pdf', bbox_inches='tight')
-    plt.clf()
 
 
 def generate_delta_offset_plot(data: dict):

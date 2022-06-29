@@ -6,6 +6,10 @@
 % Configuración de TikZ 
 \input{tikzconf}
 
+% Acrónimos
+\makeglossaries
+\input{glosario.tex}
+
 % Definimos unidades
 \DeclareSIUnit{\byte}{B}
 
@@ -175,5 +179,7 @@ Pedro Miguel \textsc{Sánchez Sánchez}\\
 \lhead{}
 \renewcommand\bibname{Bibliografía}
 \printbibliography[heading = bibintoc]
+\clearpage
+\printglossary[type=\acronymtype,title=Acrónimos,toctitle=Acrónimos]
 
 \end{document}

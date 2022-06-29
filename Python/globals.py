@@ -50,7 +50,7 @@ def stats_array(x, names):
 def statistics(data, names):
     df = pd.DataFrame(columns=names)
     for array in data:
-        df = df.append(stats_array(array, names), ignore_index=True)
+        df = pd.concat([df, stats_array(array, names)], ignore_index=True)
 
     return df
 

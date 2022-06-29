@@ -1,7 +1,5 @@
 %!TEX root = TFG.tex
 
-\lstset{frame=single,basicstyle=\ttfamily\small}
-
 \chapter{Análisis de objetivos y metodología} \label{chap:meto}
 
 En esta sección se analizarán los objetivos del trabajo y se realizará un análisis sobre las decisiones tomadas en el proceso de identificar dispositivos.
@@ -13,7 +11,7 @@ El principal objetivo de este proyecto es conseguir identificar dispositivos id�
 \begin{itemize}
     \item Usar lo visto en el estado del arte, para conocer y seleccionar los desafíos de este proyecto.
     \item Conseguir un registro de los relojes internos de cada uno de los dispositivos que se van a participar en el análisis. Para lo que definiremos una estructura cliente-servidor que recogerá un registro de los datos.
-    \item Generar una huella estadística de estos registros. Para desarrollar este objetivo se detectan valores anómalos y se eliminan. Posteriormente, se hace uso de una ventana deslizante que permite agrupar los datos y extraer estadísticas comunes.
+    \item Generar una huella estadística de estos registros mediante el uso de una ventana deslizante que permite agrupar los datos y extraer estadísticas comunes. Eliminando variables correlacionadas.
     \item Analizar distintas propuestas de algoritmos de Machine Learning que sean capaces de tomar como entrada las huellas estadísticas y, con ellas, identificar a cada dispositivo.
 \end{itemize}
 
@@ -23,12 +21,12 @@ Para poder alcanzar los objetivos propuestos, se presenta una metodología de tr
 
 \begin{enumerate}
     \item \textbf{Revisión bibliográfica}. Revisión de los trabajos relacionados con el tema de este trabajo. En concreto, se busca comprender cómo obtienen sus datos y su método de clasificación de dispositivos.
-    \item \textbf{Recolección de los datos}. Generación de un dataset que contiene las marcas de tiempo tanto del dispositivo de referencia como del que se encuentra bajo análisis. Este proceso se realiza por cada dispositivo a analizar. Posteriormente se buscan valores anómalos mediante un algoritmo de detección de anomalías y dichos valores se eliminan de la muestra.
+    \item \textbf{Recolección de los datos}. Generación de un dataset que contiene las marcas de tiempo tanto del dispositivo de referencia como del que se encuentra bajo análisis. Este proceso se realiza por cada dispositivo a analizar.
     \item \textbf{Generación de huella estadística}. Por cada dispositivo se hace uso de una ventana deslizante que agrupa los datos en grupos de $n$ muestras. De cada grupo se obtienen un conjunto de variables estadísticas que son etiquetadas con el dispositivo del que se han obtenido.
     \item \textbf{Búsqueda de variables correlacionadas}. Se realiza un test de correlación a los datos con el fin de reducir la dimensionalidad de los mismos. Las variables correlacionadas no aportan información y por ello han de ser eliminadas.
     \item \textbf{Particionamiento del conjunto de datos}. Con el fin de entrenar algoritmos de Machine Learning, se divide el conjunto de datos en dos de menor tamaño (entrenamiento y test).
     \item \textbf{Ajuste de hiperparámetros}. Para decidir cuál de los algoritmos es mejor para clasificar los datos de este trabajo se comparan distintos algoritmos de Machine Learning. Estos algoritmos han de ser ajustados correctamente para obtener los mejores resultados. Para realizar este ajuste se realiza una partición similar a la realizada con el conjunto de todos los datos, pero con un conjunto reducido de forma que los entrenamientos duren menos tiempo.
     \item \textbf{Evaluación de los distintos modelos}. Una vez entrenados todos los algoritmos que se quieren comparar, se comparan sus resultados identificando dispositivos para elegir al mejor candidato.
-    \item \textbf{Entrenamiento del modelo final}. Decididos el algoritmo que se va a usar y sus hiperparámetros, se realiza un entrenamiento final con el conjunto completo de los datos de entrenamiento.
+    \item \textbf{Entrenamiento del modelo final}. Decidido el algoritmo que se va a usar y sus hiperparámetros, se realiza un entrenamiento final con el conjunto completo de los datos de entrenamiento.
     \item \textbf{Evaluación del modelo final}. Análisis de los resultados finales obtenidos.
 \end{enumerate}

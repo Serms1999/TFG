@@ -235,7 +235,7 @@ El modelo que eligen se basa en aprendizaje no supervisado, Maximum Variance Clu
 
 \subsection{Resultados de la revisión bibliográfica}
 
-Por último se realizará un resumen en forma de tabla de los artículos que han sido revisados.
+Por último se realizará un resumen en forma de tabla de los artículos que han sido revisados. 
 
 \begin{table}
     \centering
@@ -245,18 +245,20 @@ Por último se realizará un resumen en forma de tabla de los artículos que han
             Referencia & Tipo de identificación & Fuente de los datos & Método de clasificación & Tipo de aprendizaje & Algoritmos usados & Resultados \\
             \midrule
             \cite{oser2018identifying} & Tipo de dispositivo & Cabeceras TCP & Machine Learning & Supervisado & MLP, SVM, Random Forest & 99.76\% de accuracy y 97.03\% de precisión \\
-            \addlinespace
+            \addlinespace\addlinespace
             \cite{hamad2019iot} & Individual & Característi-cas del payload & Machine Learning & Supervisado & AdaBoost, LDA, KNN, Árboles de decisión, Naive Bayes, SVM, Random Forest y GBoost & 89\% de accuracy \\
-            \addlinespace
+            \addlinespace\addlinespace
             \cite{aksoy2019automated} & Tipo y modelo del dispositivo & Cabereceras TCP & Machine Learning & Supervisado & Tablas de decisión, Árboles de decisión J48, OneR y PART & Entre 42.2\% y 100\% de accuracy, con un promedio de 82\% \\
-            \addlinespace
+            \addlinespace\addlinespace
             \cite{jafari2018iot} & Individual & Radio frecuencias & Machine Learning & Supervisado & DNN, CNN y LSTM & 96.3\% de accuracy en DNN, 94.7\% de accuracy en CNN y 76\% de accuracy en LSTM \\
-            \addlinespace
+            \addlinespace\addlinespace
             \cite{lanze2012clock} & Modelo del dispositivo & Registros NTP & Estadístico & - & - & Inconcluyentes \\
-            \addlinespace
+            \addlinespace\addlinespace
             \cite{meidan2017profiliot} & Tipo y modelo & Sesiones TCP & Machine Learning & Supervisado & GBM, Random Forest y XGBoost & \SI{99.281}{\percent} de accuracy \\
-            \addlinespace
+            \addlinespace\addlinespace
             \cite{desmond2008identifying} & Individual & Mensajes \textit{probe request} & Machine Learning & No supervisado & Maximum Variance Clustering & Entre un 70\% y 80\% de accuracy\\
+            \addlinespace\addlinespace
+            Este trabajo & Individual & Ciclos de CPU & Machine Learning & Supervisado y No supervisado & Random Forest, MLP, Naive Bayes, KNN, Árboles de decisón, SVM-Linear, LOF, OC-SVM, Isolation Forest & 99.38\% de Accuracy, 99.39\% de Recall y 99.38\% de $f$-score\\
             \bottomrule
         \end{tabular}
     }
