@@ -53,12 +53,12 @@ The next step is set on to the data analysis part. Firstly, it be will obtained 
 The median is expected to be approximately 0 and the interquartile range is expected to be very similar on each device. These results are expected since it is being analyzed clonic devices and they do not suffer from clock skew, at least theoretically.
 
 
-Looking both graphs, it will be observed that the median is actually close to 0, but both the interquartile range and the non-outliers values range oscillate much more in the sequential 8 sample. Therefore, from this point on and because of the training of the models that perform the identification process, This sample will not be taken into account; the focus will be laid on the parallel sample.
+Looking both graphs, it will be observed that the median is actually close to 0, but both the interquartile range and the non-outliers values range oscillate much more in the sequential 8 sample. Therefore, from this point on and because of the training of the models that perform the identification process, this sample will not be taken into account; the focus will be laid on the parallel sample.
 
-Once it is decided which data is going to be used it is necessary to identify anomalous values between the correct ones. To do that it will be used an anomaly detection algorithm called IsolationForest. This algorithm requieres a parameter which approximate the value of anomalous values, for example, in this research, it has been concluded that this value is near 5\%. This value was obtained trying different values and looking into the graphs that shows the values which are going to be removed from the dataset.
+Once it is decided which data is going to be used, it is necessary to identify anomalous values between the correct ones. To do that it will be used an anomaly detection algorithm called IsolationForest. This algorithm requieres a parameter which approximate the value of anomalous values, for example, in this research, it has been concluded that this value is near 5\%. This value was obtained trying different values and looking into the graphs that shows the values which are going to be removed from the dataset.
 
 
-At this point the statistical values are obtained, it is going to be used a 1 minute sliding window (60 samples) to obtain them. The statistical values that will be obtained will be: sum, mean, median, mode, standard deviation, interquartile range, kurtosis, skewness, maximum and minimum.
+At this point, the statistical values are obtained. It is going to be used a 1 minute sliding window (60 samples) to obtain them. The statistical values that will be obtained will be: sum, mean, median, mode, standard deviation, interquartile range, kurtosis, skewness, maximum and minimum.
 
 
 Before training the models, it is going to be checked if there is a correlation between the different statistical values, since having correlated data does not provide information. To do it, a correlation matrix between all the statistical variables is generated and those variables that have a high correlation value with another variable are eliminated. In order to train the different models, it is going to be used the \texttt{scikit-learn} library for Python, along with utilities such as \texttt{numpy} and \texttt{pandas}. In this work it will be used supervised learning algorithms, and those that are going to be used are: Decision Trees, Random Forest, Multilayer Perceptron (MLP), Naive Bayes, K Nearest Neighbours (KNN) and Support Vector Machines (SVM).
@@ -72,13 +72,13 @@ the set of all the data will be divided into two, one with \SI{70}{\percent} of 
 To obtain the final model it is pivotal to choose the algorithm and hyperparameters that give the best results according to the data. To get it, each algorithm must be adjusted to obtain its best results and with them decide which algorithm to use.
 
 
-The process of adjusting an algorithm takes time since each algorithm have to be trained with each combination of hyperparameters that is required for being tested. For this reason, the volume of data will be reduced (\SI{70}{\percent} of the total) and it will be keet only \SI{35}{\percent} of it. This subset will also be divided into a 70/30 ratio in order to validate the results of training with data that the model has not seen before.
+The process of adjusting an algorithm takes time since each algorithm have to be trained with each combination of hyperparameters. For this reason, the volume of data will be reduced (\SI{70}{\percent} of the total) and it will be keet only \SI{35}{\percent} of it. This subset will also be divided into a 70/30 ratio in order to validate the results of training with data that the model has not seen before.
 
 
 To make these partitions, random samples are taken, but as the data had temporal correlation, it is needed to reorder them so that this correlation can be kept and the models are able to recognize it. 
 
 
-To adjust the hyperparameters of an algorithm, an object called grid, which allows to specify all the hyperparameter that will be tested, is going to be used. This tool is very useful since it automates the whole process of testing different hyperparameters and allows us to obtain, in a single run, the results of an algorithm with each combination of hyperparameters.
+To adjust the hyperparameters of each algorithm, an approach called grid search is going to be used, which allows to specify all the hyperparameters that will be tested. This tool is very useful since it automates the whole process of testing different hyperparameters and allows to obtain, in a single run, the results of the algorithm with each combination of hyperparameters.
 
 
 Once all the models have been adjusted, it is easy to see that the ones with the best accuracies are those that are based on trees; both decision trees and random forest. In particular random forest is the one that gives us the best results, so, this random forest algorithm will be chosen to be trained as the final model. 
