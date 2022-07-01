@@ -96,7 +96,7 @@ El algoritmo KNN es un algoritmo que se usa mayoritariamente para clasificación
 
 A la hora de clasificar un nuevo dato, este algoritmo busca los $k$ datos más cercanos. Una vez tiene esos datos comprueba sus clases. La clase con mayor representación entre los $k$ datos es la que se asignará al nuevo dato. Podemos verlo con un ejemplo.
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \begin{tikzpicture}
         \node (1) {\includegraphics[width=0.4\textwidth]{images/KnnClassification}};
@@ -127,7 +127,7 @@ En la Fig. \ref{fig:svm_separation} se puede ver como hay distintos hiperplanos 
     \item $\mathcal{H}_3$ sí que cumple con las restricciones de división y distancia máxima.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \begin{tikzpicture}
         \node (1) {\includegraphics[width=0.4\textwidth]{images/svm_separation}};
@@ -153,7 +153,7 @@ De estas marcas se obtienen las variables que se usarán para entrenar los disti
 
 Una variable interesante es la del desbordamiento del contador. En el RFC 1323 \cite{RFC1323} se define que el contador del timestamp (campo TSval) tiene una longitud de 4 bytes (32 bits), por lo tanto, el mayor valor que podrá tener asignado es $2^{32}$, puesto que es un entero sin signo. Se podría pensar que todos los dispositivos desbordan a la vez, pero cada fabricante establece el valor al que el contador se desborda. Esto está ilustrado en la Fig. \ref{fig:cern_ts_overflow} con dos ejemplos.
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \includegraphics[width=0.45\textwidth]{images/CERN-timestamp_overflow}
     \caption{Desbordamiento del contador \cite{oser2018identifying}}
@@ -168,7 +168,7 @@ Otro trabajo relacionado con la temática ha sido desarrollado por Salma Abdalla
 
 Este sistema (Fig. \ref{fig:diam_hamad}), una vez se tiene una traza del dispositivo que se quiere conectar por primera vez a la red, crea una huella del dispositivo que será analizada por un modelo (previamente entrenado) que lo clasificará como desconocido o no, en caso de que esté en una lista blanca. En caso de ser un dispositivo desconocido se le denegará el acceso a la red. Por contra, si está en la lista, se consultará una matriz de autorización (que contiene la confianza de ese dispositivo según sus vulnerabilidades) para saber que privilegios recibirá ese dispositivo. Con esto el dispositivo puede contectarse como un dispositivo ``confiable'', teniendo acceso a comunicarse con todos los dispositivos de la red, o por contra, de ``acceso restringido'' donde solo podrá comunicarse con dispositivos de ese mismo nivel de acceso.
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \resizebox{0.6\textwidth}{!}{
         \input{diagrama_Hamad}
@@ -199,7 +199,7 @@ Para la clasificación se han usado diferentes algoritmos de la herramienta WEKA
 
 Los resultados que obtiene son de un 82\% de accuracy promedio entre todos los clasificadores de cada proveedor. Los valores individuales están entre el 42.2\% y el 100\%.
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \resizebox{0.6\textwidth}{!}{
         \input{diagrama_Aksoy.tex}
@@ -239,7 +239,7 @@ El modelo que eligen se basa en aprendizaje no supervisado, Maximum Variance Clu
 
 Por último se realizará un resumen en forma de tabla de los artículos que han sido revisados. 
 
-\begin{table}
+\begin{table}[t]
     \centering
     \resizebox{\textwidth}{!}{
         \begin{tabular}{C{0.12\textwidth}C{0.15\textwidth}C{0.15\textwidth}C{0.15\textwidth}C{0.14\textwidth}C{0.2\textwidth}C{0.24\textwidth}}

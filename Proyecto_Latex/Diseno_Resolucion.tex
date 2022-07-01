@@ -6,7 +6,7 @@ En este capítulo se realiza la descripción de los experimentos realizados, su 
 
 En este trabajo se usará una topología de red como la que ilustra la Fig. \ref{fig:top}. En dicha topología se puede ver que tenemos un observador (modelo RockPro64) y 5 dispositivos a analizar (Raspberry Pi 4 Model B).
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \resizebox{0.5\textwidth}{!}{
         \input{topologia}
@@ -41,8 +41,8 @@ En cada ejecución del bucle se obtendrá una marca de tiempo en el observador $
     \item La desviación del reloj del dispositivo respecto al del observador, $t_i - t'_i$.
 \end{itemize}
 
-Un ejemplo de como se guardan estos datos se puede ver en la Tabla \ref{tab:trace_example}.
-\begin{table}
+Un ejemplo de cómo se guardan estos datos se puede ver en la Tabla \ref{tab:trace_example}.
+\begin{table}[htpb!]
     \centering
     \resizebox{0.75\textwidth}{!}{
     \begin{tabular}{ccccc}
@@ -60,7 +60,7 @@ Un ejemplo de como se guardan estos datos se puede ver en la Tabla \ref{tab:trac
     \label{tab:trace_example}
 \end{table}
 
-Este proceso se realizará para cada dispositivo tanto en una muestra secuencial, como en una muestra en paralelo.
+Este proceso se realizará para cada dispositivo tanto en una muestra secuencial, como en una muestra en paralelo. 
 
 
 \section{Análisis de los datos}
@@ -73,7 +73,7 @@ En este primer experimento se ha tomado una muestra de \SI{7200}{} segundos, es 
 
 En la Fig. \ref{fig:off_acu_secuencial} se muestra la desviación (offset) acumulada en cada dispositivo durante esas \SI{2}{} horas.
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \includegraphics[scale=0.65]{../Python/plots/individual/offset_plot}
     \caption{Offset acumulado muestra secuencial}
@@ -82,7 +82,7 @@ En la Fig. \ref{fig:off_acu_secuencial} se muestra la desviación (offset) acumu
 
 Como se puede ver hay 2 tipos de comportamiento. Los dispositivos 1, 2 y 3 se mantienen monótonos al comienzo para después incrementar mucho su desviación. Por contra los dispositivos 4 y 5 se mantienen sin grandes cambios en toda la muestra. Esto se puede ver más claramente en la Fig. \ref{fig:off_acu_secuencial_diffs}.
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \subfloat[Dispositivos 1, 2 y 3]{\includegraphics[width=0.4\textwidth]{../Python/plots/individual/offset_plot_123}}
     \quad
@@ -93,7 +93,7 @@ Como se puede ver hay 2 tipos de comportamiento. Los dispositivos 1, 2 y 3 se ma
 
 Lo que interesa al final es obtener una forma de distinguir estadísticamente los datos, para ello se genera un gráfico que muestre entre que valores se mueven estos datos en cada dispositivo, en definitiva, se puede ver con un diagrama de cajas (Fig. \ref{fig:box_secuencial}). Se han eliminado los valores atípicos ya que a tan pequeña escala no dejan ver los verdaderos resultados.
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \includegraphics[scale=0.7]{../Python/plots/individual/boxplot_no_out}
     \caption{Diagrama de cajas muestra secuencial}
@@ -136,7 +136,7 @@ Para el segundo experimento se han capturado datos de todos los dispositivos sim
 
 La Fig. \ref{fig:off_acu_paralelo} muestra la desviación acumulada en cada dispositivo en este periodo de tiempo. En este gráfico también se han marcado ciertos puntos en los que los dispositivos parecen ``sincronizarse''. Con esto nos referimos a que alrededor de estas marcas de tiempo todos los dispositivos cambian de tendencia bruscamente y además parecen repetirse con cierta periodicidad. Las marcas de tiempo de este gráfico corresponden a los puntos $\{\SI{4000}{},  \SI{16500}{}, \SI{29000}{}, \SI{41000}{}\}$ que están aproximadamente equidistantes (aproximadamente \SI{12000}{} segundos).
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \includegraphics[scale=0.65]{../Python/plots/parallel/offset_plot}
     \caption{Offset acumulado muestra paralela}
@@ -147,7 +147,7 @@ Esta ``sincronización'' entre dispositivos parece deberse a algún tipo de actu
 
 Consultando otro diagrama de cajas con el incremento de la desviación en cada instante (Fig. \ref{fig:box_paralelo}) se observa como todos los dispositivos están más a la par que en la muestra secuencial (Fig. \ref{fig:box_secuencial}). Aún así, siguen teniendo ciertas diferencias, con lo que se puede concluir que también son estadísticamente diferenciables.
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \includegraphics[scale=0.7]{../Python/plots/parallel/boxplot_no_out}
     \caption{Diagrama de cajas muestra paralela}
@@ -217,7 +217,7 @@ Como parámetro para el algoritmo, se ha indicado un valor de contaminación de 
 
 Los resultados obtenidos se pueden ver en la Fig. \ref{fig:anomaly}. En ella se observa como los datos presentaban mucha variabilidad, a pesar de que deberían ser prácticamente constantes. Con este primer procesado se consigue eliminar estos valores no deseados.
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \resizebox{0.95\textwidth}{!}{
     \begin{minipage}{0.9\textwidth}
@@ -241,7 +241,7 @@ Los resultados obtenidos se pueden ver en la Fig. \ref{fig:anomaly}. En ella se 
 
 En esta sección se generarán los datos estadísticos de la muestra paralela mediante la ventana deslizante, se obtienen los resultados que se pueden ver en la Tabla \ref{tab:stats_par}.
 
-\begin{table}
+\begin{table}[htpb!]
     \centering
     \resizebox{0.85\textwidth}{!}{
         \begin{tabular}{cccccccccccc}
@@ -272,7 +272,7 @@ En esta sección se buscarán valores estadísticos correlacionados entre sí. E
 
 La correlación entre las variables estadísticas se puede ver en la Fig. \ref{fig:corr}. Se puede ver como suma, media y mediana son las variables más correlacionadas entre sí, por tanto serán eliminadas 2 de ellas (en este caso, media y mediana).
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \subfloat[Correlación entre las variables iniciales]{
         \includegraphics[scale=0.55]{../Python/plots/parallel/correlacion_stats.pdf}
@@ -290,7 +290,7 @@ En esta sección se mostrará el proceso de entrenamiento de los distintos model
 
 Para realizar estos entrenamientos se ha usado la librería \texttt{scikit-learn} sobre el lenguaje de programación Python. Esta librería tiene clases que implementan los algoritmos vistos anteriormente en la sección de \textit{Estado del arte}. Las clases que corresponden a cada modelo son las que se ven en la Tabla \ref{tab:equiv_models}.
 
-\begin{table}
+\begin{table}[htpb!]
     \centering
     \resizebox{\textwidth}{!}{
     \begin{tabular}{cccC{0.2\textwidth}}
@@ -315,11 +315,16 @@ Para realizar estos entrenamientos se ha usado la librería \texttt{scikit-learn
 
 \subsection{Entrenamiento de los algoritmos de clasificación}
 
-\begin{figure}
+
+A la hora de entrenar algoritmos de Machine Learning, lo primero que hay hacer es ajustar sus hiperparámetros. Los hiperparámetros de un modelo son parámetros del mismo que se pueden modificar para que este se adapte mejor a los datos con los que se está trabajando o para cambiar la forma en la aprende este modelo también para adaptarse a estos datos.
+
+Para ajustar los hiperparámetros no se usa la completitud de los datos, se usa un modelo entrenamiento/validación/test. Los datos se han dividido en un conjunto de entrenamiento y otro de test, 70\% para entrenamiento y 30\% para test, lo habitual es tener en torno a una tercera parte de los datos para entrenamiento y el resto para test. Este proceso (Fig. \ref{fig:database}) se hace para comprobar la capacidad de generalización del modelo con datos que no haya visto nunca.
+
+\begin{figure}[htpb!]
     \centering
     \resizebox{0.5\textwidth}{!}{
     \begin{tikzpicture}
-        \node[database,label=below:Datos,database radius=1cm,database segment height=0.5cm] (data) {};
+        \node[database,label=below:Datos del dispositivo,database radius=1cm,database segment height=0.5cm] (data) {};
         \node (aux) [right = of data] {};
         \node[database,label=below:Entrenamiento,database radius=0.75cm,database segment height=0.375cm] (train) [above right = 2cm of aux] {};
         \node[database,label=below:Test,database radius=0.75cm,database segment height=0.375cm] (test) [below right = 2cm of aux] {};
@@ -340,9 +345,6 @@ Para realizar estos entrenamientos se ha usado la librería \texttt{scikit-learn
     \label{fig:database}
 \end{figure}
 
-A la hora de entrenar algoritmos de Machine Learning, lo primero que hay hacer es ajustar sus hiperparámetros. Los hiperparámetros de un modelo son parámetros del mismo que se pueden modificar para que este se adapte mejor a los datos con los que se está trabajando o para cambiar la forma en la aprende este modelo también para adaptarse a estos datos.
-
-Para ajustar los hiperparámetros no se usa la completitud de los datos, se usa un modelo entrenamiento/validación/test. Los datos se han dividido en un conjunto de entrenamiento y otro de test, 70\% para entrenamiento y 30\% para test, lo habitual es tener en torno a una tercera parte de los datos para entrenamiento y el resto para test. Este proceso (Fig. \ref{fig:database}) se hace para comprobar la capacidad de generalización del modelo con datos que no haya visto nunca.
 
 Para particionar los datos se tomarán muestras aleatorias, pero ordenadas para mantener la correlación temporal de los datos. Por ejemplo, ante el conjunto de datos $x_1, \dots, x_{20}$, una muestra aleatoria podría ser $x_{15}, x_8, x_3, x_{17}, x_5, x_{12}$ pero si estos datos presentan una correlación temporal, como es el caso de este trabajo, esta se pierde. Por tanto, los datos han de ser devueltos a su orden natural $x_3, x_5, x_8, x_{12}, x_{15}, x_{17}$. 
 
@@ -363,7 +365,7 @@ Para evitar que una rama entre en un bucle infinito debido a que no es capaz de 
 
 Hablando en primer lugar sobre los hiperparámetros \texttt{criterion} y \texttt{max\_features} (Fig. \ref{fig:comp_hiperparam1}) se puede ver que en promedio el mejor valor de \texttt{criterion} es \texttt{gini}. Este parámetro será fijado y, a continuación, se comprobarán todos los pares de valores que generan los hiperparámetros \texttt{max\_features} y \texttt{n\_estimators} (Fig. \ref{fig:comp_hiperparam2}).
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \subfloat[]{\includegraphics[width=0.45\textwidth]{../Python/plots/parallel/delta_random_forest_results}\label{fig:comp_hiperparam1}}
     \quad
@@ -377,11 +379,11 @@ Los mejores valores obtenidos son \texttt{criterion = gini}, \texttt{n\_estimato
 
 \subsection{Entrenamiento de los algoritmos de detección de anomalías}
 
-A la hora de entrenar algoritmos de aprendizaje no supervisado, por una parte, se realiza un proceso de ajuste similar al visto en la sección anterior. Por otra parte existe una diferencia y esa son los datos de entrada del algoritmo.
+A la hora de entrenar algoritmos de aprendizaje no supervisado, se realiza un proceso de ajuste similar al visto en la sección anterior. Sin embargo, existe una diferencia y esa son los datos de entrada del algoritmo.
 
-Mientras que con los algoritmos de clasificación se realizaba un división únicamente teniendo en cuenta el tamaño del conjunto de los datos, en este caso se entrenará cada algoritmo únicamente con el 80\% de los datos de un dispositivo. Posteriormente, se usarán el 20\% de los datos de ese dispositivo para obtener una métrica y el 20\% de los datos del resto de dispositivos para otra. Este proceso se realiza con el fin de comprobar si el modelo es capaz de detectar como datos correctos aquellos provenientes de su mismo dispositivo y detectar como datos anómalos los del resto de dispositivos. Este división se puede ver de forma gráfica en la Fig. \ref{fig:unsupervised_database}.
+Mientras que con los algoritmos de clasificación se realizaba una división únicamente teniendo en cuenta el tamaño del conjunto de los datos, en este caso se entrenará cada algoritmo únicamente con el 80\% de los datos de un dispositivo. Posteriormente, se usarán el 20\% de los datos de ese dispositivo para obtener una métrica y el 20\% de los datos del resto de dispositivos para otra. Este proceso se realiza con el fin de comprobar si el modelo es capaz de detectar como datos correctos aquellos provenientes de su mismo dispositivo y detectar como datos anómalos los del resto de dispositivos. Este división se puede ver de forma gráfica en la Fig. \ref{fig:unsupervised_database}.
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \resizebox{0.5\textwidth}{!}{
     \begin{tikzpicture}    

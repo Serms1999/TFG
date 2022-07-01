@@ -49,13 +49,25 @@ Con una matriz de confusión es posible obtener las distintas métricas que sirv
 
 Analizando en primer lugar los modelos de clasificación, se puede ver en la figura anteriormente mencionada, Fig. \ref{fig:comp_accur}, que los modelos que presentan mejores resultados son los que se basan en árboles de decisión, que son el propio algoritmo de árboles de decisión y random forest. Otra forma de ver estos resultados es mediante las matrices de confusión que genera cada algoritmo.
 
-Es fácil ver en la Fig. \ref{fig:confusion_matrices_parallel} que los modelos basados en árboles aciertan prácticamente en la totalidad de las ocasiones, en particular, el algoritmo de Random Forest es el que mejores resultados consigue con aproximadamente 99.5\% en todas las métricas analizadas, seguido de cerca por Árboles de Decisión con aproximadamente 97.6\% en todas las métricas.
-
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \includegraphics[width=0.6\textwidth]{../Python/plots/parallel/model_results}
     \caption{Comparativa de resultados entre modelos de clasificación}
     \label{fig:comp_accur}
+\end{figure}
+
+Es fácil ver en la Fig. \ref{fig:confusion_matrices_parallel} que los modelos basados en árboles aciertan prácticamente en la totalidad de las ocasiones, en particular, el algoritmo de Random Forest es el que mejores resultados consigue con aproximadamente 99.5\% en todas las métricas analizadas, seguido de cerca por Árboles de Decisión con aproximadamente 97.6\% en todas las métricas.
+
+
+\begin{figure}[htpb!]
+    \centering
+    \begin{tabular}{ccc}
+        \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/decision_tree_matrix}} & \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/random_forest_matrix}} & \multirow{3}{*}[8em]{\includegraphics[scale=0.75]{../Python/plots/parallel/colorbar_matrices}} \\
+        \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/mlp_matrix}} & \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/naive_bayes_matrix}} &  \\
+        \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/knn_matrix}} & \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/svm_linear_matrix}} & \\
+    \end{tabular}
+    \caption{Matrices de confusión con datos de la muestra paralela}
+    \label{fig:confusion_matrices_parallel}
 \end{figure}
 
 Desde el punto de vista de los modelos de detección de anomalías, no se han obtenido valores de las métricas tan altas como en los algoritmos de clasificación vistos anteriormente. Se pone como ejemplo el cálculo de las métricas de Recall y TNR que se hace en función de las dos matrices de confusión, Tabla \ref{tab:ex_unsupervised_results}, que genera el par $\langle
@@ -63,7 +75,7 @@ $Dispositivo, Algoritmo$\rangle$.
 
 En la evaluación de detectar como valores correctos los de su propio dispositivo se obtiene un Recall, usando la Fórmula \ref{eq:recall}, de 95.12\%. Este valor es obtenido mediante la matriz de confusión mostrada en la Tabla \ref{tab:iso_disp1_recall}. Por contra, en la tarea de detectar como valores anómalos los provenientes del resto de dispositivos (Tabla \ref{tab:iso_disp1_tpr}), no obtiene un valor tan elevado, tan solo un 10.36\% de TNR (Fórmula \ref{eq:tnr}).
 
-\begin{table}
+\begin{table}[htpb!]
     \centering
     \subfloat[20\% de los datos del Disp. 1]{
     \begin{tabular}{@{}cc cc@{}}
@@ -103,7 +115,7 @@ En la evaluación de detectar como valores correctos los de su propio dispositiv
 
 El resto de valores de la tabla de resultados (Tabla \ref{tab:anomaly_results}) son generados mediante el mismo procedimiento.
 
-\begin{table}
+\begin{table}[htpb!]
     \centering
     \input{unsupervised_table}
     \caption{Resultados de los modelos de detección de anomalías}
@@ -114,16 +126,7 @@ Atendiendo al resto de valores de los modelos de detección de anomalías, se pu
 
 Una vez comparados todos los modelos que han sido creados para este trabajo, se llega a la conclusión de que el mejor entre ellos es el algoritmo de clasificación Random Forest. Por ello se ha generado un modelo final con los hiperparámetros ajustados anteriormente y con la totalidad de los datos de entrenamiento. Los resultados obtenidos se pueden ver en la matriz de confusión resultante (Fig. \ref{fig:final_matrix}). Con estos resultados se tiene un valor final de Accuracy de 99.38\%, de Recall de 99.39\% y de $f$-score de 99.38\%.
 
-\begin{figure}
-    \centering
-    \begin{tabular}{ccc}
-        \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/decision_tree_matrix}} & \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/random_forest_matrix}} & \multirow{3}{*}[8em]{\includegraphics[scale=0.75]{../Python/plots/parallel/colorbar_matrices}} \\
-        \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/mlp_matrix}} & \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/naive_bayes_matrix}} &  \\
-        \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/knn_matrix}} & \subfloat{\includegraphics[width=0.4\textwidth]{../Python/plots/parallel/svm_linear_matrix}} & \\
-    \end{tabular}
-    \caption{Matrices de confusión con datos de la muestra paralela}
-    \label{fig:confusion_matrices_parallel}
-\end{figure}
+
 
 \begin{figure}[H]
     \centering
