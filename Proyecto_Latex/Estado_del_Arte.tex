@@ -18,13 +18,20 @@ Cada vez hay más dispositivos IoT conectados a internet, lo que dada su natural
 
 Existen diversas propuestas sobre arquitecturas multi capa que puedan asegurar los requisitos de calidad de servicio (QoS) y seguridad requeridos. En la propuesta de Muhammad Umar Farooq et al. \cite{farooq2015review} se hace mención a una arquitectura de 6 capas.
 
-Por otro lado, en la propuesta de Ibrar Yaqoob et al. \cite{yaqoob2017internet} se explica una propuesta más general, combinando varias de las capas que comparten gran parte de su cometido. A continuación se explican estas 3 capas:
+Por otro lado, en la propuesta de Ibrar Yaqoob et al. \cite{yaqoob2017internet} se explica una propuesta más general, combinando varias de las capas que comparten gran parte de su cometido. Esta propuesta se puede observar gráficamente en la Fig. \ref{fig:iot_architecture}. A continuación se explican esas 3 capas:
 
 \begin{enumerate}
     \item \textbf{Capa sensitiva}: esta es la capa más básica. Es la que se encarga de recolectar toda la información que sea capaz el dispositivo a través de sus múltiples sensores.
     \item \textbf{Capa de transporte}: esta capa es la que realiza todo el intercambio de información entre las otras dos capas. Se encarga de las operaciones de red.
     \item \textbf{Capa de aplicación}: esta capa se encarga de extraer la información valiosa de los datos producidos por la capa sensitiva, y que le llegan a través de la capa de transporte. En esta capa se agrupan distintos servicios como data mining o computación en la nube.
 \end{enumerate}
+
+\begin{figure}
+    \centering
+    \includegraphics{images/iot_architecture.pdf}
+    \caption{Arquitectura IoT propuesta \cite{yaqoob2017internet}}
+    \label{fig:iot_architecture}
+\end{figure}
 
 \subsection{Aplicaciones del IoT}
 
@@ -98,11 +105,13 @@ A la hora de clasificar un nuevo dato, este algoritmo busca los $k$ datos más c
 
 \begin{figure}
     \centering
+    \resizebox{0.45\textwidth}{!}{
     \begin{tikzpicture}
         \node (1) {\includegraphics[width=0.4\textwidth]{images/KnnClassification}};
         \node (2) at (0.2, -1.3) {$k = 3$};
         \node (3) at (0.2, -2.6) {$k = 5$};
     \end{tikzpicture}
+    }
     \caption{Funcionamiento del algoritmo KNN \cite{knnalgorithm2010}}
     \label{fig:knn_clasification}
 \end{figure}
@@ -129,6 +138,7 @@ En la Fig. \ref{fig:svm_separation} se puede ver como hay distintos hiperplanos 
 
 \begin{figure}
     \centering
+    \resizebox{0.5\textwidth}{!}{
     \begin{tikzpicture}
         \node (1) {\includegraphics[width=0.4\textwidth]{images/svm_separation}};
         \node (2) at (2.7, -2.7) {$x_1$};
@@ -137,6 +147,7 @@ En la Fig. \ref{fig:svm_separation} se puede ver como hay distintos hiperplanos 
         \node (5) at (-0.5, 2.5) {\scriptsize $\mathcal{H}_2$};
         \node (6) at (2, 2.5) {\scriptsize $\mathcal{H}_3$};
     \end{tikzpicture}
+    }
     \caption{Separación por hiperplanos SVM \cite{svmseparation2012}}
     \label{fig:svm_separation}
 \end{figure}
@@ -155,7 +166,7 @@ Una variable interesante es la del desbordamiento del contador. En el RFC 1323 \
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\textwidth]{images/CERN-timestamp_overflow}
+    \includegraphics[width=0.6\textwidth]{images/CERN-timestamp_overflow}
     \caption{Desbordamiento del contador \cite{oser2018identifying}}
     \label{fig:cern_ts_overflow}
 \end{figure}
@@ -201,7 +212,7 @@ Los resultados que obtiene son de un 82\% de accuracy promedio entre todos los c
 
 \begin{figure}
     \centering
-    \resizebox{0.6\textwidth}{!}{
+    \resizebox{0.7\textwidth}{!}{
         \input{diagrama_Aksoy.tex}
     }
     \caption{Clasificador de dos niveles \cite{aksoy2019automated}}

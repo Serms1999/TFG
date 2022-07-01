@@ -8,20 +8,41 @@ En este trabajo se usará una topología de red como la que ilustra la Fig. \ref
 
 \begin{figure}
     \centering
-    \resizebox{0.5\textwidth}{!}{
+    \resizebox{0.7\textwidth}{!}{
         \input{topologia}
     }
     \caption{Topología de la red}
     \label{fig:top}
 \end{figure}
 
-La idea es mandar mensajes desde el observador a cada uno de los dispositivos y que cada uno de los dispositivos conteste a esos mensajes y obteniendo así una marca de tiempo de ese dispositivo.
+La idea es enviar mensajes desde el observador a cada uno de los dispositivos y que cada uno de los dispositivos responda a esos mensajes, obteniendo así una marca de tiempo de ese dispositivo.
+
+\section{Arquitectura propuesta}
+
+En este trabajo ha sido propuesta una arquitectura en la que se basará todo el desarrollo del mismo. Esta arquitectura se puede ver en la Fig. \ref{fig:architecture}.
+
+\begin{figure}
+    \centering
+    \input{architecture_scheme}
+    \caption{Arquitectura propuesta}
+    \label{fig:architecture}
+\end{figure}
+
+En esta arquitectura se compone de dos partes. Por una parte, los dispositivos que generan y comparten los datos, y por otra parte el dispositivo externo que se encarga de tanto de analizar y procesar los datos, como de ajustar los algoritmos de Machine Learning que se usan. Este dispositivo también es el encargado de evaluar los resultados que obtienen los modelos ya entrenados y compararlos entre ellos. A continuación se explicarán cada una de estas partes.
+
+\begin{enumerate}[label=\textbf{\Alph*}:]
+    \item en esta parte se preparan los dispositivos para la recolección de las muestras. Se establecen frecuencias de CPU fijas, para evitar que esto afecte a los ciclos del procesador. También se deshabilita el servicio \acrshort{ntp} que modifica el reloj interno del dispositivo.
+    \item en esta parte se obtienen los datos de los distintos dispositivos que van a ser analizados. Cada segundo estos dispositivos obtienen el valor de su reloj interno y lo envían al cliente. Este proceso se repite durante la obtención de toda la muestra, que debe de ser un periodo de tiempo suficientemente largo.
+    \item en esta parte el cliente obtiene cada una de las marcas de tiempo de los dispositivos. Con estos valores calcula el incremento entre cada par de marcas de un dispositivo y con ello construye un conjunto de datos. Sobre este conjunto de datos, y mediante el uso de una ventana deslizante, se obtienen diversos valores estadísticos que serán representativos de la ventana en cuestión. Algunos de estos valores pueden presentar correlación entre sí, por ello, se obviarán todos excepto uno que servirá de representante.
+    \item en esta parte se seleccionan los distintos algoritmos de Machine Learning que se usarán en este trabajo. En este proyecto se ha optado por usar algoritmos de aprendizaje supervisado orientados a clasificación, y algoritmos de aprendizaje no supervisado orientados a la detección de anomalías. Una vez se sabe cuales serán los algoritmos a usar, se procede a ajustar sus hiperparámetros con el objetivo de hacer que los modelos resultantes se ajusten de la mejor manera posible a los datos de este trabajo.
+    \item en esta parte se eligen las métricas que se van a usar para comparar los distintos modelos entre sí. Se seleccionan métricas distintas para comparar los algoritmos de clasificación y los de detección de anomalías. Se obtienen los resultados de las métricas deseadas para cada uno de los modelos entrenados, y una vez se está en posesión de todas ellas se procede a comparar los modelos entre sí.
+\end{enumerate}
 
 \section{Elección del protocolo}
 
-Las opciones barajadas han sido TCP e ICMP. En un principio se pensaba usar las marcas de tiempo contenidas en las cabeceras de estos protocolos, pero esta idea se descartó puesto que únicamente permitían obtener los tiempos en milisegundos. El objetivo era obtener los tiempos en nanosegundos por tanto, se enviaron los datos en el cuerpo del paquete que no tiene una limitación tan corta de espacio. 
+Las opciones barajadas han sido \acrfull{tcp} e \acrfull{icmp}. En un principio se pensaba usar las marcas de tiempo contenidas en las cabeceras de estos protocolos, pero esta idea se descartó puesto que únicamente permitían obtener los tiempos en milisegundos. El objetivo era obtener los tiempos en nanosegundos por tanto, se enviaron los datos en el cuerpo del paquete que no tiene una limitación tan corta de espacio. 
 
-Con el fin de mantener la conexión persistente en toda la muestra se escogió el protocolo TCP, ya que una vez establecida la conexión se mantendrá hasta el final.
+Con el fin de mantener la conexión persistente en toda la muestra se escogió el protocolo \acrshort{tcp}, ya que una vez establecida la conexión se mantendrá hasta el final.
 
 \section{Obtención de datos}
 
@@ -95,7 +116,7 @@ Lo que interesa al final es obtener una forma de distinguir estadísticamente lo
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.7]{../Python/plots/individual/boxplot_no_out}
+    \includegraphics{../Python/plots/individual/boxplot_no_out}
     \caption{Diagrama de cajas muestra secuencial}
     \label{fig:box_secuencial}
 \end{figure}
@@ -138,7 +159,7 @@ La Fig. \ref{fig:off_acu_paralelo} muestra la desviación acumulada en cada disp
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.65]{../Python/plots/parallel/offset_plot}
+    \includegraphics{../Python/plots/parallel/offset_plot}
     \caption{Offset acumulado muestra paralela}
     \label{fig:off_acu_paralelo}
 \end{figure}
@@ -149,7 +170,7 @@ Consultando otro diagrama de cajas con el incremento de la desviación en cada i
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.7]{../Python/plots/parallel/boxplot_no_out}
+    \includegraphics{../Python/plots/parallel/boxplot_no_out}
     \caption{Diagrama de cajas muestra paralela}
     \label{fig:box_paralelo}
 \end{figure}

@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+    % Cajas grandes
+    \node[draw, rounded corners, minimum width=6cm, minimum height=8cm, fill=yellow!20] (0) {};
+    \node (1) [above = 0cm of 0] {Dispositivo IoT};
+    \node[draw, rounded corners, minimum width=6cm, minimum height=8cm, fill=red!20] (2) [right = of 0] {};
+    \node (3) [above = 0cm of 2] {Cliente externo};
+    
+    % Parte IoT
+    \node[draw, rounded corners, minimum width=5cm, fill=gray!10, text width=4.5cm, align=flush center, font=\scriptsize] (4) at ($(0) + (0, 2)$) {A. Establecimiento de las condiciones};
+    \node[draw, rounded corners, minimum width=5cm, fill=yellow!5, text width=4.5cm, align=left, font=\scriptsize] (5) [below = 0cm of 4] {- Establecer una frecuencia fija. \\ - Desactivar servicio NTP.};
+    
+    \node[draw, rounded corners, minimum width=5cm, fill=gray!10, text width=4.5cm, align=flush center, font=\scriptsize] (6) at ($(0) + (0, -1)$) {B. Recolección de datos};
+    \node[draw, rounded corners, minimum width=5cm, fill=yellow!5, text width=4.5cm, align=left, font=\scriptsize] (7) [below = 0cm of 6] {- Obtener marcas de tiempo. \\ - Enviar el dato al cliente.};
+    
+    % Parte externa
+    \node[draw, rounded corners, minimum width=5cm, fill=gray!10, text width=4.5cm, align=flush center, font=\scriptsize] (8) at ($(2) + (0, 3)$) {C. Análisis y procesamiento de los datos};
+    \node[draw, rounded corners, minimum width=5cm, fill=red!5, text width=4.5cm, align=left, font=\scriptsize] (9) [below = 0cm of 8] {- Obtener incremento respecto al dato anterior. \\ - Generación de estadísticas. \\ - Reducción de dimensionalidad.};
+    
+    \node[draw, rounded corners, minimum width=5cm, fill=gray!10, text width=4.5cm, align=flush center, font=\scriptsize] (10) at ($(2) + (0, 0.4)$) {D. Generación de los modelos};
+    \node[draw, rounded corners, minimum width=5cm, fill=red!5, text width=4.5cm, align=left, font=\scriptsize] (11) [below = 0cm of 10] {- Elegir los algoritmos de CL$^1$ / DA$^2$. \\ - Ajustar hiperparámetros y generar el modelo.};
+    
+    \node[draw, rounded corners, minimum width=5cm, fill=gray!10, text width=4.5cm, align=flush center, font=\scriptsize] (12) at ($(2) + (0, -2)$) {E. Evaluación de los modelos};
+    \node[draw, rounded corners, minimum width=5cm, fill=red!5, text width=4.5cm, align=left, font=\scriptsize] (13) [below = 0cm of 12] {- Elección de métricas. \\ - Evaluación de los modelos. \\ - Comparar métricas};
+    
+    
+    % Aclaraciones
+    \node[minimum width=6cm, text width=5.2cm, align=left, font=\scriptsize] (14) [below = 0cm of 2] {1: Clasificación \\ 2: Detección de anomalías};
+    
+    % Iconos
+    \node (15) at ($(0.north east) + (-0.5, 0)$) {\includegraphics[scale=0.08]{images/board.png}};
+    \node (16) at ($(2.north east) + (-0.5, 0.1)$) {\includegraphics[scale=0.07]{images/server.png}};
+    
+    \draw (5) -- (6);
+    \draw[rounded corners] ($(7.north west) - (0, 0.15)$) -| ++(-0.3, -0.268) |- ($(7.south west) + (0, 0.15)$);
+    \draw[rounded corners] (7.east) -| ++(1,0) |- (9.west);
+    \draw (9) -- (10);
+    \draw (11) -- (12);
+ \end{tikzpicture}
