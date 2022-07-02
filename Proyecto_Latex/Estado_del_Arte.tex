@@ -228,7 +228,7 @@ Para los dispositivos que ya están conectados a la red, se toma una muestra ale
 
 Las huellas de los dispositivos se obtienen del payload de los mensajes enviados por ese dispositivo. De ellos se obtienen 67 características como el tamaño del paquete Ethernet, el tamaño de las cabeceras, la IP de destino, el \acrfull{ttl}, etc.
 
-Con estas huellas entrena distintos modelos como son AdaBoost, \acrfull{lda}, \acrshort{knn}, Árboles de decisión, Naive Bayes, \acrshort{svm}, Random Forest y GBoost. Obtuvo un accuracy final del 89\%.
+Con estas huellas entrena distintos modelos como son AdaBoost, Árboles de decisión, \acrfull{lda}, \acrshort{knn}, Naive Bayes, \acrshort{svm}, Random Forest y GBoost. Obtuvo un accuracy final del 89\%.
 
 El siguiente artículo que se analizará es el realizado por Ahmet Aksoy et al. \cite{aksoy2019automated}. Este trabajo diseña un sistema (llamado SysID) que es capaz de identificar dispositivos a través del tráfico de red. 
 
@@ -284,9 +284,9 @@ El modelo que eligen se basa en aprendizaje no supervisado, Maximum Variance Clu
 
 \subsection{Resultados de la revisión bibliográfica}
 
-Por último se ha realizado un resumen en forma de tabla de los artículos que han sido revisados. 
+Por último se ha realizado un resumen en forma de tabla de los artículos que han sido revisados. Se puede consultar la Tabla \ref{tab:art_results}
 
-\begin{table}[t]
+\begin{table}[htpb!]
     \centering
     \resizebox{\textwidth}{!}{
         \begin{tabular}{C{0.12\textwidth}C{0.15\textwidth}C{0.15\textwidth}C{0.15\textwidth}C{0.14\textwidth}C{0.2\textwidth}C{0.24\textwidth}}
