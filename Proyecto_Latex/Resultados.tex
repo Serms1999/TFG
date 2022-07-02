@@ -122,7 +122,7 @@ El resto de valores de la tabla de resultados (Tabla \ref{tab:anomaly_results}) 
     \label{tab:anomaly_results}
 \end{table}
 
-Atendiendo al resto de valores de los modelos de detección de anomalías, se puede observar en la Tabla \ref{tab:anomaly_results} que ninguno de los modelos entrenados es capaz de identificar de una forma solvente a los distintos dispositivos. El mejor entre ellos es OneClass-SVM, pero no es capaz de obtener resultados tan elevados en comparación con los modelos de clasificación.
+Atendiendo al resto de valores de los modelos de detección de anomalías, se puede observar en la Tabla \ref{tab:anomaly_results} que ninguno de los modelos entrenados es capaz de identificar de una forma solvente a los distintos dispositivos. El mejor entre ellos es OneClass-SVM, pero no es capaz de obtener resultados tan elevados en comparación con los modelos de clasificación. Sin embargo, se observa que tanto el Disp. 2 como el Disp. 5 obtienen, en general, resultados mejores. Atendiendo a la Fig. \ref{fig:box_paralelo} se puede ver que estos dispositivos son los que presentan una menor variabilidad en el incremento del desfase de sus relojes.
 
 Una vez comparados todos los modelos que han sido creados para este trabajo, se llega a la conclusión de que el mejor entre ellos es el algoritmo de clasificación Random Forest. Por ello se ha generado un modelo final con los hiperparámetros ajustados anteriormente y con la totalidad de los datos de entrenamiento. Los resultados obtenidos se pueden ver en la matriz de confusión resultante (Fig. \ref{fig:final_matrix}). Con estos resultados se tiene un valor final de Accuracy de 99.38\%, de Recall de 99.39\% y de $f$-score de 99.38\%.
 

@@ -71,6 +71,12 @@
 	url = {https://en.cppreference.com/w/cpp/chrono/steady_clock},
 	bdsk-url-1 = {https://en.cppreference.com/w/cpp/chrono/steady_clock}}
 
+@online{systemclockcpp,
+	journal = {cppreference.com},
+	title = {\texttt{std::chrono::system\_clock}},
+	url = {https://en.cppreference.com/w/cpp/chrono/system_clock},
+	bdsk-url-1 = {https://en.cppreference.com/w/cpp/chrono/system_clock}}
+
 @article{hatwell2020chirps,
 	author = {Hatwell, Julian and Gaber, Mohamed Medhat and Azad, R Muhammad Atif},
 	journal = {Artificial Intelligence Review},
@@ -346,3 +352,144 @@ address = {USA},
 edition = {Pap/Onl},
 abstract = {ZigBee is a standard based on the IEEE 802.15.4 standard for wireless personal networks. This standard allows for the creation of very lost cost and low power networks - these applications run for years rather than months. These networks are created from sensors and actuators and can wireless control many electrical products such as remote controls, medical, industrial, and security sensors. Hundreds of companies are creating applications including Mitsubishi, Motorola, Freescale, and Siemens. This book is written for engineers who plan to develop ZigBee applications and networks, to understand how they work, and to evaluate this technology to see if it is appropriate to a particular project. This book does not simply state facts but explains what ZigBee can do through detailed code examples. CONTENTS:CHAPTER 1 HELLO ZIGBEECHAPTER 2 DECIDING ON ZIGBEECHAPTER 3 THE ZIGBEE DEVELOPMENT ENVIRONMENTCHAPTER 4 ZIGBEE APPLICATIONSCHAPTER 5 ZIGBEE, ZDO AND ZDPCHAPTER 6 THE ZIGBEE CLUSTER LIBRARYCHAPTER 7 THE ZIGBEE NETWORKING LAYERCHAPTER 8 COMMISSIONING ZIGBEE NETWORKSCHAPTER 9 ZIGBEE GATEWAYSAPPENDIX A ZIGBEE 2007 AND ZIGBEE PROAPPENDIX B ZIGBEE QUICK REFERENCEAPPENDIX C ZIGBEE CLUSTER LIBRARY QUICK REFERENCE*Details how to plan and develop applications and networks*Zigbee sensors have many applications including industrial automation, medical sensing, remote controls, and security*Hot topic for today's electrical engineer because it is low cost and low power}
 }
+
+@online{ex_scikit_ocsvm,
+ title={One-class SVM with non-linear kernel (RBF)},
+ url={https://scikit-learn.org/stable/auto_examples/svm/plot_oneclass.html#sphx-glr-auto-examples-svm-plot-oneclass-py}
+ } 
+
+@INPROCEEDINGS{li2003improving,  author={Kun-Lun Li and Hou-Kuan Huang and Sheng-Feng Tian and Wei Xu},  booktitle={Proceedings of the 2003 International Conference on Machine Learning and Cybernetics (IEEE Cat. No.03EX693)},   title={Improving one-class SVM for anomaly detection},   year={2003},  volume={5},  number={},  pages={3077-3081 Vol.5},  abstract={With the tremendous growth of the Internet, information system security has become an issue of serious global concern due to the rapid connection and accessibility. Developing effective methods for intrusion detection, therefore, is an urgent task for assuring computer \& information system security. Since most attacks and misuses can be recognized through the examination of system audit log files and pattern analysis therein, an approach for intrusion detection can be built on them. First we have made deep analysis on attacks and misuses patterns in log files; and then proposed an approach using support vector machines for anomaly detection. It is a one-class SVM based approach, trained with abstracted user audit logs data from 1999 DARPA.},  keywords={},  doi={10.1109/ICMLC.2003.1260106},  ISSN={},  month={Nov},}
+
+@online{ex_scikit_isolation,
+ title={IsolationForest example},
+ url={https://scikit-learn.org/stable/auto_examples/ensemble/plot_isolation_forest.html#sphx-glr-auto-examples-ensemble-plot-isolation-forest-py}
+ } 
+
+@INPROCEEDINGS{liu2008isolation,  author={Liu, Fei Tony and Ting, Kai Ming and Zhou, Zhi-Hua},  booktitle={2008 Eighth IEEE International Conference on Data Mining},   title={Isolation Forest},   year={2008},  volume={},  number={},  pages={413-422},  abstract={Most existing model-based approaches to anomaly detection construct a profile of normal instances, then identify instances that do not conform to the normal profile as anomalies. This paper proposes a fundamentally different model-based method that explicitly isolates anomalies instead of profiles normal points. To our best knowledge, the concept of isolation has not been explored in current literature. The use of isolation enables the proposed method, iForest, to exploit sub-sampling to an extent that is not feasible in existing methods, creating an algorithm which has a linear time complexity with a low constant and a low memory requirement. Our empirical evaluation shows that iForest performs favourably to ORCA, a near-linear time complexity distance-based method, LOF and random forests in terms of AUC and processing time, and especially in large data sets. iForest also works well in high dimensional problems which have a large number of irrelevant attributes, and in situations where training set does not contain any anomalies.},  keywords={},  doi={10.1109/ICDM.2008.17},  ISSN={2374-8486},  month={Dec},}
+
+@inproceedings{cheng2019outlier,
+author = {Cheng, Zhangyu and Zou, Chengming and Dong, Jianwei},
+title = {Outlier Detection Using Isolation Forest and Local Outlier Factor},
+year = {2019},
+isbn = {9781450368438},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3338840.3355641},
+doi = {10.1145/3338840.3355641},
+abstract = {Outlier detection, also named as anomaly detection, is one of the hot issues in the field of data mining. As well-known outlier detection algorithms, Isolation Forest(iForest) and Local Outlier Factor(LOF) have been widely used. However, iForest is only sensitive to global outliers, and is weak in dealing with local outliers. Although LOF performs well in local outlier detection, it has high time complexity. To overcome the weaknesses of iForest and LOF, a two-layer progressive ensemble method for outlier detection is proposed. It can accurately detect outliers in complex datasets with low time complexity. This method first utilizes iForest with low complexity to quickly scan the dataset, prunes the apparently normal data, and generates an outlier candidate set. In order to further improve the pruning accuracy, the outlier coefficient is introduced to design a pruning threshold setting method, which is based on outlier degree of data. Then LOF is applied to further distinguish the outlier candidate set and get more accurate outliers. The proposed ensemble method takes advantage of the two algorithms and concentrates valuable computing resources on the key stage. Finally, a large number of experiments are carried out to verify the ensemble method. The results show that compared with the existing methods, the ensemble method can significantly improve the outlier detection rate and greatly reduce the time complexity.},
+booktitle = {Proceedings of the Conference on Research in Adaptive and Convergent Systems},
+pages = {161–168},
+numpages = {8},
+keywords = {local outlier factor, ensemble method, outlier detection(OD), isolation forest},
+location = {Chongqing, China},
+series = {RACS '19}
+}
+
+@ARTICLE{shafique2020internet,  author={Shafique, Kinza and Khawaja, Bilal A. and Sabir, Farah and Qazi, Sameer and Mustaqim, Muhammad},  journal={IEEE Access},   title={Internet of Things (IoT) for Next-Generation Smart Systems: A Review of Current Challenges, Future Trends and Prospects for Emerging 5G-IoT Scenarios},   year={2020},  volume={8},  number={},  pages={23022-23040},  abstract={The Internet of Things (IoT)-centric concepts like augmented reality, high-resolution video streaming, self-driven cars, smart environment, e-health care, etc. have a ubiquitous presence now. These applications require higher data-rates, large bandwidth, increased capacity, low latency and high throughput. In light of these emerging concepts, IoT has revolutionized the world by providing seamless connectivity between heterogeneous networks (HetNets). The eventual aim of IoT is to introduce the plug and play technology providing the end-user, ease of operation, remotely access control and configurability. This paper presents the IoT technology from a bird's eye view covering its statistical/architectural trends, use cases, challenges and future prospects. The paper also presents a detailed and extensive overview of the emerging 5G-IoT scenario. Fifth Generation (5G) cellular networks provide key enabling technologies for ubiquitous deployment of the IoT technology. These include carrier aggregation, multiple-input multiple-output (MIMO), massive-MIMO (M-MIMO), coordinated multipoint processing (CoMP), device-to-device (D2D) communications, centralized radio access network (CRAN), software-defined wireless sensor networking (SD-WSN), network function virtualization (NFV) and cognitive radios (CRs). This paper presents an exhaustive review for these key enabling technologies and also discusses the new emerging use cases of 5G-IoT driven by the advances in artificial intelligence, machine and deep learning, ongoing 5G initiatives, quality of service (QoS) requirements in 5G and its standardization issues. Finally, the paper discusses challenges in the implementation of 5G-IoT due to high data-rates requiring both cloud-based platforms and IoT devices based edge computing.},  keywords={},  doi={10.1109/ACCESS.2020.2970118},  ISSN={2169-3536},  month={},}
+
+@inproceedings{miller2012survey,
+author = {Miller, Bill and Rowe, Dale},
+title = {A Survey SCADA of and Critical Infrastructure Incidents},
+year = {2012},
+isbn = {9781450316439},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2380790.2380805},
+doi = {10.1145/2380790.2380805},
+abstract = {In this paper, we analyze several cyber-security incidents involving critical infrastructure and SCADA systems. We classify these incidents based on Source Sector, Method of Operations, Impact, and Target Sector. Using this standardized taxonomy we can easily compare and contrast current and future SCADA incidents.},
+booktitle = {Proceedings of the 1st Annual Conference on Research in Information Technology},
+pages = {51–56},
+numpages = {6},
+keywords = {scada, cyber security, information assurance and security, critical infrastructure, security, cyber attack},
+location = {Calgary, Alberta, Canada},
+series = {RIIT '12}
+}
+
+@article{nicholson2012scada,
+title = {SCADA security in the light of Cyber-Warfare},
+journal = {Computers \& Security},
+volume = {31},
+number = {4},
+pages = {418-436},
+year = {2012},
+issn = {0167-4048},
+doi = {https://doi.org/10.1016/j.cose.2012.02.009},
+url = {https://www.sciencedirect.com/science/article/pii/S0167404812000429},
+author = {A. Nicholson and S. Webber and S. Dyer and T. Patel and H. Janicke},
+keywords = {SCADA, Security, Cyber-Warfare, Adversary classification, SCADA incidents},
+abstract = {Supervisory Control and Data Acquisition (SCADA) systems are deployed worldwide in many critical infrastructures ranging from power generation, over public transport to industrial manufacturing systems. Whilst contemporary research has identified the need for protecting SCADA systems, these information are disparate and do not provide a coherent view of the threats and the risks resulting from the tendency to integrate these once isolated systems into corporate networks that are prone to cyber attacks. This paper surveys ongoing research and provides a coherent overview of the threats, risks and mitigation strategies in the area of SCADA security.}
+}
+
+@ARTICLE{bisio2018unauthorized,  author={Bisio, Igor and Garibotto, Chiara and Lavagetto, Fabio and Sciarrone, Andrea and Zappatore, Sandro},  journal={IEEE Communications Magazine},   title={Unauthorized Amateur UAV Detection Based on WiFi Statistical Fingerprint Analysis},   year={2018},  volume={56},  number={4},  pages={106-111},  abstract={Amateur drones are enjoying great popularity in recent years due to the wide commercial diffusion of small, rather low-cost devices. More and more user-friendly, easy-to-pilot aerial and terrestrial drones are available off the shelf, and people can even remotely pilot them using their smartphones. This situation brings up the problem of keeping unauthorized drones away from private or sensitive areas, where they can represent a personal or public threat. With this motivation, after a survey of the existing solutions, we propose a WiFi-based approach aimed at detecting nearby aerial or terrestrial devices by performing statistical fingerprint analysis on wireless traffic. This novel detection technique, tested in a variety of real-life scenarios, proved able to efficiently detect and identify intruder drones in all the considered experimental setups, making it a promising unmanned aerial vehicle detection approach in the framework of amateur drone surveillance.},  keywords={},  doi={10.1109/MCOM.2018.1700340},  ISSN={1558-1896},  month={April},}
+
+@ARTICLE{nosouhi2022towards,  author={Nosouhi, Mohammad Reza and Sood, Keshav and Grobler, Marthie and Doss, Robin},  journal={IEEE Transactions on Information Forensics and Security}, keywords={},  doi={10.1109/TIFS.2022.3170276},  ISSN={1556-6021},  month={},}
+
+@INPROCEEDINGS{wang2018efficient,  author={Wang, Ning and Jiao, Long and Wang, Pu and Dabaghchian, Monireh and Zeng, Kai},  booktitle={2018 IEEE Global Communications Conference (GLOBECOM)},   title={Efficient Identity Spoofing Attack Detection for IoT in mm-Wave and Massive MIMO 5G Communication},   year={2018},  volume={},  number={},  pages={1-6},  abstract={In many IoT (Internet-of-Things) applications, a large number of low-cost IoT devices are connected to the Internet through an access point (AP) or gateway via wireless communication. Due to the resource constraints on IoT devices and broadcast nature of wireless medium, identity spoofing attacks are easy to launch but hard to defend in an IoT wireless access network. In this paper, under the context of 5G communication, we propose an efficient physical layer identity spoofing attack detection scheme for IoT. By harnessing the sparsity of the virtual channel in mmWave and Massive MIMO 5G communication, we propose a two- step detection scheme. In the first step, our scheme detects anomalies by examining the virtual angles of arrival (AoA) and path gains of all the IoT devices simultaneously in a virtual channel space (VCS). In the second step, we introduce a machine learning based detection scheme to detect the actual attack. Simulation results evaluate and confirm the effectiveness of the proposed detection scheme. The minimum Bayes risk of the proposed scheme can be less than 0.5\% even in the presence of 100 IoT devices.},  keywords={},  doi={10.1109/GLOCOM.2018.8647707},  ISSN={2576-6813},  month={Dec},}
+
+@article{al2018survey,
+  title={Survey of hardware-based security support for IoT/CPS systems},
+  author={Al-Omary, Alauddin and Othman, Ali and AlSabbagh, Haider M and Al-Rizzo, Hussain},
+  journal={KnE Engineering},
+  pages={52--70},
+  year={2018}
+}
+
+@article{yousefnezhad2020security,
+title = {Security in product lifecycle of IoT devices: A survey},
+journal = {Journal of Network and Computer Applications},
+volume = {171},
+pages = {102779},
+year = {2020},
+issn = {1084-8045},
+doi = {https://doi.org/10.1016/j.jnca.2020.102779},
+url = {https://www.sciencedirect.com/science/article/pii/S1084804520302538},
+author = {Narges Yousefnezhad and Avleen Malhi and Kary Främling},
+keywords = {Internet of things, Product lifecycle, Lifecycle phases, Security solutions, Product lifecycle security, Device security},
+abstract = {The Internet of Things (IoT) paradigm is considerably impacted by security challenges, which has lately demanded substantial consideration. Accordingly, certain reviews and surveys have been presented, focusing on disparate IoT-related domains, including IoT security, intrusion detection systems, and emerging technologies. However, in this article, we solely target IoT security with respect to product lifecycle stages. In that regard, we provide a comprehensive comparison of state-of-the-art surveys in an initial phase which concentrate on distinct parameters required for IoT security. Further, we present prominent solutions for addressing product lifecycle security in IoT. In this context, the contributions of this article are: (a) IoT product lifecycle security, (b) security taxonomy in IoT product lifecycle, (c) security solutions for each lifecycle phase in product lifecycle stages, and (d) open issues in these lifecycle stages that pose new research challenges. Consequently, the advancing research related to IoT security, especially with respect to product lifecycle, is explored through state-of-the-art developments in the domain of product lifecycle security.}
+}
+
+@ARTICLE{hoque2015botnet,  author={Hoque, Nazrul and Bhattacharyya, Dhruba K. and Kalita, Jugal K.},  journal={IEEE Communications Surveys \& Tutorials},   title={Botnet in DDoS Attacks: Trends and Challenges},   year={2015},  volume={17},  number={4},  pages={2242-2270},  abstract={Threats of distributed denial of service (DDoS) attacks have been increasing day-by-day due to rapid development of computer networks and associated infrastructure, and millions of software applications, large and small, addressing all varieties of tasks. Botnets pose a major threat to network security as they are widely used for many Internet crimes such as DDoS attacks, identity theft, email spamming, and click fraud. Botnet based DDoS attacks are catastrophic to the victim network as they can exhaust both network bandwidth and resources of the victim machine. This survey presents a comprehensive overview of DDoS attacks, their causes, types with a taxonomy, and technical details of various attack launching tools. A detailed discussion of several botnet architectures, tools developed using botnet architectures, and pros and cons analysis are also included. Furthermore, a list of important issues and research challenges is also reported.},  keywords={},  doi={10.1109/COMST.2015.2457491},  ISSN={1553-877X},  month={Fourthquarter},}
+
+@article{murtagh1991multilayer,
+title = {Multilayer perceptrons for classification and regression},
+journal = {Neurocomputing},
+volume = {2},
+number = {5},
+pages = {183-197},
+year = {1991},
+issn = {0925-2312},
+doi = {https://doi.org/10.1016/0925-2312(91)90023-5},
+url = {https://www.sciencedirect.com/science/article/pii/0925231291900235},
+author = {Fionn Murtagh},
+keywords = {Multilayer perceptron, discriminant analysis, supervised classification, regression, function approximation},
+abstract = {We review the theory and practice of the multilayer perceptron. We aim at addressing a range of issues which are important from the point of view of applying this approach to practical problems. A number of examples are given, illustrating how the multilayer perceptron compares to alternative, conventional approaches. The application fields of classification and regression are especially considered. Questions of implementation, i.e. of multilayer perceptron architecture, dynamics, and related aspects, are discussed. Recent studies, which are particularly relevant to the areas of discriminant analysis, and function mapping, are cited.}
+}
+
+
+@INPROCEEDINGS{taunk2019brief,  author={Taunk, Kashvi and De, Sanjukta and Verma, Srishti and Swetapadma, Aleena},  booktitle={2019 International Conference on Intelligent Computing and Control Systems (ICCS)},   title={A Brief Review of Nearest Neighbor Algorithm for Learning and Classification},   year={2019},  volume={},  number={},  pages={1255-1260},  abstract={k-Nearest Neighbor (kNN) algorithm is an effortless but productive machine learning algorithm. It is effective for classification as well as regression. However, it is more widely used for classification prediction. kNN groups the data into coherent clusters or subsets and classifies the newly inputted data based on its similarity with previously trained data. The input is assigned to the class with which it shares the most nearest neighbors. Though kNN is effective, it has many weaknesses. This paper highlights the kNN method and its modified versions available in previously done researches. These variants remove the weaknesses of kNN and provide a more efficient method.},  keywords={},  doi={10.1109/ICCS45141.2019.9065747},  ISSN={},  month={May},}
+
+
+@article{murphy2006naive,
+  title={Naive bayes classifiers},
+  author={Murphy, Kevin P and others},
+  journal={University of British Columbia},
+  volume={18},
+  number={60},
+  pages={1--8},
+  year={2006}
+}
+
+@article{cervantes2020comprehensive,
+title = {A comprehensive survey on support vector machine classification: Applications, challenges and trends},
+journal = {Neurocomputing},
+volume = {408},
+pages = {189-215},
+year = {2020},
+issn = {0925-2312},
+doi = {https://doi.org/10.1016/j.neucom.2019.10.118},
+url = {https://www.sciencedirect.com/science/article/pii/S0925231220307153},
+author = {Jair Cervantes and Farid Garcia-Lamont and Lisbeth Rodríguez-Mazahua and Asdrubal Lopez},
+keywords = {SVM, Classification, Machine learning},
+abstract = {In recent years, an enormous amount of research has been carried out on support vector machines (SVMs) and their application in several fields of science. SVMs are one of the most powerful and robust classification and regression algorithms in multiple fields of application. The SVM has been playing a significant role in pattern recognition which is an extensively popular and active research area among the researchers. Research in some fields where SVMs do not perform well has spurred development of other applications such as SVM for large data sets, SVM for multi classification and SVM for unbalanced data sets. Further, SVM has been integrated with other advanced methods such as evolve algorithms, to enhance the ability of classification and optimize parameters. SVM algorithms have gained recognition in research and applications in several scientific and engineering areas. This paper provides a brief introduction of SVMs, describes many applications and summarizes challenges and trends. Furthermore, limitations of SVMs will be identified. The future of SVMs will be discussed in conjunction with further applications. The applications of SVMs will be reviewed as well, especially in the some fields.}
+}
+

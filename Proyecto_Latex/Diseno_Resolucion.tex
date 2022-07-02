@@ -21,14 +21,14 @@ La idea es enviar mensajes desde el observador a cada uno de los dispositivos y 
 
 En este trabajo ha sido propuesta una arquitectura en la que se basará todo el desarrollo del mismo. Esta arquitectura se puede ver en la Fig. \ref{fig:architecture}.
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \input{architecture_scheme}
     \caption{Arquitectura propuesta}
     \label{fig:architecture}
 \end{figure}
 
-En esta arquitectura se compone de dos partes. Por una parte, los dispositivos que generan y comparten los datos, y por otra parte el dispositivo externo que se encarga de tanto de analizar y procesar los datos, como de ajustar los algoritmos de Machine Learning que se usan. Este dispositivo también es el encargado de evaluar los resultados que obtienen los modelos ya entrenados y compararlos entre ellos. A continuación se explicarán cada una de estas partes.
+Esta arquitectura se compone de dos partes. Por una parte, los dispositivos que generan y comparten los datos, y por otra parte el dispositivo externo que se encarga de tanto de analizar y procesar los datos, como de ajustar los algoritmos de Machine Learning que se usan. Este dispositivo también es el encargado de evaluar los resultados que obtienen los modelos ya entrenados y compararlos entre ellos. A continuación se explicarán cada una de estas partes.
 
 \begin{enumerate}[label=\textbf{\Alph*}:]
     \item en esta parte se preparan los dispositivos para la recolección de las muestras. Se establecen frecuencias de CPU fijas, para evitar que esto afecte a los ciclos del procesador. También se deshabilita el servicio \acrshort{ntp} que modifica el reloj interno del dispositivo.
@@ -40,7 +40,7 @@ En esta arquitectura se compone de dos partes. Por una parte, los dispositivos q
 
 \section{Elección del protocolo}
 
-Las opciones barajadas han sido \acrfull{tcp} e \acrfull{icmp}. En un principio se pensaba usar las marcas de tiempo contenidas en las cabeceras de estos protocolos, pero esta idea se descartó puesto que únicamente permitían obtener los tiempos en milisegundos. El objetivo era obtener los tiempos en nanosegundos por tanto, se enviaron los datos en el cuerpo del paquete que no tiene una limitación tan corta de espacio. 
+Las opciones barajadas han sido \acrfull{tcp} e \acrfull{icmp}. En un principio se pensaba usar las marcas de tiempo contenidas en las cabeceras de estos protocolos, pero esta idea fue descartada puesto que únicamente permitían obtener los tiempos en milisegundos. El objetivo era obtener los tiempos en nanosegundos por tanto, se enviaron los datos en el cuerpo del paquete que no tiene una limitación tan corta de espacio. 
 
 Con el fin de mantener la conexión persistente en toda la muestra se escogió el protocolo \acrshort{tcp}, ya que una vez establecida la conexión se mantendrá hasta el final.
 
@@ -50,7 +50,13 @@ Para obtener los datos se usará una estructura cliente-servidor. Los dispositiv
 
 Con esta idea en mente se crea un programa servidor que escuche a cualquier dirección IP en un determinado puerto y responda con una marca de tiempo en nanosegundos. Este programa se ejecutará en cada uno de los dispositivos bajo análisis.
 
-A la hora de capturar los datos se usó un reloj interno que no debería sufrir alteraciones que disminuyeran su valor (\texttt{steady\_clock}\cite{steadyclockcpp}).
+A la hora de capturar los datos era necesario establecer el reloj interno sobre el que se tomarán los datos, ya que existen diferentes relojes dentro de un dispositivo.
+\begin{itemize}
+    \item \texttt{system\_clock} el cual contiene la hora actual \cite{systemclockcpp}. Este reloj es modificable por los servicios que mantienen actualizada la hora del sistema como, por ejemplo, el servicio \acrfull{ntp}.
+    \item \texttt{steady\_clock} el cual contiene el número de ciclos de CPU desde el encendido del dispositivo \cite{steadyclockcpp}.
+\end{itemize}
+
+Para los cometidos de este proyecto se usará el reloj \texttt{steady\_clock}.
 
 Una vez los dispositivos estén todos escuchando, el observador ejecutará un programa cliente que es el que se encargará de enviar los mensajes al servidor correspondiente. Este programa guarda una marca de tiempo al comienzo de la ejecución $t_{start}$, que será nuestro punto de referencia. Después mandará $n$ mensajes equiespaciados en intervalos de 1 segundo.
 
@@ -81,7 +87,7 @@ Un ejemplo de cómo se guardan estos datos se puede ver en la Tabla \ref{tab:tra
     \label{tab:trace_example}
 \end{table}
 
-Este proceso se realizará para cada dispositivo tanto en una muestra secuencial, como en una muestra en paralelo. 
+Este proceso se realizará para cada dispositivo tanto en una muestra secuencial, como en una muestra en paralelo. En la muestra secuencial se recibirán marcas de tiempo de un dispositivo durante 2 horas. Una vez transcurrido ese tiempo se comenzarán a recibir marcas de tiempo del siguiente dispositivo, y esta estructura se repite para cada dispositivo, obteniendo una muestra final de datos de unas 10 horas. En la muestra paralela por contra se recibirán marcas de tiempo de todos los dispositivos de forma simultánea, realizándose una captura global de 12 horas.
 
 
 \section{Análisis de los datos}
@@ -105,18 +111,18 @@ Como se puede ver hay 2 tipos de comportamiento. Los dispositivos 1, 2 y 3 se ma
 
 \begin{figure}[htpb!]
     \centering
-    \subfloat[Dispositivos 1, 2 y 3]{\includegraphics[width=0.4\textwidth]{../Python/plots/individual/offset_plot_123}}
+    \subfloat[Dispositivos 1, 2 y 3]{\includegraphics[width=0.45\textwidth]{../Python/plots/individual/offset_plot_123}}
     \quad
-    \subfloat[Dispositivos 4 y 5]{\includegraphics[width=0.4\textwidth]{../Python/plots/individual/offset_plot_45}}
+    \subfloat[Dispositivos 4 y 5]{\includegraphics[width=0.45\textwidth]{../Python/plots/individual/offset_plot_45}}
     \caption{Diferencias entre offsets de dispositivos}
     \label{fig:off_acu_secuencial_diffs}
 \end{figure}
 
-Lo que interesa al final es obtener una forma de distinguir estadísticamente los datos, para ello se genera un gráfico que muestre entre que valores se mueven estos datos en cada dispositivo, en definitiva, se puede ver con un diagrama de cajas (Fig. \ref{fig:box_secuencial}). Se han eliminado los valores atípicos ya que a tan pequeña escala no dejan ver los verdaderos resultados.
+El objetivo final es obtener una forma de distinguir estadísticamente los datos, para ello se genera un gráfico que muestre entre que valores se mueven estos datos en cada dispositivo, en definitiva, se puede ver con un diagrama de cajas (Fig. \ref{fig:box_secuencial}). Se han eliminado los valores atípicos ya que a tan pequeña escala no dejan ver los verdaderos resultados.
 
 \begin{figure}[htpb!]
     \centering
-    \includegraphics{../Python/plots/individual/boxplot_no_out}
+    \includegraphics[scale=0.65]{../Python/plots/individual/boxplot_no_out}
     \caption{Diagrama de cajas muestra secuencial}
     \label{fig:box_secuencial}
 \end{figure}
@@ -159,18 +165,18 @@ La Fig. \ref{fig:off_acu_paralelo} muestra la desviación acumulada en cada disp
 
 \begin{figure}[htpb!]
     \centering
-    \includegraphics{../Python/plots/parallel/offset_plot}
+    \includegraphics[scale=0.75]{../Python/plots/parallel/offset_plot}
     \caption{Offset acumulado muestra paralela}
     \label{fig:off_acu_paralelo}
 \end{figure}
 
-Esta ``sincronización'' entre dispositivos parece deberse a algún tipo de actualización del reloj interno del dispositivo mediante algún demonio del sistema operativo. El principal demonio que se encarga de esta tarea es el servicio NTP, el cual fue desactivado para realizar estas pruebas. 
+Esta ``sincronización'' entre dispositivos parece deberse a algún tipo de actualización del reloj interno del dispositivo observador (RockPro64) mediante algún demonio del sistema operativo. El principal demonio que se encarga de esta tarea es el servicio NTP, el cual fue desactivado para realizar estas pruebas. 
 
 Consultando otro diagrama de cajas con el incremento de la desviación en cada instante (Fig. \ref{fig:box_paralelo}) se observa como todos los dispositivos están más a la par que en la muestra secuencial (Fig. \ref{fig:box_secuencial}). Aún así, siguen teniendo ciertas diferencias, con lo que se puede concluir que también son estadísticamente diferenciables.
 
 \begin{figure}[htpb!]
     \centering
-    \includegraphics{../Python/plots/parallel/boxplot_no_out}
+    \includegraphics[scale=0.7]{../Python/plots/parallel/boxplot_no_out}
     \caption{Diagrama de cajas muestra paralela}
     \label{fig:box_paralelo}
 \end{figure}
@@ -296,10 +302,10 @@ La correlación entre las variables estadísticas se puede ver en la Fig. \ref{f
 \begin{figure}[htpb!]
     \centering
     \subfloat[Correlación entre las variables iniciales]{
-        \includegraphics[scale=0.55]{../Python/plots/parallel/correlacion_stats.pdf}
+        \includegraphics[scale=0.65]{../Python/plots/parallel/correlacion_stats.pdf}
     }
     \subfloat[Correlación entre las variables finales]{
-        \includegraphics[scale=0.55]{../Python/plots/parallel/correlacion_stats_ftred.pdf}
+        \includegraphics[scale=0.65]{../Python/plots/parallel/correlacion_stats_ftred.pdf}
     }
     \caption{Correlación entre las variables estadísticas}
     \label{fig:corr}
@@ -339,11 +345,11 @@ Para realizar estos entrenamientos se ha usado la librería \texttt{scikit-learn
 
 A la hora de entrenar algoritmos de Machine Learning, lo primero que hay hacer es ajustar sus hiperparámetros. Los hiperparámetros de un modelo son parámetros del mismo que se pueden modificar para que este se adapte mejor a los datos con los que se está trabajando o para cambiar la forma en la aprende este modelo también para adaptarse a estos datos.
 
-Para ajustar los hiperparámetros no se usa la completitud de los datos, se usa un modelo entrenamiento/validación/test. Los datos se han dividido en un conjunto de entrenamiento y otro de test, 70\% para entrenamiento y 30\% para test, lo habitual es tener en torno a una tercera parte de los datos para entrenamiento y el resto para test. Este proceso (Fig. \ref{fig:database}) se hace para comprobar la capacidad de generalización del modelo con datos que no haya visto nunca.
+Para ajustar los hiperparámetros no se usa la completitud de los datos, se usa un modelo entrenamiento/validación/test. Los datos se han dividido en un conjunto de entrenamiento y otro de test, 70\% para entrenamiento y 30\% para test, lo habitual es tener en torno a una tercera parte de los datos para entrenamiento y el resto para test. Este proceso (Fig. \ref{fig:database}) se realiza con el objetivo de comprobar la capacidad de generalización del modelo con datos que no haya visto nunca.
 
 \begin{figure}[htpb!]
     \centering
-    \resizebox{0.5\textwidth}{!}{
+    \resizebox{0.6\textwidth}{!}{
     \begin{tikzpicture}
         \node[database,label=below:Datos del dispositivo,database radius=1cm,database segment height=0.5cm] (data) {};
         \node (aux) [right = of data] {};
@@ -402,7 +408,7 @@ Los mejores valores obtenidos son \texttt{criterion = gini}, \texttt{n\_estimato
 
 A la hora de entrenar algoritmos de aprendizaje no supervisado, se realiza un proceso de ajuste similar al visto en la sección anterior. Sin embargo, existe una diferencia y esa son los datos de entrada del algoritmo.
 
-Mientras que con los algoritmos de clasificación se realizaba una división únicamente teniendo en cuenta el tamaño del conjunto de los datos, en este caso se entrenará cada algoritmo únicamente con el 80\% de los datos de un dispositivo. Posteriormente, se usarán el 20\% de los datos de ese dispositivo para obtener una métrica y el 20\% de los datos del resto de dispositivos para otra. Este proceso se realiza con el fin de comprobar si el modelo es capaz de detectar como datos correctos aquellos provenientes de su mismo dispositivo y detectar como datos anómalos los del resto de dispositivos. Este división se puede ver de forma gráfica en la Fig. \ref{fig:unsupervised_database}.
+Mientras que con los algoritmos de clasificación se realizaba una división únicamente teniendo en cuenta el tamaño del conjunto de los datos, en este caso se entrenará cada algoritmo únicamente con el 80\% de los datos de un dispositivo. Posteriormente, se usarán el 20\% de los datos de ese dispositivo para obtener un valor de \acrfull{tpr} o \textit{Recall} y el 20\% de los datos del resto de dispositivos para obtener un valor de \acrfull{tnr}. Este proceso se realiza con el fin de comprobar si el modelo es capaz de detectar como datos correctos aquellos provenientes de su mismo dispositivo y detectar como datos anómalos los del resto de dispositivos. Este división se puede ver de forma gráfica en la Fig. \ref{fig:unsupervised_database}.
 
 \begin{figure}[htpb!]
     \centering

@@ -8,15 +8,15 @@ En este capítulo se introducirán los conceptos de dispositivos y arquitectura 
 
 \subsection{Introducción}
 
-El Internet de las Cosas, más conocido por Internet of Things (IoT), es el conjunto de  dispositivos capaces de conectarse a internet, recolectar e intercambiar datos de forma autónoma. Una cosa que distingue a los dispositivos IoT de los que no lo son, es que estos dispositivos pueden interactuar entre ellos sin necesidad de intervención humana.
+El Internet de las Cosas, más conocido por \acrfull{iot}, es el conjunto de  dispositivos capaces de conectarse a internet, recolectar e intercambiar datos de forma autónoma. Una cosa que distingue a los dispositivos \acrshort{iot} de los que no lo son, es que estos dispositivos pueden interactuar entre ellos sin necesidad de intervención humana.
 
-El concepto de IoT fue primeramente mencionado por Kevin Ashton en 1999 mientras realizaba una presentación sobre dispositivos RFID \cite{gokhale2018introduction}. A pesar de esto el primer dispositivo de este tipo fue una máquina de refrescos en 1982 \cite{cokemachine1982iot}, que se conectaba a internet para informar los refrescos que contenía, y si estos se encontraban fríos.
+El concepto de IoT fue primeramente mencionado por Kevin Ashton en 1999 mientras realizaba una presentación sobre dispositivos \acrfull{rfid} \cite{gokhale2018introduction}. A pesar de esto el primer dispositivo de este tipo fue una máquina de refrescos en 1982 \cite{cokemachine1982iot}, que se conectaba a internet para informar los refrescos que contenía, y si estos se encontraban fríos.
 
 \subsection{Arquitectura IoT}
 
-Cada vez hay más dispositivos IoT conectados a internet, lo que dada su naturaleza, implica que son varias miles de millones de ellos. Por este motivo, los protocolos de la pila TCP/IP no están preparados para este número tan grande de dispositivos que manejar.
+Cada vez hay más dispositivos \acrshort{iot} conectados a internet, lo que dada su naturaleza, implica que son varias miles de millones de ellos. Por este motivo, los protocolos de la pila TCP/IP no están preparados para este número tan grande de dispositivos que manejar.
 
-Existen diversas propuestas sobre arquitecturas multi capa que puedan asegurar los requisitos de calidad de servicio (QoS) y seguridad requeridos. En la propuesta de Muhammad Umar Farooq et al. \cite{farooq2015review} se hace mención a una arquitectura de 6 capas.
+Existen diversas propuestas sobre arquitecturas multi capa que puedan asegurar los requisitos de calidad de servicio (\acrshort{qos}) y seguridad requeridos. En la propuesta de Muhammad Umar Farooq et al. \cite{farooq2015review} se hace mención a una arquitectura de 6 capas.
 
 Por otro lado, en la propuesta de Ibrar Yaqoob et al. \cite{yaqoob2017internet} se explica una propuesta más general, combinando varias de las capas que comparten gran parte de su cometido. Esta propuesta se puede observar gráficamente en la Fig. \ref{fig:iot_architecture}. A continuación se explican esas 3 capas:
 
@@ -26,7 +26,7 @@ Por otro lado, en la propuesta de Ibrar Yaqoob et al. \cite{yaqoob2017internet} 
     \item \textbf{Capa de aplicación}: esta capa se encarga de extraer la información valiosa de los datos producidos por la capa sensitiva, y que le llegan a través de la capa de transporte. En esta capa se agrupan distintos servicios como data mining o computación en la nube.
 \end{enumerate}
 
-\begin{figure}
+\begin{figure}[htpb!]
     \centering
     \includegraphics{images/iot_architecture.pdf}
     \caption{Arquitectura IoT propuesta \cite{yaqoob2017internet}}
@@ -83,29 +83,29 @@ Si los atributos son categóricos se puede crear una partición diciendo si pert
 
 \subsubsection{Random Forest}
 
-Este algoritmo es un conjunto de árboles de decisión trabajando en paralelo. Cada árbol realizará de forma aleatoria una partición distinta a los otros para cada división de una rama, con esto se obtiene variabilidad en los resultados de los árboles. Por último, el algoritmo toma como salida aquella clase que haya sido el resultado de más árboles.  \cite{hatwell2020chirps} \cite{breiman2001random}
+Este algoritmo es un conjunto de árboles de decisión trabajando en paralelo. Cada árbol realizará de forma aleatoria una partición distinta a los otros para cada división de una rama, con esto se obtiene variabilidad en los resultados de los árboles. Por último, el algoritmo toma como salida aquella clase que haya sido el resultado de más árboles \cite{breiman2001random}\cite{hatwell2020chirps}.
 
 \subsubsection{Multilayer Perceptron (MLP)}
 
-Se trata de un modelo de red neuronal artificial de tipo \textit{feed-forward} (es decir, no existen ciclos en el grafo que forma la red). Consiste en una serie de múltiples capas (multilayer) de nodos que conforman grafos dirigidos, estando cada capa conectada con la siguiente. 
+Se trata de un modelo de red neuronal artificial de tipo \textit{feed-forward} (es decir, no existen ciclos en el grafo que forma la red). Consiste en una serie de múltiples capas (multilayer) de nodos que conforman grafos dirigidos, estando cada capa conectada con la siguiente \cite{murtagh1991multilayer}. 
 
 MLP entrena la red utilizando la propagación hacia atrás (backpropagation) que, empleada junto con una técnica de optimización como gradient descent, calcula el gradiente de una función de pérdida respecto a todos los pesos en la red, de manera que se pasa el valor del gradiente al método de optimización y este lo usa para actualizar los pesos, con el objetivo de minimizar la función de pérdida.
 
 \subsubsection{Naive Bayes}
 
-Los algoritmos de aprendizaje bayesianos tratan de encontrar la probabilidad de que un dato pertenezca a una clase. Una vez se tienen todas las probabilidades de pertenencia a una clase se toma como salida del algoritmo aquella clase con la mayor probabilidad.
+Los algoritmos de aprendizaje bayesianos tratan de encontrar la probabilidad de que un dato pertenezca a una clase. Una vez se tienen todas las probabilidades de pertenencia a una clase se toma como salida del algoritmo aquella clase con la mayor probabilidad \cite{murphy2006naive}.
 
 Para realizar este proceso el algoritmo usa distintos atributos de cada dato $a_1, \dots, a_n$. Ahora este proceso se trata de conoces la probabilidad condicionada de que este conjunto de atributos pertenezca a una determinada clase. Esto es muy costoso y por tanto hay que relajar esta hipóstesis. Para ello se asume independencia entre los atributos de ahí el nombre de \textit{naive}.
 
 \subsubsection{K Nearest Neighbours (KNN)}
 
-El algoritmo KNN es un algoritmo que se usa mayoritariamente para clasificación. En este algoritmo los datos se agrupan por distancias.
+El algoritmo KNN es un algoritmo que se usa mayoritariamente para clasificación. En este algoritmo los datos se agrupan por distancias \cite{taunk2019brief}. 
 
 A la hora de clasificar un nuevo dato, este algoritmo busca los $k$ datos más cercanos. Una vez tiene esos datos comprueba sus clases. La clase con mayor representación entre los $k$ datos es la que se asignará al nuevo dato. Podemos verlo con un ejemplo.
 
 \begin{figure}[htpb!]
     \centering
-    \resizebox{0.45\textwidth}{!}{
+    \resizebox{0.5\textwidth}{!}{
     \begin{tikzpicture}
         \node (1) {\includegraphics[width=0.4\textwidth]{images/KnnClassification}};
         \node (2) at (0.2, -1.3) {$k = 3$};
@@ -126,7 +126,7 @@ En la Fig. \ref{fig:knn_clasification} se quiere clasificar el dato \textcolor{v
 
 Las máquinas de vector soporte son un conjunto de algoritmos de aprendizaje supervisado que se utilizan tanto para clasificación como para regresión, en este caso se analizará únicamente en clasificación.
 
-Estos algoritmos toman los datos como puntos en un espacio $n-$dimensional. El objetivo es dividir estos datos mediante hiperplanos de forma que los puntos que contenidos en una región del espacio delimitada por los mismos hiperplanos sean una misma clase y que estén lo más separados posible. Esto se puede ver más fácil con un ejemplo.
+Estos algoritmos toman los datos como puntos en un espacio $n-$dimensional. El objetivo es dividir estos datos mediante hiperplanos de forma que los puntos que contenidos en una región del espacio delimitada por los mismos hiperplanos sean una misma clase y que estén lo más separados posible \cite{cervantes2020comprehensive}. Este proceso se puede ver de una forma más sencilla a través de un ejemplo.
 
 En la Fig. \ref{fig:svm_separation} se puede ver como hay distintos hiperplanos ($\mathcal{H}_1, \mathcal{H}_2, \mathcal{H}_3$) que pueden dividir el espacio. 
 
@@ -154,11 +154,47 @@ En la Fig. \ref{fig:svm_separation} se puede ver como hay distintos hiperplanos 
 
 En muchas ocasiones no se podrán dividir los conjuntos de forma correcta usando únicamente divisiones lineales del espacio, por ello, habrá que usar divisiones no lineales.
 
+\subsubsection{Isolation Forest}
+
+En este trabajo se ha presentado el algoritmo Random Forest, el cual es un algoritmo de aprendizaje supervisado orientado a clasificación. El algoritmo Isolation Forest \cite{liu2008isolation} \cite{cheng2019outlier} se basa Random Forest con el objetivo de obtener un algoritmo orientado a la detección de anomalías.
+
+Para lograr esto, este algoritmo aprovecha dos características de un valor anómalo. Por un lado, se espera que los valores anómalos sean minoritarios en la muestra, y por el otro, se espera que dichos valores presenten características muy distintas a los datos legítimos.
+
+Partiendo de estas premisas se pueden identificar los valores anómalos en un árbol de decisión como aquel que ha necesitado menos preguntas binarias para quedar separado. Esto se extiende a varios árboles para que esta detección sea tomada entre la mayoría. Un ejemplo de uso de este algoritmo se puede ver en la Fig. \ref{fig:ex_scikit_isolation}.
+
+\begin{figure}[htpb!]
+    \centering
+    \includegraphics[scale=0.7]{images/isolation_example.pdf}
+    \caption{Ejemplo de OneClass-SVM \cite{ex_scikit_isolation}}
+    \label{fig:ex_scikit_isolation}
+\end{figure}
+
+\subsubsection{Local Outlier Factor (LOF)}
+
+El algoritmo de detección de anomalías \acrfull{lof} \cite{cheng2019outlier} utiliza la densidad de puntos como predictor de valores anómalos. Para cada dato se calcula su densidad local, es decir, cuántos datos vecinos se sitúan cerca de este.
+
+Una vez se tienen todos los valores de densidad de cada dato, se ordenan de forma descendente y se seleccionan los $m$ (variable de entrada del algoritmo) primeros como valores anómalos.
+
+\subsubsection{OneClass SVM (OC-SVM)}
+
+Anteriormente se ha explicado el algoritmo \acrshort{svm}, el cual pertenece a los algoritmos de aprendizaje supervisado orientados a a la clasificación. En este apartado se presenta un algoritmo basado en \acrshort{svm} orientado a la detección de anomalías. Este algoritmo recibe el nombre de \acrfull{ocsvm} \cite{li2003improving}.
+
+La idea de este algoritmo es ser entrenado únicamente con datos pertenecientes a una misma clase. De esta forma, y al igual que pasaba con \acrshort{svm}, se generan hiperplanos que dividen el espacio $n$-dimensional de manera que los datos de esta clase estén contenidos en la misma región. 
+
+Una vez se tiene un modelo entrenado, en la etapa de test, se situará el nuevo dato como un vector en dicho espacio, produciéndose dos situaciones: está contenido en la región del espacio que ocupan los datos de la clase o, por contra, no está contenido en esa región. En caso de estar contenido se le asigna el valor 1 y en otro caso se le asigna el valor $-1$, quedando de esta forma identificado como anomalía o no. Un ejemplo de uso de este algoritmo se puede ver en la Fig. \ref{fig:ex_scikit_ocsvm}.
+
+\begin{figure}[htpb!]
+    \centering
+    \includegraphics[scale=0.7]{images/oc-svm.pdf}
+    \caption{Ejemplo de Isolation Forest \cite{ex_scikit_ocsvm}}
+    \label{fig:ex_scikit_ocsvm}
+\end{figure}
+
 \section{Revisión bibliográfica}
 
 En esta sección se realiza un estudio del estado del arte relativo a la aplicación de distintas técnicas que tengan como objetivo identificar a un dispositivo a través de la red independientemente de un identificador susceptible de ser identificado. Para estos cometidos son muy utilizados los algoritmos de aprendizaje automático o Machine Learning. 
 
-Para comenzar la revisión bibliográfica, se analizará el trabajo desarrollado por Pascal Oser et al. \cite{oser2018identifying}. En este trabajo se desarrolla un sistema para identificar dispositivos entre un total de 562 en el centro del CERN. Para este cometido se tomas muestras periódicas de las marcas de tiempo (timestamps) contenidas en paquetes TCP que se envían y reciben de estos dispositivos.
+Para comenzar la revisión bibliográfica, se analizará el trabajo desarrollado por Pascal Oser et al. \cite{oser2018identifying}. En este trabajo se desarrolla un sistema para identificar dispositivos entre un total de 562 en el centro del \acrfull{cern}. Para este cometido se tomas muestras periódicas de las marcas de tiempo (timestamps) contenidas en paquetes \acrshort{tcp} que se envían y reciben de estos dispositivos.
 
 De estas marcas se obtienen las variables que se usarán para entrenar los distintos modelos de machine learning. Las variables que obtiene son el incremento entre dos marcas consecutivas, el desbordamiento del contador de la marca de tiempo, la mediana de todas las marcas, etc.
 
@@ -166,12 +202,12 @@ Una variable interesante es la del desbordamiento del contador. En el RFC 1323 \
 
 \begin{figure}[htpb!]
     \centering
-    \includegraphics[width=0.6\textwidth]{images/CERN-timestamp_overflow}
+    \includegraphics[width=0.45\textwidth]{images/CERN-timestamp_overflow}
     \caption{Desbordamiento del contador \cite{oser2018identifying}}
     \label{fig:cern_ts_overflow}
 \end{figure}
 
-Una vez tiene todas las variables registradas para todos los dispositivos, compara varios modelos de machine learning, para clasificar cada uno de los dispositivos. Los resultados que obtiene son de un accuracy del 99.22\% con MLP, un 99.14\% con SVM y por último 99.67\% con Random Forest.
+Una vez tiene todas las variables registradas para todos los dispositivos, compara varios modelos de machine learning, para clasificar cada uno de los dispositivos. Los resultados que obtiene son de un accuracy del 99.22\% con \acrshort{mlp}, un 99.14\% con \acrshort{svm} y por último 99.67\% con Random Forest.
 
 Con estos datos decide quedarse con el modelo de Random Forest, el cual entrena con la totalidad de los datos de entrenamiento, obteniendo finalmente una precisión del 97.03\% y un accuracy del 99.76\%.
 
@@ -190,9 +226,9 @@ Este sistema (Fig. \ref{fig:diam_hamad}), una vez se tiene una traza del disposi
 
 Para los dispositivos que ya están conectados a la red, se toma una muestra aleatoria que comprobará si se han clasificado de forma correcta. En el caso de que se haya clasificado mal pero siga estando en la lista blanca se actualizará su matriz de autorización. Por otra parte, en caso de que no esté en dicha lista se pondrá en cuarentena para ser analizado más adelante.
 
-Las huellas de los dispositivos se obtienen del payload de los mensajes enviados por ese dispositivo. De ellos se obtienen 67 características como el tamaño del paquete Ethernet, el tamaño de las cabeceras, la IP de destino, el TTL, etc.
+Las huellas de los dispositivos se obtienen del payload de los mensajes enviados por ese dispositivo. De ellos se obtienen 67 características como el tamaño del paquete Ethernet, el tamaño de las cabeceras, la IP de destino, el \acrfull{ttl}, etc.
 
-Con estas huellas entrena distintos modelos como son AdaBoost, LDA, KNN, Árboles de decisión, Naive Bayes, SVM, Random Forest y GBoost. Obtuvo un accuracy final del 89\%.
+Con estas huellas entrena distintos modelos como son AdaBoost, \acrfull{lda}, \acrshort{knn}, Árboles de decisión, Naive Bayes, \acrshort{svm}, Random Forest y GBoost. Obtuvo un accuracy final del 89\%.
 
 El siguiente artículo que se analizará es el realizado por Ahmet Aksoy et al. \cite{aksoy2019automated}. Este trabajo diseña un sistema (llamado SysID) que es capaz de identificar dispositivos a través del tráfico de red. 
 
@@ -206,7 +242,7 @@ donde $n = \lvert SelectedFeatures \rvert$ y $Accuracy$ es el resultado que se o
 
 Las trazas que se han usado para clasificar estos dispositivos provienen de una base de datos de otro artículo \cite{miettinen2017iot}, de donde se obtienen 20 medidas de 23 dispositivos IoT.
 
-Para la clasificación se han usado diferentes algoritmos de la herramienta WEKA \cite{hall2009weka} como son tablas de decisión, árboles de decisión J48, OneR y PART. Se decide usar una clasificación en dos niveles (Fig. \ref{fig:askoy_classifier}), se clasifican primero entre su proveedor o el propio dispositivo, dependiendo de si hay más de un mismo dispositivo del mismo proveedor. Después se clasifican los dispositivos del mismo proveedor entre sí. Este esquema ayuda a tener mejores resultados pues cada proveedor puede ser identificado de mejor forma por un algoritmo distinto.
+Para la clasificación se han usado diferentes algoritmos de la herramienta \acrfull{weka} \cite{hall2009weka} como son tablas de decisión, árboles de decisión J48, OneR y PART. Se decide usar una clasificación en dos niveles (Fig. \ref{fig:askoy_classifier}), se clasifican primero entre su proveedor o el propio dispositivo, dependiendo de si hay más de un mismo dispositivo del mismo proveedor. Después se clasifican los dispositivos del mismo proveedor entre sí. Este esquema ayuda a tener mejores resultados pues cada proveedor puede ser identificado de mejor forma por un algoritmo distinto.
 
 Los resultados que obtiene son de un 82\% de accuracy promedio entre todos los clasificadores de cada proveedor. Los valores individuales están entre el 42.2\% y el 100\%.
 
@@ -223,21 +259,21 @@ El siguiente trabajo que se verá es el realizado por Hossein Jafari et al. \cit
 
 Para cada uno de los dispositivos se realiza una captura de 5 minutos. Esta captura será del SNR en 5 niveles distintos, con lo que se obtiene \SI{10}{\giga\byte} por dispositivo y nivel de SNR, lo que en total serían \SI{300}{\giga\byte} de datos.
 
-A continuación procede a entrenar tres modelos de deep learning, DNN, CNN y LSTM (los tres modelos pertenecen a la librería \texttt{TensorFlow} programada para Python \cite{tensorflow2015-whitepaper}), con los que obtiene unos resultados de 96.3\%, 94.7\% y 76\% respectivamente.
+A continuación procede a entrenar tres algoritmos de Deep Learning, DNN, CNN y LSTM (los tres modelos pertenecen a la librería \texttt{TensorFlow} programada para Python \cite{tensorflow2015-whitepaper}), con los que obtiene unos resultados de 96.3\%, 94.7\% y 76\% respectivamente.
 
 Fabian Lanze et al. \cite{lanze2012clock} han desarrollado un trabajo en el que crean un sistema de identificación de dispositivos basado en el clock skew. Su objetivo es generar huellas para cada punto de acceso, de forma que si un dispositivo pueda saber si ese punto de acceso es legítimo, o por contra si puede ser un potencial atacante.
 
-Lo primero que hacen es definir el skew de un reloj como la primera derivada del offset de dicho reloj. De forma práctica usarán la desviación que almacena el demonio del servicio NTP para aproximar el skew del dispositivo conectado al punto de acceso. Usará conexión inalámbrica y recogerá hasta 6000 paquetes por dispositivo en cada muestra (10 minutos). Si en una muestra no se alcanzan los 500 paquetes, por problemas de conexión o cualquier otro motivo, esa muestra se elimina. Con este proceso se consiguen medir 388 puntos de acceso. 
+Lo primero que hacen es definir el skew de un reloj como la primera derivada del offset de dicho reloj. De forma práctica usarán la desviación que almacena el demonio del servicio \acrshort{ntp} para aproximar el skew del dispositivo conectado al punto de acceso. Usará conexión inalámbrica y recogerá hasta 6000 paquetes por dispositivo en cada muestra (10 minutos). Si en una muestra no se alcanzan los 500 paquetes, por problemas de conexión o cualquier otro motivo, esa muestra se elimina. Con este proceso se consiguen medir 388 puntos de acceso. 
 
 Finalmente, trata de generar una huella para cada punto de acceso de forma estadística, basándose sobre todo en la distribución del clock skew. Como resultado obtiene que su método no es suficientemente preciso y que muchos dispositivos presentan una huella similar, por lo tanto, concluye que no es posible identificarlos únicamente de esta forma.
 
-En el trabajo desarrollado por Yair Meidan et al. \cite{meidan2017profiliot} se desarrolla un sistema que es capaz de identificar dispositivos IoT a través de su tráfico de red. Las pruebas se realizan con trazas sobre conexión inalámbrica y tanto con dispositivos IoT como con PCs, smartphones, etc. 
+En el trabajo desarrollado por Yair Meidan et al. \cite{meidan2017profiliot} se desarrolla un sistema que es capaz de identificar dispositivos IoT a través de su tráfico de red. Las pruebas se realizan con trazas sobre conexión inalámbrica y tanto con dispositivos \acrshort{iot} como con PCs, smartphones, etc. 
 
-De estas trazas se centran específicamente en las sesiones TCP, donde cada una se representa como un conjunto de características de cada paquete.
+De estas trazas se centran específicamente en las sesiones \acrshort{tcp}, donde cada una se representa como un conjunto de características de cada paquete.
 
-Primeramente, ejecutan un clasificador binario con el que obtienen la probabilidad de que un dispositivo sea IoT, usando solo información de una sesión TCP de cada dispositivo. En este apartado obtienen un \SI{100}{\percent} de acierto.
+Primeramente, ejecutan un clasificador binario con el que obtienen la probabilidad de que un dispositivo sea IoT, usando solo información de una sesión \acrshort{tcp} de cada dispositivo. En este apartado obtienen un \SI{100}{\percent} de acierto.
 
-Por último, entrenan distintos modelos de clasificación (GBM, Random Forest, XGBoost), únicamente sobre los dispositivos previamente etiquetados como IoT, obteniendo finalmente un resultado de un \SI{99.281}{\percent} de accuracy en la identificación del modelo y marca de cada uno de ellos.
+Por último, entrenan distintos modelos de clasificación, tales como \acrfull{gbm}, Random Forest, XGBoost, únicamente sobre los dispositivos previamente etiquetados como \acrshort{iot}, obteniendo finalmente un resultado de un \SI{99.281}{\percent} de accuracy en la identificación del modelo y marca de cada uno de ellos.
 
 Como último artículo se analizará la propuesta realizada por Loh Chin Choong Desmond et al. \cite{desmond2008identifying}. En este trabajo han construido un sistema de identificación de dispositivos basado en los mensajes \textit{probe request} de los distintos dispositivos. Para ello, distinguirán como dispositivos distintos las distintas combinaciones de la tupla: $\langle$``Machine'', ``Wireless Network Interface Card (NIC) Driver'', ``Operating System''$\rangle$.
 
@@ -248,7 +284,7 @@ El modelo que eligen se basa en aprendizaje no supervisado, Maximum Variance Clu
 
 \subsection{Resultados de la revisión bibliográfica}
 
-Por último se realizará un resumen en forma de tabla de los artículos que han sido revisados. 
+Por último se ha realizado un resumen en forma de tabla de los artículos que han sido revisados. 
 
 \begin{table}[t]
     \centering
@@ -279,4 +315,7 @@ Por último se realizará un resumen en forma de tabla de los artículos que han
     \label{tab:art_results}
 \end{table}
 
+En esta revisión bibliográfica se ha llegado a la conclusión de que a pesar de que existen diversas soluciones de identificación de dispositivos, solo una de ellas utiliza mecanismos hardware, la propuesta de Hossein Jafari et al. \cite{jafari2018iot}. El resto de propuestas se centran en aspectos software, en particular en diversas características de los envíos \acrshort{tcp}. Otra de las carencias encontradas ha sido la del nivel de identificación deseado, en varias propuestas no se busca una identificación individual de los dispositivos, únicamente se atiende a clasificarlos por fabricante, modelo y demás características que no identifican a un dispositivo de forma unívoca.
+
+Debido a estas razones, la solución propuesta en este trabajo propone un método de identificación a más bajo nivel que puede ser usada para incrementar la seguridad de diversos entornos que deben permanecer seguros ante posibles ataques.
 
