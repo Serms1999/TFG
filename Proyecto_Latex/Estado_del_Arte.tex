@@ -6,6 +6,8 @@ En este capítulo se introducirán los conceptos de dispositivos y arquitectura 
 
 \section{Dispositivos IoT}
 
+En esta sección se introducirá la arquitectura \acrshort{iot}, así como sus aplicaciones en el mundo actual.
+
 \subsection{Introducción}
 
 El Internet de las Cosas, más conocido por \acrfull{iot}, es el conjunto de  dispositivos capaces de conectarse a internet, recolectar e intercambiar datos de forma autónoma. Una cosa que distingue a los dispositivos \acrshort{iot} de los que no lo son, es que estos dispositivos pueden interactuar entre ellos sin necesidad de intervención humana.
@@ -47,6 +49,8 @@ Como último ejemplo se mencionará al sector agrícola. En este campo se pueden
 
 \section{Machine Learning}
 
+En esta sección se introducirá el concepto de Machine Learning, los diferentes tipos de aprendizaje, así como 
+
 \subsection{Introducción}
 
 El Machine Learning se trata de una búsqueda, una búsqueda de formas alternativas de hacer algo. Para ello se busca en estructuras muy similares a las previas. Para modificar una estructura y seguir con la búsqueda nos valemos de sucesos que hayan acontecido, entonces, evaluamos si han mejorado y nos quedaremos como estructura para la siguiente iteración con la que más mejore a la previa. Para realizar estas operaciones necesitamos una forma de cambiar de estructura y una forma de evaluar si hemos mejorado.
@@ -67,7 +71,9 @@ Para realizar una comparación entre distintos modelos donde se quiere ver cual 
 
 Con esta segunda división se obtiene el algoritmo que mejor se adapta a los datos, pero no un modelo final. Para tener un modelo final se entrenará este con el conjunto de datos de entrenamiento en su totalidad y se evaluará con los datos de test.
 
-\subsection{Algoritmos de aprendizaje supervisado} \label{sec:algorithms}
+\subsection{Algoritmos de Machine Learning} \label{sec:algorithms}
+
+\subsubsection{Algoritmos de aprendizaje supervisado}
 
 Dentro de los algoritmos de aprendizaje supervisado se encuentran algoritmos que clasifican y algoritmos que se dedican a la regresión.
 
@@ -75,13 +81,13 @@ Los algoritmos clasificadores tratan de agrupar a los distintos vectores de entr
 
 Los algoritmos regresores buscan dar una salida numérica como resultado en lugar de la pertenencia a una clase, por tanto no sirven para este trabajo. A continuación se explicarán los algoritmos que se han usado para el desarrollo de este trabajo.
 
-\subsubsection{Árboles de decisión}
+\subsubsubsection{Árboles de decisión}
 
 La idea principal del algoritmo es que partiendo de un conjunto de elementos en el nodo padre, haciendo una pregunta binaria tal que se pude dividir el conjunto en otros 2 que sean más puros, es decir, que los elementos entre sí compartan (al menos) la característica por la que hemos preguntado.
 
 Si los atributos son categóricos se puede crear una partición diciendo si pertenecen o no a la clase. Por contra, si los atributos son ordinales se pueden tener preguntas del tipo $x \leq x_c$.
 
-\subsubsection{Random Forest}
+\subsubsubsection{Random Forest}
 
 Este algoritmo es un conjunto de árboles de decisión trabajando en paralelo. Cada árbol realizará de forma aleatoria una partición distinta a los otros para cada división de una rama, con esto se obtiene variabilidad en los resultados de los árboles. Por último, el algoritmo toma como salida aquella clase que haya sido el resultado de más árboles \cite{breiman2001random}\cite{hatwell2020chirps}.
 
@@ -91,13 +97,13 @@ Se trata de un modelo de red neuronal artificial de tipo \textit{feed-forward} (
 
 MLP entrena la red utilizando la propagación hacia atrás (backpropagation) que, empleada junto con una técnica de optimización como gradient descent, calcula el gradiente de una función de pérdida respecto a todos los pesos en la red, de manera que se pasa el valor del gradiente al método de optimización y este lo usa para actualizar los pesos, con el objetivo de minimizar la función de pérdida.
 
-\subsubsection{Naive Bayes}
+\subsubsubsection{Naive Bayes}
 
 Los algoritmos de aprendizaje bayesianos tratan de encontrar la probabilidad de que un dato pertenezca a una clase. Una vez se tienen todas las probabilidades de pertenencia a una clase se toma como salida del algoritmo aquella clase con la mayor probabilidad \cite{murphy2006naive}.
 
 Para realizar este proceso el algoritmo usa distintos atributos de cada dato $a_1, \dots, a_n$. Ahora este proceso se trata de conoces la probabilidad condicionada de que este conjunto de atributos pertenezca a una determinada clase. Esto es muy costoso y por tanto hay que relajar esta hipóstesis. Para ello se asume independencia entre los atributos de ahí el nombre de \textit{naive}.
 
-\subsubsection{K Nearest Neighbours (KNN)}
+\subsubsubsection{K Nearest Neighbours (KNN)}
 
 El algoritmo KNN es un algoritmo que se usa mayoritariamente para clasificación. En este algoritmo los datos se agrupan por distancias \cite{taunk2019brief}. 
 
@@ -122,7 +128,7 @@ En la Fig. \ref{fig:knn_clasification} se quiere clasificar el dato \textcolor{v
     \item Asignando $k = 5$ sólo se tendrán en cuenta los 5 datos más próximos, que serán 2 de la clase \textcolor{rojodato}{\large$\blacktriangle$} y tres de la clase \textcolor{azuldato}{$\blacksquare$}. Con esto la clase que se asignará al dato \textcolor{verdedato}{\Large$\bullet$} será \textcolor{azuldato}{$\blacksquare$}.
 \end{itemize}
 
-\subsubsection{Máquinas de vector soporte (SVM)}
+\subsubsubsection{Máquinas de vector soporte (SVM)}
 
 Las máquinas de vector soporte son un conjunto de algoritmos de aprendizaje supervisado que se utilizan tanto para clasificación como para regresión, en este caso se analizará únicamente en clasificación.
 
@@ -154,7 +160,9 @@ En la Fig. \ref{fig:svm_separation} se puede ver como hay distintos hiperplanos 
 
 En muchas ocasiones no se podrán dividir los conjuntos de forma correcta usando únicamente divisiones lineales del espacio, por ello, habrá que usar divisiones no lineales.
 
-\subsubsection{Isolation Forest}
+\subsubsection{Algoritmos de detección de anomalías}
+
+\subsubsubsection{Isolation Forest}
 
 En este trabajo se ha presentado el algoritmo Random Forest, el cual es un algoritmo de aprendizaje supervisado orientado a clasificación. El algoritmo Isolation Forest \cite{liu2008isolation} \cite{cheng2019outlier} se basa Random Forest con el objetivo de obtener un algoritmo orientado a la detección de anomalías.
 
@@ -169,13 +177,13 @@ Partiendo de estas premisas se pueden identificar los valores anómalos en un á
     \label{fig:ex_scikit_isolation}
 \end{figure}
 
-\subsubsection{Local Outlier Factor (LOF)}
+\subsubsubsection{Local Outlier Factor (LOF)}
 
 El algoritmo de detección de anomalías \acrfull{lof} \cite{cheng2019outlier} utiliza la densidad de puntos como predictor de valores anómalos. Para cada dato se calcula su densidad local, es decir, cuántos datos vecinos se sitúan cerca de este.
 
 Una vez se tienen todos los valores de densidad de cada dato, se ordenan de forma descendente y se seleccionan los $m$ (variable de entrada del algoritmo) primeros como valores anómalos.
 
-\subsubsection{OneClass SVM (OC-SVM)}
+\subsubsubsection{OneClass SVM (OC-SVM)}
 
 Anteriormente se ha explicado el algoritmo \acrshort{svm}, el cual pertenece a los algoritmos de aprendizaje supervisado orientados a a la clasificación. En este apartado se presenta un algoritmo basado en \acrshort{svm} orientado a la detección de anomalías. Este algoritmo recibe el nombre de \acrfull{ocsvm} \cite{li2003improving}.
 
