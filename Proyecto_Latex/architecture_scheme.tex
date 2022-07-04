@@ -3,10 +3,10 @@
     \node[draw, rounded corners, minimum width=6cm, minimum height=8cm, fill=yellow!20] (0) {};
     \node (1) [above = 0cm of 0] {Dispositivo IoT};
     \node[draw, rounded corners, minimum width=6cm, minimum height=8cm, fill=red!20] (2) [right = of 0] {};
-    \node (3) [above = 0cm of 2] {Cliente externo};
+    \node (3) [above = 0cm of 2] {Servidor externo};
     
     % Parte IoT
-    \node[draw, rounded corners, minimum width=5cm, fill=gray!10, text width=4.5cm, align=flush center, font=\scriptsize] (4) at ($(0) + (0, 2)$) {A. Establecimiento de las condiciones};
+    \node[draw, rounded corners, minimum width=5cm, fill=gray!10, text width=4.5cm, align=flush center, font=\scriptsize] (4) at ($(0) + (0, 2)$) {A. Establecimiento de las condiciones de estabilidad};
     \node[draw, rounded corners, minimum width=5cm, fill=yellow!5, text width=4.5cm, align=left, font=\scriptsize] (5) [below = 0cm of 4] {- Establecer una frecuencia fija. \\ - Desactivar servicio NTP.};
     
     \node[draw, rounded corners, minimum width=5cm, fill=gray!10, text width=4.5cm, align=flush center, font=\scriptsize] (6) at ($(0) + (0, -1)$) {B. Recolección de datos};
