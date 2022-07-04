@@ -21,6 +21,7 @@ Para poder alcanzar los objetivos propuestos, se presenta una metodología de tr
 
 \begin{enumerate}
     \item \textbf{Revisión bibliográfica}. Revisión de los trabajos relacionados con el tema de este trabajo. En concreto, se busca comprender cómo obtienen sus datos y su método de clasificación de dispositivos.
+    \item \textbf{Diseño de la arquitectura de trabajo}. Se diseña un procedimiento a seguir de forma genérica, con el objetivo llevar a cabo los objetivos de este trabajo.
     \item \textbf{Recolección de los datos}. Generación de un dataset que contiene las marcas de tiempo tanto del dispositivo de referencia como del que se encuentra bajo análisis. Este proceso se realiza por cada dispositivo a analizar.
     \item \textbf{Generación de huella estadística}. Por cada dispositivo se hace uso de una ventana deslizante que agrupa los datos en grupos de $n$ muestras. De cada grupo se obtienen un conjunto de variables estadísticas que son etiquetadas con el dispositivo del que se han obtenido.
     \item \textbf{Búsqueda de variables correlacionadas}. Se realiza un test de correlación a los datos con el fin de reducir la dimensionalidad de los mismos. Las variables correlacionadas no aportan información y por ello han de ser eliminadas.
