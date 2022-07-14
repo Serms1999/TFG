@@ -1,0 +1,51 @@
+\section{Estado del arte}
+
+%Normal Slide (copy, paste and modify this slide for longer presentations)
+\begin{frame}
+\frametitle{\secname} %Title
+\framesubtitle{} %Subtitle
+\rmfamily %Font
+\color{black} %Color
+\vspace{0.5cm}
+\begin{table}
+    \centering
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{C{0.32\textwidth}C{0.25\textwidth}C{0.45\textwidth}C{0.34\textwidth}C{0.54\textwidth}}
+            \toprule
+            Referencia & Tipo de identificación & Enfoque & Tipo de aprendizaje & Resultados \\
+            \midrule
+            Pascal Oser et al. & Tipo de dispositivo & Machine Learning & Supervisado & 99.76\% de accuracy y 97.03\% de precisión \\
+            \addlinespace\addlinespace
+            Salma Hamad et al. & Individual & Machine Learning & Supervisado & 89\% de accuracy \\
+            \addlinespace\addlinespace
+            Ahmet Aksoy et al. & Tipo y modelo del dispositivo & Machine Learning & Supervisado & Entre 42.2\% y 100\% de accuracy, con un promedio de 82\% \\
+            \addlinespace\addlinespace
+            Hossein Jafari et al. & Individual & Machine Learning & Supervisado & 96.3\% de accuracy en DNN, 94.7\% de accuracy en CNN y 76\% de accuracy en LSTM \\
+            \addlinespace\addlinespace
+            Fabian Lanze et al. & Modelo del dispositivo & Análisis estadístico (regresión lineal) & - & Método no válido para identificar unívocamente un dispositivo. \\
+            \addlinespace\addlinespace
+            Yair Meidan et al. & Tipo y modelo & Machine Learning & Supervisado & 99.28\% de accuracy \\
+            \addlinespace\addlinespace
+            Loh Chin Choong Desmond et al. & Individual & Machine Learning & No supervisado & Entre un 70\% y 80\% de accuracy\\
+            \addlinespace\addlinespace
+            Este trabajo & Individual & Machine Learning & Supervisado y No supervisado & 99.38\% de Accuracy, 99.39\% de Recall y 99.38\% de $f$-score\\
+            \bottomrule
+        \end{tabular}
+    }
+    \caption{Resultados en el estado del arte}
+\end{table}
+\end{frame}
+
+%Normal Slide (copy, paste and modify this slide for longer presentations)
+\begin{frame}
+\frametitle{\secname} %Title
+\framesubtitle{} %Subtitle
+\rmfamily %Font
+\color{black} %Color
+\begin{figure}
+    \centering
+    \subfloat[Propuesta de Ahmet Aksoy et al. para identificar \rojoUMU{modelos}.]{\resizebox{0.5\textwidth}{!}{\input{../Proyecto_Latex/diagrama_Aksoy}}}
+    \subfloat[Propuesta de Salma Hamad et al. para identificar \rojoUMU{dispositivos}.]{\resizebox{0.5\textwidth}{!}{\input{../Proyecto_Latex/diagrama_Hamad}}}
+\end{figure}
+\end{frame}
+

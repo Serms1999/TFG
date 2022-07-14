@@ -1,0 +1,113 @@
+\section{Diseño}
+
+%Normal Slide (copy, paste and modify this slide for longer presentations)
+\begin{frame}
+\frametitle{\secname} %Title
+\framesubtitle{Arquitectura} %Subtitle
+\rmfamily %Font
+\color{black} %Color
+\begin{itemize}
+    \item \rojoUMU{Arquitectura} propuesta.
+\begin{figure}
+    \centering
+    \resizebox{0.8\textwidth}{!}{
+        \input{../Proyecto_Latex/architecture_scheme}
+    }
+\end{figure}
+\end{itemize}
+\end{frame}
+
+%Normal Slide (copy, paste and modify this slide for longer presentations)
+\begin{frame}
+\frametitle{\secname} %Title
+\framesubtitle{Topología} %Subtitle
+\rmfamily %Font
+\color{black} %Color
+\begin{itemize}
+    \item \rojoUMU{Topología} de la red.
+\begin{figure}
+    \centering
+    \resizebox{0.8\textwidth}{!}{
+        \input{../Proyecto_Latex/topologia}
+    }
+\end{figure}
+\end{itemize}
+\end{frame}
+
+%Normal Slide (copy, paste and modify this slide for longer presentations)
+\begin{frame}
+\frametitle{\secname} %Title
+\framesubtitle{Recolección de datos} %Subtitle
+\rmfamily %Font
+\color{black} %Color
+\begin{minipage}{0.5\textwidth}
+\begin{itemize}
+    \item La marca de tiempo relativa a cada mensaje desde el inicio, \rojoUMU{$t_i - t_{start}$}.
+    \item La marca de tiempo absoluta del observador \rojoUMU{$t_i$}.
+    \item La marca de tiempo absoluta del dispositivo \rojoUMU{$t'_i$}.
+    \item La desviación del reloj del dispositivo respecto al del observador, \rojoUMU{$t_i - t'_i$}.
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.3\textwidth}
+\begin{figure}
+    \centering
+    \resizebox{1.7\textwidth}{!}{
+    \begin{sequencediagram}
+        \newthread{o}{Observador}
+        \newinst[3]{d}{Dispositivo $x$}
+        
+        \begin{call}{o}{Obtener marca de tiempo}{o}{$t_i$}        \end{call}
+        
+        \postlevel
+        
+        \begin{call}{o}{Obtener tiempo relativo al mensaje}{o}{$t_i - t_{start} \approx i$}        \end{call}
+        
+        \postlevel
+        
+        \begin{call}{o}{Pedir marca de tiempo}{d}{Devolver $t'_i$}
+        \end{call}
+        
+        \postlevel
+        
+        \begin{call}{o}{Obtener desviación}{o}{$t_i - t'_i$}        \end{call}
+    \end{sequencediagram}
+    }
+\end{figure}
+\end{minipage}
+\end{frame}
+
+%Normal Slide (copy, paste and modify this slide for longer presentations)
+\begin{frame}
+\frametitle{\secname} %Title
+\framesubtitle{Evaluación de los resultados} %Subtitle
+\rmfamily %Font
+\color{black} %Color
+\begin{itemize}
+    \item Evaluación de los resultados.
+        \begin{itemize}
+            \item Algoritmos de ML supervisados para \rojoUMU{clasificación}.
+            \item Algoritmos de ML no supervisados para \rojoUMU{detección de anomalías}.
+        \end{itemize}
+\end{itemize}
+{\small
+\begin{multicols}{2}
+\begin{equation*}
+    Accuracy = \frac{TP + TN}{TP + FP + FN + TN}
+\end{equation*}
+\begin{equation*}
+    Recall = \frac{TP}{TP + FN}
+\end{equation*}
+\begin{equation*}
+    f-score = \frac{2 \cdot TP}{2 \cdot TP + FP + FN}
+\end{equation*}
+\begin{equation*}
+    TNR = \frac{TN}{TN + FP}
+\end{equation*}
+\end{multicols}
+}
+\end{frame}
+
+
+
+
+

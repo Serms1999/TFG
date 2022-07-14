@@ -21,9 +21,7 @@ A la hora de particionar el conjunto de datos de cara a los entrenamientos de lo
 
 Por otra parte, los algoritmos de detección de anomalías han sido entrenados por cada dispositivo, en lugar de todos a la vez. Se ha usado una parte de los datos de cada dispositivo para entrenar el algoritmo, y posteriormente se ha evaluado su rendimiento el resto de los datos de ese dispositivo y con el resto de dispositivos, esto último de forma separada.
 
-Al realizar estos entrenamientos se puede apreciar que los modelos basados en árboles son los mejores, tanto árboles de decisión (95.92\%) como Random Forest (99.22\%). Finalmente se elige el algoritmo de Random Forest y se procede a entrenarlo con la totalidad de los datos de entrenamiento y los hiperparámetros usados anteriormente. 
-
-Al realizar estos entrenamientos se ha apreciado que los algoritmos de detección de anomalías no obtienen resultados elevados. Por contra, algunos de los algoritmos de clasificación sí que son capaces de obtenerlos, en concreto, los basados en árboles (Árboles de decisión y Random Forest). Este último es el algoritmo elegido para generar un modelo de identificación final.
+Al realizar estos entrenamientos se puede apreciar que los modelos basados en árboles son los mejores, tanto árboles de decisión (95.92\% de Accuracy) como Random Forest (99.22\% de Accuracy). Durante el desarrollo de los entrenamientos de detección de anomalías se ha apreciado que estos no obtienen resultados elevados. Por estos motivos se elige el algoritmo de Random Forest y se procede a entrenarlo con la totalidad de los datos de entrenamiento y los hiperparámetros usados anteriormente.
 
 Como resultado se tiene que este último modelo de Random Forest final obtiene un valor final de Accuracy de 99.38\%, de Recall de 99.39\% y de $f$-score de 99.38\%. Gracias a este resultado, se ha llegado a la conclusión de que es posible automatizar el proceso de distinguir dispositivos idénticos de forma remota.
 

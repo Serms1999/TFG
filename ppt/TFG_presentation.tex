@@ -1,0 +1,222 @@
+\documentclass[bigger]{beamer}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{subfig}
+\usepackage{datetime}
+\usepackage{multicol}
+\usepackage[underline=false, rounded corners=false]{pgf-umlsd}
+\usepackage{eforms}
+% Tablas
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% Figuras
+\usepackage{standalone}
+\usepackage{tikz}
+\usetikzlibrary{
+    automata, 
+    positioning,
+    calc, 
+    arrows, 
+    shapes.geometric,  
+    shapes.symbols,
+    backgrounds
+}
+
+% Tick y cruz
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\usepackage{graphicx}
+\newdate{fecha}{14}{7}{2022}
+
+\decimalpoint
+
+% Definición colores
+\definecolor{verdedato}{RGB}{78,173,50}
+\definecolor{rojodato}{RGB}{234,51,35}
+\definecolor{azuldato}{RGB}{0,0,200}
+
+\definecolor{codegreen}{RGB}{184,215,163}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\definecolor{azuldiagrama}{RGB}{93,160,242}
+\definecolor{verdediagrama}{RGB}{124,244,111}
+\definecolor{rojodiagrama}{RGB}{204,73,53}
+\definecolor{naranjadiagrama}{RGB}{209,139,69}
+\definecolor{blancodiagrama}{RGB}{237,247,211}
+
+\definecolor{azulclasificador}{RGB}{181,199,230}
+\definecolor{verdeclasificador}{RGB}{197,224,181}
+\definecolor{rojoclasificador}{RGB}{248,204,175}
+
+\definecolor{rojoUMU}{RGB}{189,42,51}
+\newcommand{\rojoUMU}[1]{\textcolor{rojoUMU}{#1}}
+
+\renewcommand{\labelitemi}{$\blacktriangleright$}
+\renewcommand{\labelitemii}{$\textcolor{rojoUMU}{\vartriangleright}$}
+
+%%%%%%% Title Page %%%%%%%
+\title{Identificación de dispositivos IoT a través de huellas hardware}
+%\subtitle{Subtítulo de la presentación, más largo que el título, pero no mucho}
+\date{\displaydate{fecha}}
+\author{Sergio Marín Sánchez
+ }
+%\institute{Universidad de Murcia \\ Facultad de Informática}
+
+%Title color
+\setbeamercolor*{title}{fg=white}   
+%Title size, font family, font weight
+\setbeamerfont{title}{size=\LARGE,series=\bfseries,parent=structure,family=\rmfamily} 
+
+%Subtitle color
+\setbeamercolor*{subtitle}{fg=white}  
+%Subtitle size, font family, font weight
+\setbeamerfont{subtitle}{size=\normalsize,series=\bfseries,parent=structure,family=\rmfamily} 
+
+%Date color
+\setbeamercolor*{date}{fg=white}   
+
+%Author color
+\setbeamercolor*{author}{fg=white}  
+
+%Institution color
+\setbeamercolor*{institute}{fg=white}  
+
+%Section colors
+\setbeamercolor*{section in toc}{fg=white}  
+\setbeamercolor*{subsection in toc}{fg=white} 
+
+%Table of contents font size
+%\setbeamerfont{section in toc}{size=\scriptsize}
+
+%Table of contents style
+\setbeamertemplate{section in toc}[circle]
+\setbeamercolor{section number projected}{bg=black}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Global Settings %%%%%%%
+
+%Headers color
+\setbeamercolor{frametitle}{fg=white}
+%Headers, font family, font weight
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries,parent=structure,family=\rmfamily}
+
+%Subheaders color
+\setbeamercolor{framesubtitle}{fg=white}
+%Subheaders, font family, font weight
+\setbeamerfont{framesubtitle}{size=\footnotesize,series=\bfseries,parent=structure,family=\rmfamily}
+
+%Caption color
+\setbeamercolor{caption name}{fg=rojoUMU}
+
+%Items color
+\setbeamercolor{itemize item}{fg=black}
+
+%Background image
+\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{/Users/serms1999/Pictures/Fondo3.png}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Math Settings %%%%%%%
+
+\DeclareMathOperator*{\minimize}{min}
+%etc.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{../Proyecto_Latex/tikzconf}
+
+\includeonly{
+    Introduccion,
+    EstadoArte,
+    DisenoImplementacion,
+    ExperimentosResultados,
+    Conclusiones
+}
+
+\begin{document}
+
+%Title Slide
+{\usebackgroundtemplate{\includegraphics[width=\paperwidth]{/Users/serms1999/Pictures/Fondo1.png}} %Title Background
+\begin{frame}
+\rmfamily %Title Font
+\color{white} %Title Color & Weight
+\vspace{2.3cm}
+\begin{center}
+    \bfseries
+    \Large
+    Identificación de dispositivos IoT \\
+    a través de huellas hardware
+\end{center}
+% Author and supervisor
+\begin{minipage}{0.5\textwidth}
+\begin{flushleft}
+\emph{Autor:}\\
+Sergio \textsc{Marín Sánchez}\\
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{flushright}
+\emph{Tutores:} \\
+Gregorio \textsc{Martínez Pérez}\\
+Pedro Miguel \textsc{Sánchez Sánchez}\\
+\end{flushright}
+\end{minipage}
+\end{frame}
+}
+
+\newcommand{\RN}[1]{%
+  \ensuremath{\textup{\uppercase\expandafter{\romannumeral#1}}}%
+}
+
+%Contents Slide
+{\usebackgroundtemplate{\includegraphics[width=\paperwidth]{/Users/serms1999/Pictures/Fondo2.png}} %Contents Background
+\begin{frame}
+\frametitle{Índice} %Contents Title
+\rmfamily %Contents Font
+\color{white}
+\tableofcontents[hideallsubsections]
+\end{frame}
+}
+
+\include{Introduccion}
+
+\include{EstadoArte}
+
+\include{DisenoImplementacion}
+
+\include{ExperimentosResultados}
+
+\include{Conclusiones}
+
+% Questions slide
+{\usebackgroundtemplate{\includegraphics[width=\paperwidth]{/Users/serms1999/Pictures/Fondo2.png}} %Contents Background
+\begin{frame}
+\frametitle{} %Contents Title
+\rmfamily %Contents Font
+\color{white}
+\Large\bfseries
+\vfill\vspace{3cm}
+Gracias por su atención. \\
+¿Alguna pregunta? \\
+\sigField{Firma}{5cm}{3cm} \\
+\vfill
+
+\end{frame}
+}
+
+\end{document}

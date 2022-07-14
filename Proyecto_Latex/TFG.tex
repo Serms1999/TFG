@@ -55,6 +55,11 @@
 % Code Listing Configuration
 \input{config_listing}
 
+%%%
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\addtocontents{lof}{\protect\thispagestyle{empty}}
+\addtocontents{lot}{\protect\thispagestyle{empty}}
+
 \begin{document}
 \selectlanguage{spanish}
 \title{Identificación de dispositivos IoT a través de huellas hardware}
@@ -107,7 +112,7 @@ Pedro Miguel \textsc{Sánchez Sánchez}\\
  
 \end{titlepage}
 
-\let\cleardoublepage\newpage
+%\let\cleardoublepage\newpage
 
 \clearpage{\pagestyle{empty}\cleardoublepage}
 
@@ -115,8 +120,9 @@ Pedro Miguel \textsc{Sánchez Sánchez}\\
 \input{agradecimientos.tex}
 \clearpage{\pagestyle{empty}\cleardoublepage}
 
-\pagestyle{plain}
-\setcounter{page}1
+\pagestyle{empty}
+\pagenumbering{roman}
+\setcounter{page}{1}
 \setcounter{secnumdepth}{4}	%Profundidad de la numeracion del indice
 \setcounter{tocdepth}{2}	%Profundidad del indice
 
@@ -135,6 +141,10 @@ Pedro Miguel \textsc{Sánchez Sánchez}\\
 \input{declaracion.tex}
 \clearpage{\pagestyle{empty}\cleardoublepage}
 
+\pagestyle{plain}
+\pagenumbering{roman}
+\setcounter{page}{1}
+
 % Resumen en castellano
 \include{resumen}
 
@@ -145,7 +155,9 @@ Pedro Miguel \textsc{Sánchez Sánchez}\\
 
 \clearpage{\pagestyle{empty}\cleardoublepage}
 
+\setcounter{page}{1}
 \pagestyle{fancy}
+\pagenumbering{arabic}
 \renewcommand{\chaptermark}[1]{\lhead[{\sc{\chaptername\ \thechapter.\ #1}}]{}}
 \renewcommand{\sectionmark}[1]{\rhead[ ]{{\thesection.\ #1}}}
 \renewcommand{\headrulewidth}{0.5pt}
@@ -153,21 +165,27 @@ Pedro Miguel \textsc{Sánchez Sánchez}\\
 
 % Introduccion
 \include{Introduccion}
+\clearpage{\pagestyle{empty}\cleardoublepage}
 
 % Estado del arte
 \include{Estado_del_Arte}
+\clearpage{\pagestyle{empty}\cleardoublepage}
 
 % Análisis de objetivos y metodología 
 \include{Objetivos_Metodologia}
+\clearpage{\pagestyle{empty}\cleardoublepage}
 
 % Diseño y resolución
 \include{Diseno_Resolucion}
+\clearpage{\pagestyle{empty}\cleardoublepage}
 
 % Análisis de los resultados
 \include{Resultados}
+\clearpage{\pagestyle{empty}\cleardoublepage}
 
 % Conclusiones y vias futuras
 \include{Conclusiones}
+\clearpage{\pagestyle{empty}\cleardoublepage}
 
 % Apéndices, si hiciese falta
 \appendix
@@ -179,7 +197,7 @@ Pedro Miguel \textsc{Sánchez Sánchez}\\
 \lhead{}
 \renewcommand\bibname{Bibliografía}
 \printbibliography[heading = bibintoc]
-\clearpage
+\clearpage{\pagestyle{empty}\cleardoublepage}
 \printglossary[type=\acronymtype,title=Acrónimos,toctitle=Acrónimos]
 
 \end{document}
